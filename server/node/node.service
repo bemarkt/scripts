@@ -1,0 +1,16 @@
+[Unit]
+Description=SS Node Service
+After=rc-local.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/root/shadowsocks
+ExecStart=/usr/bin/nohup /usr/bin/python3 server.py m>> node.log 2>&1 &
+ExecStop=/bin/bash stop.sh
+Restart=always
+LimitNOFILE=512000
+
+[Install]
+WantedBy=multi-user.target

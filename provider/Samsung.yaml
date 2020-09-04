@@ -1,0 +1,20 @@
+payload:
+  # Samsung
+  - DOMAIN-SUFFIX,account.samsung.com
+  - DOMAIN-SUFFIX,apps.samsung.com
+  - DOMAIN-SUFFIX,clubweixin.samsung.com
+  - DOMAIN-SUFFIX,cn-api.samsungcloud.com
+  - DOMAIN-SUFFIX,downloadcenter.samsung.com
+  - DOMAIN-SUFFIX,fr-odc.samsungapps.com
+  - DOMAIN-SUFFIX,images.samsung.com
+  - DOMAIN-SUFFIX,img.samsungapps.com
+  - DOMAIN-SUFFIX,samsunganycar.com
+  - DOMAIN-SUFFIX,samsungfiberoptics.com
+  - DOMAIN-SUFFIX,samsunghealthcn.com
+  - DOMAIN-SUFFIX,samsungyx.com
+  - DOMAIN-SUFFIX,secaz-fota-dn.samsungdm.com
+  - DOMAIN-SUFFIX,shop.samsung.com
+  - DOMAIN-SUFFIX,store.samsung.com
+  - DOMAIN-SUFFIX,support-cn.samsung.com
+  - DOMAIN-SUFFIX,uk-odc.samsungapps.com
+  - DOMAIN-SUFFIX,www.samsung.com

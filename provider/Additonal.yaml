@@ -1,0 +1,116 @@
+payload:
+  # China Area Network
+  # > Tencent
+  - DOMAIN-SUFFIX,livew.l.qq.com
+  - DOMAIN-SUFFIX,vd.l.qq.com
+  # > Umeng
+  - DOMAIN-SUFFIX,msg.umeng.com
+  - DOMAIN-SUFFIX,msg.umengcloud.com
+  # > Others
+  - DOMAIN-SUFFIX,app.adjust.com
+  - DOMAIN-SUFFIX,chinaz.com
+  - DOMAIN-SUFFIX,educoder.net
+  - DOMAIN-SUFFIX,international-gfe.download.nvidia.com
+  - DOMAIN-SUFFIX,ip138.com
+  - DOMAIN-SUFFIX,ityxb.com
+  - DOMAIN-SUFFIX,jiyou.world
+
+  # Global Area Network
+  # > Akamai
+  - DOMAIN-SUFFIX,whoami.akamai.net
+  - DOMAIN-SUFFIX,www.akamai.com
+  # > Amazon
+  - DOMAIN-SUFFIX,images-cn-8.ssl-images-amazon.com
+  - DOMAIN-SUFFIX,images-cn.ssl-images-amazon.com
+  # > Epicgames
+  - DOMAIN-SUFFIX,ol.epicgames.com
+  # > Google
+  - DOMAIN-SUFFIX,265.com
+  - DOMAIN-SUFFIX,2mdn.net
+  - DOMAIN-SUFFIX,alt1-mtalk.google.com
+  - DOMAIN-SUFFIX,alt2-mtalk.google.com
+  - DOMAIN-SUFFIX,alt3-mtalk.google.com
+  - DOMAIN-SUFFIX,alt4-mtalk.google.com
+  - DOMAIN-SUFFIX,alt5-mtalk.google.com
+  - DOMAIN-SUFFIX,alt6-mtalk.google.com
+  - DOMAIN-SUFFIX,alt7-mtalk.google.com
+  - DOMAIN-SUFFIX,alt8-mtalk.google.com
+  - DOMAIN-SUFFIX,app-measurement.com
+  - DOMAIN-SUFFIX,c.android.clients.google.com
+  - DOMAIN-SUFFIX,cache.pack.google.com
+  - DOMAIN-SUFFIX,clickserve.dartsearch.net
+  - DOMAIN-SUFFIX,clientservices.googleapis.com
+  - DOMAIN-SUFFIX,crl.pki.goog
+  - DOMAIN-SUFFIX,dl.google.com
+  - DOMAIN-SUFFIX,dl.l.google.com
+  - DOMAIN-SUFFIX,fonts.googleapis.com
+  - DOMAIN-SUFFIX,fonts.gstatic.com
+  - DOMAIN-SUFFIX,googletagmanager.com
+  - DOMAIN-SUFFIX,googletagservices.com
+  - DOMAIN-SUFFIX,googletraveladservices.com
+  - DOMAIN-SUFFIX,gtm.oasisfeng.com
+  - DOMAIN-SUFFIX,imasdk.googleapis.com
+  - DOMAIN-SUFFIX,kh.google.com
+  - DOMAIN-SUFFIX,khm.google.com
+  - DOMAIN-SUFFIX,khm.googleapis.com
+  - DOMAIN-SUFFIX,khm0.google.com
+  - DOMAIN-SUFFIX,khm0.googleapis.com
+  - DOMAIN-SUFFIX,khm1.google.com
+  - DOMAIN-SUFFIX,khm1.googleapis.com
+  - DOMAIN-SUFFIX,khm2.google.com
+  - DOMAIN-SUFFIX,khm2.googleapis.com
+  - DOMAIN-SUFFIX,khm3.google.com
+  - DOMAIN-SUFFIX,khm3.googleapis.com
+  - DOMAIN-SUFFIX,khmdb.google.com
+  - DOMAIN-SUFFIX,khmdb.googleapis.com
+  - DOMAIN-SUFFIX,mtalk.google.com
+  - DOMAIN-SUFFIX,ocsp.pki.goog
+  - DOMAIN-SUFFIX,recaptcha.net
+  - DOMAIN-SUFFIX,redirector.gvt1.com
+  - DOMAIN-SUFFIX,safebrowsing-cache.google.com
+  - DOMAIN-SUFFIX,safebrowsing.googleapis.com
+  - DOMAIN-SUFFIX,settings.crashlytics.com
+  - DOMAIN-SUFFIX,ssl-google-analytics.l.google.com
+  - DOMAIN-SUFFIX,ssl.gstatic.com
+  - DOMAIN-SUFFIX,toolbarqueries.google.com
+  - DOMAIN-SUFFIX,tools.google.com
+  - DOMAIN-SUFFIX,tools.l.google.com
+  - DOMAIN-SUFFIX,update.googleapis.com
+  - DOMAIN-SUFFIX,www-googletagmanager.l.google.com
+  - DOMAIN-SUFFIX,www.gstatic.com
+  # > Mozilla
+  - DOMAIN-SUFFIX,tracking-protection.cdn.mozilla.net
+  # > Steam
+  - DOMAIN,clientconfig.akamai.steamstatic.com
+  - DOMAIN-SUFFIX,steamcontent.com
+  - DOMAIN-SUFFIX,steampowered.com
+  - DOMAIN-SUFFIX,pinyuncloud.com
+  # > Private Tracker
+  - DOMAIN-SUFFIX,awesome-hd.me
+  - DOMAIN-SUFFIX,broadcasthe.net
+  - DOMAIN-SUFFIX,chdbits.co
+  - DOMAIN-SUFFIX,classix-unlimited.co.uk
+  - DOMAIN-SUFFIX,empornium.me
+  - DOMAIN-SUFFIX,gazellegames.net
+  - DOMAIN-SUFFIX,hdchina.org
+  - DOMAIN-SUFFIX,hdsky.me
+  - DOMAIN-SUFFIX,icetorrent.org
+  - DOMAIN-SUFFIX,jpopsuki.eu
+  - DOMAIN-SUFFIX,keepfrds.com
+  - DOMAIN-SUFFIX,madsrevolution.net
+  - DOMAIN-SUFFIX,m-team.cc
+  - DOMAIN-SUFFIX,nanyangpt.com
+  - DOMAIN-SUFFIX,ncore.cc
+  - DOMAIN-SUFFIX,open.cd
+  - DOMAIN-SUFFIX,ourbits.club
+  - DOMAIN-SUFFIX,passthepopcorn.me
+  - DOMAIN-SUFFIX,privatehd.to
+  - DOMAIN-SUFFIX,redacted.ch
+  - DOMAIN-SUFFIX,springsunday.net
+  - DOMAIN-SUFFIX,tjupt.org
+  - DOMAIN-SUFFIX,totheglory.im
+  # > Others
+  - DOMAIN-KEYWORD,announce
+  - DOMAIN-KEYWORD,torrent
+  - DOMAIN-KEYWORD,tracker
+  - DOMAIN-SUFFIX,smtp
