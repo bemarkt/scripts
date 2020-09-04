@@ -2,7 +2,8 @@ name: Panel-DailyBonus
 
 on:
   schedule:
-    - cron: ${random.int[0,60]} ${random.int[0,24]} * * *
+    - cron:  0 2 * * *
+
 jobs:
   checkin:
     runs-on: ubuntu-latest
