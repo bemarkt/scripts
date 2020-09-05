@@ -2,7 +2,7 @@ name: Panel-DailyBonus
 
 on:
   schedule:
-    - cron:  0 2 * * *
+    - cron:  30 3 * * *
 
 jobs:
   checkin:
@@ -23,7 +23,7 @@ jobs:
 
     - name: Checkin
       run: |
-        python3 panel.py <<EOF
+        python3 $GITHUB_WORKSPACE/checkin/panel.py <<EOF
         ${{secrets.PANEL_SITE}}
         ${{secrets.PANEL_USER}}
         ${{secrets.PANEL_PWD}}
