@@ -23,7 +23,7 @@ jobs:
 
     - name: Checkin
       run: |
-        python3 checkin.py <<EOF
+        python3 panel.py <<EOF
         ${{secrets.PANEL_SITE}}
         ${{secrets.PANEL_USER}}
         ${{secrets.PANEL_PWD}}
