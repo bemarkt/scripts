@@ -2,7 +2,9 @@ name: Panel-DailyBonus
 
 on:
   schedule:
-    - cron:  30 3 * * *
+    - cron: 30 3 * * *
+  watch:
+    types: started
 
 jobs:
   checkin:
@@ -16,7 +18,7 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: init
+    - name: Init environment
       run: |
         python -m pip install --upgrade pip
         pip install requests
@@ -24,8 +26,8 @@ jobs:
     - name: Checkin
       run: |
         python3 $GITHUB_WORKSPACE/checkin/panel.py <<EOF
-        ${{secrets.PANEL_SITE}}
-        ${{secrets.PANEL_USER}}
-        ${{secrets.PANEL_PWD}}
-        ${{secrets.SC_KEY}}
+        ${{ secrets.PANEL_SITE  }}
+        ${{ secrets.PANEL_USER  }}
+        ${{ secrets.PANEL_PWD }}
+        ${{ secrets.SC_KEY  }}
         EOF
