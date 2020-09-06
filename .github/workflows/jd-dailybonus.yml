@@ -20,11 +20,11 @@ jobs:
 
     - name: Get js file
       run: |
-        wget -O jd.js https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+        wget -O ./jd.js https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
         sed -i "s#var Key = ''#var Key = \'${{ secrets.JD_COOKIE }}\'#" jd.js
      
     - name: Install module
-      run: npm install request -g
+      run: npm install request
 
     - name: Start checkin
       run: node jd.js >> result.log
