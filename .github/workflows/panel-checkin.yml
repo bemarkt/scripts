@@ -2,7 +2,7 @@ name: Panel-DailyBonus
 
 on:
   schedule:
-    - cron: 30 3 * * *
+    - cron: "30 3 * * *"
   watch:
     types: started
 
