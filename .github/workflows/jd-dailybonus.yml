@@ -2,7 +2,7 @@ name: JD-DailyBonus
 
 on:
   schedule:
-    - cron: "0-3 16 * * *"
+    - cron: "1 16 * * *"
   watch:
     types: started
 
