@@ -2,7 +2,7 @@ name: JD-DailyBonus
 
 on:
   schedule:
-    - cron: "1 16 * * *"
+    - cron: "0 16 * * *"
   watch:
     types: started
 
@@ -32,3 +32,4 @@ jobs:
     - name: Push notification
       run: |
         curl -X POST https://sc.ftqq.com/${{ secrets.SC_KEY }}.send -d "text=JD-DailyBonus&desp=`cat result.log`"
+
