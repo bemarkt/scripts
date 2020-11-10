@@ -1,8 +1,8 @@
 name: IBM Cloud Auto Restart
 
 on:
-  schedule:
-    - cron: "0 12 * * FRI"
+  #schedule:
+    #- cron: "0 12 * * FRI"
   watch:
     types: started
 
