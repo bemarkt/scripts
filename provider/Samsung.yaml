@@ -2,6 +2,7 @@ payload:
   # Samsung
   - DOMAIN-SUFFIX,account.samsung.com
   - DOMAIN-SUFFIX,apps.samsung.com
+  - DOMAIN-SUFFIX,cdn.samsung.com
   - DOMAIN-SUFFIX,clubweixin.samsung.com
   - DOMAIN-SUFFIX,cn-api.samsungcloud.com
   - DOMAIN-SUFFIX,downloadcenter.samsung.com
