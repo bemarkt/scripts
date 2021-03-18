@@ -64,14 +64,14 @@ payload:
   - DOMAIN-SUFFIX,st.dl.bscstorage.net
   - DOMAIN-SUFFIX,st.dl.eccdnx.com
   - DOMAIN-SUFFIX,st.dl.pinyuncloud.com
-  - DOMAIN-SUFFIX,steamcommunity-a.akamaihd.net
-  - DOMAIN-SUFFIX,steamcontent.com
-  - DOMAIN-SUFFIX,steamgames.com
-  - DOMAIN-SUFFIX,steampowered.com.8686c.com
-  - DOMAIN-SUFFIX,steamstat.us
-  - DOMAIN-SUFFIX,steamstatic.com
-  - DOMAIN-SUFFIX,steamusercontent.com
-  - DOMAIN-SUFFIX,steamuserimages-a.akamaihd.net
+  # - DOMAIN-SUFFIX,steamcommunity-a.akamaihd.net
+  # - DOMAIN-SUFFIX,steamcontent.com
+  # - DOMAIN-SUFFIX,steamgames.com
+  # - DOMAIN-SUFFIX,steampowered.com.8686c.com
+  # - DOMAIN-SUFFIX,steamstat.us
+  # - DOMAIN-SUFFIX,steamstatic.com
+  # - DOMAIN-SUFFIX,steamusercontent.com
+  # - DOMAIN-SUFFIX,steamuserimages-a.akamaihd.net
   # > Strava
   - DOMAIN,analytics.strava.com
   # > Private Tracker
