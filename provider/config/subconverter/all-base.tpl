@@ -8,16 +8,14 @@ allow-lan: {{ default(local.clash.allow_lan,"true") }}
 mode: rule
 log-level: {{ default(local.clash.log_level,"silent") }}
 ipv6: {{ default(local.clash.ipv6,"true")}}
-external-controller: {{ default(local.clash.api_port,":9090")}}
-#external-ui: folder
-# secret: ''
+external-controller: {{ default(local.clash.api_port,"0.0.0.0:9090")}}
 
 profile:
   store-selected: true
   tracing: false
+
 {% if exists("request.clash.dns") %}
 {% if request.clash.dns == "tap" %}
-hosts:
 dns:
   enable: true
   listen: 0.0.0.0:53
@@ -30,27 +28,22 @@ tun:
     - 198.18.0.2:53 # when `fake-ip-range` is 198.18.0.1/16, should hijack 198.18.0.2:53
   auto-route: true
   auto-detect-interface: true
-hosts:
 dns:
   enable: true
 #  listen: 0.0.0.0:53
 {% endif %}
 {% if request.clash.dns == "cfa" %}
-hosts:
 dns:
   enable: true
-  listen: 127.0.0.1:1053
+  listen: 0.0.0.0:1053
 {% endif %}
 {% else %}
-hosts:
 dns:
   enable: true
   listen: 127.0.0.1:1053
 {% endif %}
 {% if exists("request.clash.ipv6") %}
-{% if request.clash.ipv6 == "true" %}
-  ipv6: true
-{% endif %}
+  ipv6: {{ request.clash.ipv6 }}
 {% else %}
   ipv6: false
 {% endif %}
@@ -182,6 +175,246 @@ dns:
       - 127.0.0.0/8
       - 240.0.0.0/4
       - 255.255.255.255/32
+
+rule-providers:
+  Additonal:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Addtional.yaml
+    url: https://cdn.jsdelivr.net/gh/bemarkt/scripts/provider/ruleset/Additonal.yaml
+    interval: 43200
+  Adult:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Adult.yaml
+    url: https://cors.bemarkt.workers.dev/?https://gist.githubusercontent.com/bemarkt/b1933e22046237d11f2578b6ad404577/raw/5c5985203d2c37155c49379468630d79ab21c90e/adult.yaml
+    interval: 43200
+  Apple:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Apple.yaml
+    url: https://cdn.jsdelivr.net/gh/lhie1/Rules/Clash/Provider/Apple.yaml
+    interval: 43200
+  BanEasyList:
+    type: http
+    behavior: classical
+    path: ./rule-providers/BanEasyListChina.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml
+    interval: 43200
+  BanEasyPrivacy:
+    type: http
+    behavior: classical
+    path: ./rule-providers/BanEasyPrivacy.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml
+    interval: 43200
+  BanProgramAD:
+    type: http
+    behavior: classical
+    path: ./rule-providers/BanProgramAD.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml
+    interval: 43200
+  ChinaDomain:
+    type: http
+    behavior: classical
+    path: ./rule-providers/ChinaDomain.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml
+    interval: 43200
+  ChinaIp:
+    type: http
+    behavior: ipcidr
+    path: ./rule-providers/ChinaIp.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaIp.yaml
+    interval: 43200
+  Developer:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Developer.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Developer.yaml
+    interval: 43200
+  GlobalMedia:
+    type: http
+    behavior: classical
+    path: ./rule-providers/GlobalMedia.yaml
+    url: https://cdn.jsdelivr.net/gh/DivineEngine/Profiles@master/Clash/RuleSet/StreamingMedia/Streaming.yaml
+    interval: 43200
+  HBO:
+    type: http
+    behavior: classical
+    path: ./rule-providers/HBO.yaml
+    url: https://cdn.jsdelivr.net/gh/DivineEngine/Profiles@master/Clash/RuleSet/StreamingMedia/Video/HBO.yaml
+    interval: 43200
+  Hijacking:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Hijacking.yaml
+    url: https://cdn.jsdelivr.net/gh/DivineEngine/Profiles@master/Clash/RuleSet/Guard/Hijacking.yaml
+    interval: 43200
+  Microsoft:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Microsoft.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml
+    interval: 43200
+  NetEaseMusic:
+    type: http
+    behavior: classical
+    path: ./rule-providers/NetEaseMusic.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/NetEaseMusic.yaml
+    interval: 43200
+  Netflix:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Netflix.yaml
+    url: https://cdn.jsdelivr.net/gh/lhie1/Rules@master/Clash/Provider/Media/Netflix.yaml
+    interval: 43200
+  PrivateNetwork:
+    type: http
+    behavior: classical
+    path: ./rule-providers/PrivateNetwork.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml
+    interval: 43200
+  ProxyGFWlist:
+    type: http
+    behavior: classical
+    path: ./rule-providers/ProxyGFWlist.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml
+    interval: 43200
+  Samsung:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Samsung.yaml
+    url: https://cdn.jsdelivr.net/gh/bemarkt/scripts/provider/ruleset/Samsung.yaml
+    interval: 43200
+  Scholar:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Scholar.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Scholar.yaml
+    interval: 43200
+  Speedtest:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Speedtest.yaml
+    url: https://cdn.jsdelivr.net/gh/lhie1/Rules@master/Clash/Provider/Speedtest.yaml
+    interval: 43200
+  Spotify:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Spotify.yaml
+    url: https://cdn.jsdelivr.net/gh/lhie1/Rules@master/Clash/Provider/Media/Spotify.yaml
+    interval: 43200
+  KKBOX:
+    type: http
+    behavior: classical
+    path: ./rule-providers/KKBOX.yaml
+    url: https://cdn.jsdelivr.net/gh/DivineEngine/Profiles@master/Clash/RuleSet/StreamingMedia/Music/KKBOX.yaml
+    interval: 43200
+  YouTubeMusic:
+    type: http
+    behavior: classical
+    path: ./rule-providers/YouTubeMusic.yaml
+    url: https://cdn.jsdelivr.net/gh/DivineEngine/Profiles@master/Clash/RuleSet/StreamingMedia/Music/YouTubeMusic.yaml
+    interval: 43200
+  StreamingSE:
+    type: http
+    behavior: classical
+    path: ./rule-providers/StreamingSE.yaml
+    url: https://cdn.jsdelivr.net/gh/DivineEngine/Profiles/Clash/RuleSet/StreamingMedia/StreamingSE.yaml
+    interval: 43200
+  Telegram:
+    type: http
+    behavior: classical
+    path: ./rule-providers/Telegram.yaml
+    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Telegram.yaml
+    interval: 43200
+  YouTube:
+    type: http
+    behavior: classical
+    path: ./rule-providers/YouTube.yaml
+    url: https://cdn.jsdelivr.net/gh/lhie1/Rules@master/Clash/Provider/Media/YouTube.yaml
+    interval: 43200
+
+proxies: ~
+proxy-groups: ~
+
+rules:
+  # LocalAreaNetwork 本地网络
+  - RULE-SET,PrivateNetwork,🏠 锦城虽云乐，不如早还家
+
+  # Additonal 后续规则修正
+  - RULE-SET,Additonal,🚣 长风破浪会有时
+
+  # Advertising 广告（以及隐私追踪）&& Hijacking 劫持（运营商及臭名昭著的网站和应用）
+  - RULE-SET,Hijacking,🚧 通用拦截
+  - RULE-SET,BanEasyPrivacy,🚧 通用拦截
+  - RULE-SET,BanEasyList,🚧 通用拦截
+  - RULE-SET,BanProgramAD,🍃 应用净化
+
+  # 流媒体服务中心
+  # > 大陆流媒体面向港澳台限定服务（愛奇藝台灣站、bilibili 港澳台限定）
+  - RULE-SET,StreamingSE,🌏 国内媒体
+  # > 未成年禁止入内
+  - RULE-SET,Adult,💪 青壮年模式
+  # > 国际流媒体服务
+  # 影视：Youtube、Netflix、Amazon Prime Video、Fox、HBO、Hulu、PBS、BBC iPlayer、All4、myTV_SUPER、encoreTVB、ViuTV、AbemaTV、Bahamut、KKTV、Line TV、LiTV、Pornhub
+  # 音乐：Spotify、JOOX、Pandora、KKBOX
+  # 自定义多区域媒体应用
+  # (更多自定义请查阅 https://github.com/ConnersHua/Profiles/tree/master/Surge/Ruleset/Media)
+  - RULE-SET,Spotify,🎵 高雅音乐
+  - RULE-SET,KKBOX,🎵 高雅音乐
+  - RULE-SET,YouTubeMusic,🎵 高雅音乐
+  - RULE-SET,Netflix,🎞️ 流媒体
+  - RULE-SET,HBO,🎞️ 流媒体
+  - RULE-SET,YouTube,🌎 国际媒体
+  - RULE-SET,GlobalMedia,🌎 国际媒体
+
+  # GlobalCompany 国外常用服务
+  # > Developer 开发者服务
+  - RULE-SET,Developer,👨‍💻 开发者服务
+  # > Scholar 学术服务
+  - RULE-SET,Scholar,👨‍🔬 学术服务
+  # > Samsung 三星
+  - RULE-SET,Samsung,✨ 三星服务
+  # > Apple 苹果
+  - RULE-SET,Apple,🍎 苹果服务
+  # > Microsoft 微软
+  - RULE-SET,Microsoft,Ⓜ️ 微软服务
+  # > SpeedTest
+  - RULE-SET,Speedtest,⏱️ 测速服务
+  # > Telegram 电报
+  - RULE-SET,Telegram,⛵ 直挂云帆济沧海
+
+  # Global 全球加速
+  - RULE-SET,ProxyGFWlist,⛵ 直挂云帆济沧海
+
+  # China 中国直连
+  # > 国内常见域名、直连CDN、IPIP的国内地址段
+  - RULE-SET,ChinaDomain,🚣 长风破浪会有时
+  - RULE-SET,ChinaIp,🚣 长风破浪会有时
+  - GEOIP,CN,🚣 长风破浪会有时
+
+  - MATCH,🕸️ 漏网之鱼
+
+script:
+  code: |
+    def main(ctx, metadata):
+      ruleset_action = {'PrivateNetwork': "🚣 长风破浪会有时",'Additonal': "🚣 长风破浪会有时", 'BanEasyList': "🚧 通用拦截", 'Hijacking': "🚧 通用拦截", 'BanProgramAD': "🍃 应用净化", 'Developer': "👨‍💻 开发者服务", 'Scholar': "👨‍🔬 学术服务", 'Spotify': "🎵 高雅音乐",'KKBOX': "🎵 高雅音乐", 'YouTubeMusic': "🎵 高雅音乐" ,'StreamingSE': "🌏 国内媒体", 'Adult': "💪 青壮年模式", 'Netflix': "🎞️ 流媒体", 'HBO': "🎞️ 流媒体", 'YouTube': "🌎 国际媒体", 'GlobalMedia': "🌎 国际媒体", 'Samsung': "✨ 三星服务", 'Apple': "🍎 苹果服务", 'Microsoft': "Ⓜ️ 微软服务", 'Speedtest': "⏱️ 测速服务", 'Telegram': "⛵ 直挂云帆济沧海", 'ProxyGFWlist': "⛵ 直挂云帆济沧海", 'ChinaDomain': "🚣 长风破浪会有时", 'ChinaIp': "🚣 长风破浪会有时"}
+
+      for ruleset in ctx.rule_providers.keys():
+        if ctx.rule_providers[ruleset].match(metadata):
+          return ruleset_action[ruleset]
+
+      # Router Reject && DNS Error
+      ip = metadata["dst_ip"] or ctx.resolve_ip(metadata["host"])
+
+      if ip == "":
+        return "🏠 锦城虽云乐，不如早还家"
+
+      code = ctx.geoip(ip)
+      if code == "CN":
+        return "🚣 长风破浪会有时"
+        
+      return "🕸️ 漏网之鱼"
 
 {% endif %}
 {% if request.target == "surge" %}

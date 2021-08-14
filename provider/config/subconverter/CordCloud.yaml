@@ -1,9 +1,9 @@
 custom:
-  enable_rule_generator: true
+  enable_rule_generator: false
   overwrite_original_rules: true
 
   clash_rule_base: >-
-    https://github.com/bemarkt/scripts/raw/master/provider/config/subconverter/all-base.tpl
+    base/all-base.tpl
   surge_rule_base: >-
     https://github.com/bemarkt/scripts/raw/master/provider/config/subconverter/all-base.tpl
   surfboard_rule_base: >-
@@ -23,943 +23,357 @@ custom:
     - (剩余流量|到期时间|过期时间|官网地址|产品名称|先购买套餐|流量消耗|唯一官网|更新订阅)
     - (.*流量.*剩.*天)
     - (■等级警报■)
-    - ((限速))
     - (近期下线)
     - (游戏专线)
-    - "([游戏专用])"
 
   rename_node:
-    - 商宽@
-    - 上海@沪
-    - 中国@中
-    - 云南@云
-    - 佛山@禅
-    - 俄罗斯@俄
-    - 加拿大@加
-    - 北京@京
-    - 南京@宁
-    - 南阳@宛
-    - 印度@印
-    - 台湾@台
-    - 四川@川
-    - 土耳其@土
-    - 天津@津
-    - 宁波@甬
-    - 安徽@皖
-    - 广东@粤
-    - 广州@穗
-    - 徐州@徐
-    - 德国@德
-    - 意大利@意
-    - 成都@蓉
-    - 新加坡@新
-    - 日本@日
-    - 杭州@杭
-    - 武汉@汉
-    - 汕头@汕
-    - 江苏@苏
-    - 沈阳@沈
-    - 法国@法
-    - 泰国@泰
-    - 浙江@浙
-    - 海南@琼
-    - 深圳@深
-    - 湖北@鄂
-    - 湖南@湘
-    - 长沙@长
-    - 澳门@澳
-    - 珠海@珠
-    - 瑞士@瑞
-    - 福建@闽
-    - 美国@美
-    - 芬兰@芬
-    - 英国@英
-    - 菲律宾@菲
-    - 许昌@许
-    - 贵州@贵
-    - 贵阳@筑
-    - 越南@越
-    - 镇江@镇
-    - 青岛@青
-    - 青海@青
-    - 韩国@韩
-    - 香港@港
-    - 深港专线@深港
-    - "(-)@▷"
-    - 隧道测试@
-    - 隧道@
-    - "隧道测试[0-9]组@"
-    - "[0-9]组@"
-    - "(倍率:)@×"
-    - " @"
-    - "[ ]@"
-    - "( )@"
+    - { match: 商宽, replace: "" }
+    - { match: 上海, replace: 沪 }
+    - { match: 中国, replace: 中 }
+    - { match: 云南, replace: 云 }
+    - { match: 佛山, replace: 禅 }
+    - { match: 俄罗斯, replace: 俄 }
+    - { match: 加拿大, replace: 加 }
+    - { match: 北京, replace: 京 }
+    - { match: 南京, replace: 宁 }
+    - { match: 南阳, replace: 宛 }
+    - { match: 印度, replace: 印 }
+    - { match: 台湾, replace: 台 }
+    - { match: 四川, replace: 川 }
+    - { match: 土耳其, replace: 土 }
+    - { match: 天津, replace: 津 }
+    - { match: 宁波, replace: 甬 }
+    - { match: 安徽, replace: 皖 }
+    - { match: 广东, replace: 粤 }
+    - { match: 广州, replace: 穗 }
+    - { match: 徐州, replace: 徐 }
+    - { match: 德国, replace: 德 }
+    - { match: 意大利, replace: 意 }
+    - { match: 成都, replace: 蓉 }
+    - { match: 新加坡, replace: 新 }
+    - { match: 日本, replace: 日 }
+    - { match: 杭州, replace: 杭 }
+    - { match: 武汉, replace: 汉 }
+    - { match: 汕头, replace: 汕 }
+    - { match: 江苏, replace: 苏 }
+    - { match: 沈阳, replace: 沈 }
+    - { match: 法国, replace: 法 }
+    - { match: 泰国, replace: 泰 }
+    - { match: 浙江, replace: 浙 }
+    - { match: 海南, replace: 琼 }
+    - { match: 深圳, replace: 深 }
+    - { match: 湖北, replace: 鄂 }
+    - { match: 湖南, replace: 湘 }
+    - { match: 长沙, replace: 长 }
+    - { match: 澳门, replace: 澳 }
+    - { match: 珠海, replace: 珠 }
+    - { match: 瑞士, replace: 瑞 }
+    - { match: 福建, replace: 闽 }
+    - { match: 美国, replace: 美 }
+    - { match: 芬兰, replace: 芬 }
+    - { match: 英国, replace: 英 }
+    - { match: 菲律宾, replace: 菲 }
+    - { match: 许昌, replace: 许 }
+    - { match: 贵州, replace: 贵 }
+    - { match: 贵阳, replace: 筑 }
+    - { match: 越南, replace: 越 }
+    - { match: 镇江, replace: 镇 }
+    - { match: 青岛, replace: 青 }
+    - { match: 青海, replace: 青 }
+    - { match: 韩国, replace: 韩 }
+    - { match: 香港, replace: 港 }
+    - { match: 深港专线, replace: 深港 }
+    - { match: "(-)", replace: ▷ }
+    - { match: 隧道测试, replace: "" }
+    - { match: 隧道, replace: "" }
+    - { match: "隧道测试[0-9]组", replace: "" }
+    - { match: "[0-9]组", replace: "" }
+    - { match: "(倍率:)", replace: × }
+    - { match: " ", replace: "" }
+    - { match: "[ ]", replace: "" }
+    - { match: "( )", replace: "" }
 
-  rulesets:
-    - {
-        group: 🥥 DNS Improvement,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/DNS.list,
-        interval: 10800,
-      }
-    - {
-        group: ☠️ 软件验证,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/App-Activation.list,
-        interval: 10800,
-      }
-    - {
-        group: ⛔️ 广告服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Adblock/Adblock.list,
-        interval: 10800,
-      }
-    - {
-        group: ⏰ 时间校准,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/NTP-Service.list,
-        interval: 10800,
-      }
-    - {
-        group: 🍎 苹果服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Apple.list,
-        interval: 10800,
-      }
-    - {
-        group: 📺 哔哩哔哩,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/BiliBili.list,
-        interval: 10800,
-      }
-    - {
-        group: 🙈 谷歌服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Google.list,
-        interval: 10800,
-      }
-    - {
-        group: 🍥 政府网站,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/Government-CN.list,
-        interval: 10800,
-      }
-    - {
-        group: 🥝 爱奇艺,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/iQIYI.list,
-        interval: 10800,
-      }
-    - {
-        group: 🐻 LineTV,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/LineTV.list,
-        interval: 10800,
-      }
-    - {
-        group: 🐼 微软服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Microsoft.list,
-        interval: 10800,
-      }
-    - {
-        group: 🐷 网易音乐,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/NeteaseMusic.list,
-        interval: 10800,
-      }
-    - {
-        group: 🎥 奈飞影视,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Global-Services/Netflix.list,
-        interval: 10800,
-      }
-    - {
-        group: 📲 电报消息,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Telegram.list,
-        interval: 10800,
-      }
-    - {
-        group: 🎬 推趣影音,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY/Twitch.list,
-        interval: 10800,
-      }
-    - {
-        group: 📡 视频解析,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Video-Crack.list,
-        interval: 10800,
-      }
-    - {
-        group: 💊 小米服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Xiaomi.list,
-        interval: 10800,
-      }
-    - {
-        group: 🚦 DMCA Sensitive,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/DMCA-Sensitive.list,
-        interval: 10800,
-      }
-    - {
-        group: 🎯 直连服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/TeamViewer-CIDR.list,
-        interval: 10800,
-      }
-    - {
-        group: 🕸️ 局域网服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/LAN-Special-Apps.list,
-        interval: 10800,
-      }
-    - {
-        group: 🎮 游戏服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Game.list,
-        interval: 10800,
-      }
-    - {
-        group: 🌍 国外媒体,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/GlobalMedia.list,
-        interval: 10800,
-      }
-    - {
-        group: 🍖 默认代理,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/PROXY.list,
-        interval: 10800,
-      }
-    - {
-        group: 🌏 大陆服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic.list,
-        interval: 10800,
-      }
-    - {
-        group: 🌏 大陆服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/CCC-CN.list,
-        interval: 10800,
-      }
-    - {
-        group: 🍖 默认代理,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/CCC-Global.list,
-        interval: 10800,
-      }
-    - {
-        group: 🏬 阿里巴巴,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Domestic-Services/Alibaba.list,
-        interval: 10800,
-      }
-    - {
-        group: 🚀 SpeedTest,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/SpeedTest.list,
-        interval: 10800,
-      }
-    - {
-        group: 🎯 直连服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/Special/Local-LAN.list,
-        interval: 10800,
-      }
-    - {
-        group: 🌏 大陆服务,
-        ruleset: surge:https://raw.githubusercontent.com/LM-Firefly/Rules/master/CN-IP.list,
-        interval: 10800,
-      }
-    - { group: 🌏 大陆服务, rule: "GEOIP,CN" }
-    - { group: 🚧 终末策略, rule: MATCH }
   proxy_groups:
-    - { name: "🌮 手动选择", type: select, rule: ".*" }
-    - {
-        name: "🍖 默认代理",
-        type: select,
-        rule: "[]🔄 延迟最低,[]🌮 手动选择,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,[]🇩🇪 德国-轮询,[]🇩🇪 德国-TL,[]🍱 冷门地区,[]🇺🇸 美国-轮询,[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇺🇸 美国-Others,[]🇯🇵 日本-轮询,[]🇯🇵 日本-AWS,[]🇯🇵 日本-Azure,[]🇯🇵 日本-M247,[]🇯🇵 日本-NHN,[]🇯🇵 日本-NTT,[]🇯🇵 日本-Webarena,[]🇯🇵 日本-CloudN,[]🇬🇧 英国,[]🇭🇰 香港-轮询,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 深港专线,[]🇭🇰 香港-Others,[]🇷🇺 俄罗斯-Others,[]🇷🇺 俄罗斯-轮询,[]🇸🇬 新加坡-AWS,[]🇸🇬 新加坡-Azure,[]🇸🇬 新加坡-DO,[]🇸🇬 新加坡-NTT,[]🇰🇷 韩国-轮询,[]🇰🇷 韩国-Azure,[]🇩🇪 德国-轮询,[]🇩🇪 德国-TL",
-      }
-    - {
-        name: "🌍 国外媒体",
-        type: select,
-        rule: "[]🌮 手动选择,[]🇭🇰 香港-Media,[]🇹🇼 台湾-Media,[]🇺🇸 美国-Media,[]🇯🇵 日本-Media,[]🇬🇧 英国-Media,[]🇸🇬 新加坡-Media,[]🇰🇷 韩国-Media,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,[]🇹🇼 台湾-轮询,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-Others,[]🇯🇵 日本-CloudN,[]🇯🇵 日本-M247,[]🇯🇵 日本-NHN,[]🇯🇵 日本-NTT,[]🇯🇵 日本-Webarena,[]🇬🇧 英国,[]🇸🇬 新加坡-DO,[]🇸🇬 新加坡-NTT,[]🇸🇬 新加坡-AWS,[]🇸🇬 新加坡-Azure,[]🇰🇷 韩国-轮询,[]🇰🇷 韩国-Azure,[]🇩🇪 德国-TL",
-      }
-    - {
-        name: "🎮 游戏服务",
-        type: select,
-        rule: "[]🌮 手动选择,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 深港专线,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,[]🇹🇼 台湾-轮询,[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇯🇵 日本-M247,[]🇯🇵 日本-NHN,[]🇯🇵 日本-NTT,[]🇯🇵 日本-Webarena,[]🇯🇵 日本-CloudN,[]🇬🇧 英国,[]🇸🇬 新加坡-AWS,[]🇸🇬 新加坡-Azure,[]🇸🇬 新加坡-DO,[]🇸🇬 新加坡-NTT,[]🇰🇷 韩国-Azure,[]🇩🇪 德国-TL,[]🍖 默认代理",
-      }
-    - {
-        name: "🌏 大陆服务",
-        type: select,
-        rule: "[]🎯 直连服务,(🇨🇳),[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 香港-Others,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,台TFN,[]🍖 默认代理",
-      }
-    - {
-        name: "🚧 终末策略",
-        type: select,
-        rule: "[]🔄 延迟最低,[]🎯 直连服务,[]🌏 大陆服务,[]🍖 默认代理",
-      }
-    - {
-        name: "📡 视频解析",
-        type: select,
-        rule: "[]🎯 直连服务,[]🔄 延迟最低,[]🌏 大陆服务,[]🍖 默认代理",
-      }
-    - {
-        name: "🎥 奈飞影视",
-        type: select,
-        rule: "[]🇭🇰 香港-Media,[]🇹🇼 台湾-Media,[]🇺🇸 美国-Media,[]🇯🇵 日本-Media,[]🇬🇧 英国-Media,[]🇸🇬 新加坡-Media,[]🇰🇷 韩国-Media,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-Others,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-HiNet-FB,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-Others,[]🇯🇵 日本-CloudN,[]🇯🇵 日本-M247,[]🇯🇵 日本-NHN,[]🇯🇵 日本-NTT,[]🇯🇵 日本-Webarena,[]🇯🇵 日本-AWS,[]🇯🇵 日本-Azure,[]🇬🇧 英国,[]🇷🇺 俄罗斯-Others,[]🇷🇺 俄罗斯-轮询,[]🇸🇬 新加坡-DO,[]🇸🇬 新加坡-NTT,[]🇸🇬 新加坡-AWS,[]🇸🇬 新加坡-Azure,[]🇰🇷 韩国-Azure,[]🇩🇪 德国-TL",
-      }
-    - {
-        name: "🐷 网易音乐",
-        type: select,
-        rule: "[]🎯 直连服务,(网易云),(UnblockNetEaseMusic),(🇨🇳),[]🌏 大陆服务",
-      }
-    - {
-        name: "🍎 苹果服务",
-        type: select,
-        rule: "[]🍖 默认代理,[]🔄 延迟最低,[]🎯 直连服务",
-      }
-    - {
-        name: "📺 哔哩哔哩",
-        type: select,
-        rule: "[]🎯 直连服务,(🇨🇳),[]🌮 手动选择,[]🇭🇰 香港-Media,[]🇹🇼 台湾-Media,[]🇯🇵 日本-AWS,[]🇯🇵 日本-Azure,[]🇯🇵 日本-CloudN,[]🇯🇵 日本-M247,[]🇯🇵 日本-NHN,[]🇯🇵 日本-NTT,[]🇯🇵 日本-Webarena,[]🇭🇰 香港-轮询,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 深港专线,[]🇭🇰 香港-Others,[]🇹🇼 台湾-轮询,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,[]🇺🇸 美国-轮询,[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇺🇸 美国-Others,[]🍱 冷门地区",
-      }
-    - {
-        name: "🙈 谷歌服务",
-        type: select,
-        rule: "[]🔄 延迟最低,[]🌮 手动选择,[]🇺🇸 美国-轮询,[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇺🇸 美国-Others,[]🇯🇵 日本-轮询,[]🇯🇵 日本-AWS,[]🇯🇵 日本-Azure,[]🇯🇵 日本-M247,[]🇯🇵 日本-NHN,[]🇯🇵 日本-NTT,[]🇯🇵 日本-Webarena,[]🇯🇵 日本-CloudN,[]🇬🇧 英国,[]🇭🇰 香港-轮询,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 深港专线,[]🇭🇰 香港-Others,[]🇹🇼 台湾-轮询,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,[]🍱 冷门地区,[]🇷🇺 俄罗斯-Others,[]🇷🇺 俄罗斯-轮询,[]🇸🇬 新加坡-AWS,[]🇸🇬 新加坡-Azure,[]🇸🇬 新加坡-DO,[]🇸🇬 新加坡-NTT,[]🇰🇷 韩国-轮询,[]🇰🇷 韩国-Azure,[]🇩🇪 德国-轮询,[]🇩🇪 德国-TL",
-      }
-    - {
-        name: "🥝 爱奇艺",
-        type: select,
-        rule: "[]🎯 直连服务,[]🌮 手动选择,[]🇭🇰 香港-Media,[]🇹🇼 台湾-Media,[]🇺🇸 美国-Media,[]🇯🇵 日本-Media,[]🇬🇧 英国-Media,[]🇸🇬 新加坡-Media,[]🇰🇷 韩国-Media,(🇨🇳),[]🇭🇰 香港-轮询,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 深港专线,[]🇭🇰 香港-Others,[]🇹🇼 台湾-轮询,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet",
-      }
-    - {
-        name: "🐻 LineTV",
-        type: select,
-        rule: "[]🇹🇼 台湾-Media,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,[]🍖 默认代理,(台.*(?!▷)|TW|彰化)",
-      }
-    - {
-        name: "🐼 微软服务",
-        type: select,
-        rule: "[]🔄 延迟最低,[]🌮 手动选择,[]🇺🇸 美国-轮询,[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇺🇸 美国-Others,[]🇬🇧 英国,[]🇭🇰 香港-轮询,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 深港专线,[]🇭🇰 香港-Others,[]🇹🇼 台湾-轮询,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,[]🍱 冷门地区,[]🇸🇬 新加坡-AWS,[]🇸🇬 新加坡-Azure,[]🇸🇬 新加坡-DO,[]🇸🇬 新加坡-NTT,[]🇰🇷 韩国-轮询,[]🇰🇷 韩国-Azure,[]🇩🇪 德国-轮询,[]🇩🇪 德国-TL,[]🌏 大陆服务,[]🎯 直连服务",
-      }
-    - {
-        name: "📲 电报消息",
-        type: select,
-        rule: "[]🔄 延迟最低,[]🌮 手动选择,[]🇸🇬 新加坡-AWS,[]🇸🇬 新加坡-Azure,[]🇸🇬 新加坡-DO,[]🇸🇬 新加坡-NTT,[]🇰🇷 韩国-轮询,[]🇰🇷 韩国-Azure,[]🇩🇪 德国-轮询,[]🇩🇪 德国-TL,[]🇹🇼 台湾-轮询,[]🇭🇰 香港-轮询,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 香港-Others,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,台TFN,[]🇺🇸 美国-轮询,[]🍱 冷门地区,[]🇯🇵 日本-轮询,[]🇬🇧 英国,[]🇷🇺 俄罗斯-Others,[]🇷🇺 俄罗斯-轮询",
-      }
-    - {
-        name: "🎬 推趣影音",
-        type: select,
-        rule: "[]🔄 延迟最低,[]🌮 手动选择,[]🇺🇸 美国-轮询,[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇺🇸 美国-Others,[]🍱 冷门地区,[]🇯🇵 日本-轮询,[]🇯🇵 日本-AWS,[]🇯🇵 日本-Azure,[]🇯🇵 日本-M247,[]🇯🇵 日本-NHN,[]🇯🇵 日本-NTT,[]🇯🇵 日本-Webarena,[]🇯🇵 日本-CloudN,[]🇬🇧 英国,[]🇭🇰 香港-轮询,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 深港专线,[]🇭🇰 香港-Others,[]🇹🇼 台湾-轮询,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet",
-      }
-    - {
-        name: "💊 小米服务",
-        type: select,
-        rule: "[]🎯 直连服务,(🇨🇳),[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 香港-Others,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,台TFN,[]🍖 默认代理",
-      }
-    - {
-        name: "🏬 阿里巴巴",
-        type: select,
-        rule: "[]🎯 直连服务,(🇨🇳),[]🌏 大陆服务",
-      }
-    - {
-        name: "🚦 DMCA Sensitive",
-        type: select,
-        rule: "[]🎯 直连服务,[]🌏 大陆服务,[]🍖 默认代理",
-      }
-    - {
-        name: "🥥 DNS Improvement",
-        type: select,
-        rule: "[]🎯 直连服务,(🇨🇳),[]🔄 延迟最低,[]🍖 默认代理",
-      }
-    - {
-        name: "🕸️ 局域网服务",
-        type: select,
-        rule: "[]🎯 直连服务,[]🍖 默认代理",
-      }
-    - {
-        name: "🚀 SpeedTest",
-        type: select,
-        rule: "[]🎯 直连服务,[]🌮 手动选择",
-      }
-    - {
-        name: "🇹🇼 台湾-HiNet",
-        type: url-test,
-        rule: "(🇹🇼.*台HiNet(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇹🇼 台湾-Seednet",
-        type: url-test,
-        rule: "(🇹🇼.*台Seednet(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇹🇼 台湾-HiNet-FB",
-        type: fallback,
-        rule: "[]🇹🇼 台湾-HiNet,(🇹🇼.*台HiNet(?!▷))",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇹🇼 台湾-轮询",
-        type: fallback,
-        rule: "[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,(🇹🇼.*台TFN(?!▷))",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-AWS",
-        type: url-test,
-        rule: "(🇭🇰.*港AWS.*(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-Azure",
-        type: url-test,
-        rule: "(🇭🇰.*港Azure.*(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-HGC",
-        type: url-test,
-        rule: "(🇭🇰.*HGC.*(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-HKBN",
-        type: url-test,
-        rule: "(🇭🇰.*HKBN.*(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-HKT",
-        type: url-test,
-        rule: "(🇭🇰.*HKT.*(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-NTT",
-        type: url-test,
-        rule: "(🇭🇰.*NTT.*(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 深港专线",
-        type: url-test,
-        rule: "(🇭🇰.*不限速|深港临时专线),(🇭🇰.*深港(?!▷|回)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-Others",
-        type: url-test,
-        rule: "(🇭🇰.*港CI),(🇭🇰.*港icable),(🇭🇰.*港阿里云),(^🇭🇰.*港(?!▷|AWS|Azure|HGC|HKBN|HKT|NTT)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-延迟最低",
-        type: url-test,
-        rule: "[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 香港-Others,[]🇭🇰 深港专线",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-轮询",
-        type: fallback,
-        rule: "[]🇭🇰 香港-延迟最低,[]🇭🇰 香港-AWS,[]🇭🇰 香港-Azure,[]🇭🇰 香港-HGC,[]🇭🇰 香港-HKBN,[]🇭🇰 香港-HKT,[]🇭🇰 香港-NTT,[]🇭🇰 香港-Others,[]🇭🇰 深港专线",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇬🇧 英国",
-        type: url-test,
-        rule: "(🇬🇧.*伦敦|英.*(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-AWS",
-        type: url-test,
-        rule: "(🇺🇸.*美.*AWS),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-Azure",
-        type: url-test,
-        rule: "(🇺🇸.*美.*Azure),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-Cera",
-        type: url-test,
-        rule: "(🇺🇸.*美.*Cera),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-CT",
-        type: url-test,
-        rule: "(🇺🇸.*美.*CT),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-DO",
-        type: url-test,
-        rule: "(🇺🇸.*美.*DO),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-HE",
-        type: url-test,
-        rule: "(🇺🇸.*美.*HE),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-JS",
-        type: url-test,
-        rule: "(🇺🇸.*美.*JS),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-LN",
-        type: url-test,
-        rule: "(🇺🇸.*美.*Ln),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-RN",
-        type: url-test,
-        rule: "(🇺🇸.*美.*RN),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-Others",
-        type: url-test,
-        rule: "(🇺🇸.*美.*DP),(🇺🇸.*美.*VM),(^🇺🇸.*美(?!▷|AWS|Azure|Cera|CT|DO|HE|JS|LN|RN)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-延迟最低",
-        type: url-test,
-        rule: "[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇺🇸 美国-Others",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-轮询",
-        type: fallback,
-        rule: "[]🇺🇸 美国-延迟最低,[]🇺🇸 美国-AWS,[]🇺🇸 美国-Azure,[]🇺🇸 美国-Cera,[]🇺🇸 美国-CT,[]🇺🇸 美国-DO,[]🇺🇸 美国-HE,[]🇺🇸 美国-JS,[]🇺🇸 美国-LN,[]🇺🇸 美国-RN,[]🇺🇸 美国-Others",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-AWS",
-        type: url-test,
-        rule: "(🇯🇵.*日.*AWS),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-Azure",
-        type: url-test,
-        rule: "(🇯🇵.*日.*Azure),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-CloudN",
-        type: url-test,
-        rule: "(🇯🇵.*日.*CloudN),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-M247",
-        type: url-test,
-        rule: "(🇯🇵.*日.*M247),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-NHN",
-        type: url-test,
-        rule: "(🇯🇵.*日.*NHN),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-NTT",
-        type: url-test,
-        rule: "(🇯🇵.*日.*NTT),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-Webarena",
-        type: url-test,
-        rule: "(🇯🇵.*日.*Webarena),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-延迟最低",
-        type: url-test,
-        rule: "[]🇯🇵 日本-CloudN,[]🇯🇵 日本-M247,[]🇯🇵 日本-NHN,[]🇯🇵 日本-NTT,[]🇯🇵 日本-Webarena,[]🇯🇵 日本-AWS,[]🇯🇵 日本-Azure",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-轮询",
-        type: fallback,
-        rule: "[]🇯🇵 日本-延迟最低,[]🇯🇵 日本-CloudN,[]🇯🇵 日本-M247,[]🇯🇵 日本-NHN,[]🇯🇵 日本-NTT,[]🇯🇵 日本-Webarena,[]🇯🇵 日本-AWS,[]🇯🇵 日本-Azure",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇷🇺 俄罗斯-Others",
-        type: url-test,
-        rule: "(🇷🇺.*新西伯利亚),(🇷🇺.*莫斯科),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇷🇺 俄罗斯-延迟最低",
-        type: url-test,
-        rule: "[]🇷🇺 俄罗斯-Others",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇷🇺 俄罗斯-轮询",
-        type: fallback,
-        rule: "[]🇷🇺 俄罗斯-延迟最低,[]🇷🇺 俄罗斯-Others",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇸🇬 新加坡-AWS",
-        type: url-test,
-        rule: "(🇸🇬.*新AWS),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇸🇬 新加坡-Azure",
-        type: url-test,
-        rule: "(🇸🇬.*新Azure),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇸🇬 新加坡-DO",
-        type: url-test,
-        rule: "(🇸🇬.*新DO),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇸🇬 新加坡-NTT",
-        type: url-test,
-        rule: "(🇸🇬.*新NTT(?!▷)),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇸🇬 新加坡-延迟最低",
-        type: url-test,
-        rule: "[]🇸🇬 新加坡-AWS,[]🇸🇬 新加坡-Azure,[]🇸🇬 新加坡-DO,[]🇸🇬 新加坡-NTT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇸🇬 新加坡-轮询",
-        type: fallback,
-        rule: "[]🇸🇬 新加坡-延迟最低,[]🇸🇬 新加坡-AWS,[]🇸🇬 新加坡-Azure,[]🇸🇬 新加坡-DO,[]🇸🇬 新加坡-NTT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇰🇷 韩国-Azure",
-        type: url-test,
-        rule: "(🇰🇷.*韩.*Azure),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇰🇷 韩国-延迟最低",
-        type: url-test,
-        rule: "[]🇰🇷 韩国-Azure",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇰🇷 韩国-轮询",
-        type: fallback,
-        rule: "[]🇰🇷 韩国-延迟最低,[]🇰🇷 韩国-Azure",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇩🇪 德国-TL",
-        type: url-test,
-        rule: "(🇩🇪.*德.*TL),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇩🇪 德国-延迟最低",
-        type: url-test,
-        rule: "[]🇩🇪 德国-TL",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇩🇪 德国-轮询",
-        type: fallback,
-        rule: "[]🇩🇪 德国-延迟最低,[]🇩🇪 德国-TL",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🔄 延迟最低",
-        type: url-test,
-        rule: "[]🇺🇸 美国-延迟最低,[]🇭🇰 香港-延迟最低,[]🇹🇼 台湾-HiNet,[]🇹🇼 台湾-Seednet,[]🇯🇵 日本-延迟最低,[]🇷🇺 俄罗斯-延迟最低,[]🇩🇪 德国-延迟最低,[]🍱 冷门地区,[]🇸🇬 新加坡-延迟最低,[]🇰🇷 韩国-延迟最低,[]🇬🇧 英国",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🍱 冷门地区",
-        type: url-test,
-        rule: "(🇩🇪),(🇬🇧),(🇰🇷),(🇹🇷),(🇵🇭),(🇮🇪),(🇫🇷),(🇮🇳),(🇨🇦),(🇷🇺),(🇧🇷),(🇲🇾)",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇭🇰 香港-Media",
-        type: url-test,
-        rule: "(^🇭🇰.*[M]),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇹🇼 台湾-Media",
-        type: url-test,
-        rule: "(^🇹🇼.*[M]),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇬🇧 英国-Media",
-        type: url-test,
-        rule: "(^🇬🇧.*[M]),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇺🇸 美国-Media",
-        type: url-test,
-        rule: "(^🇺🇸.*[M]),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇯🇵 日本-Media",
-        type: url-test,
-        rule: "(^🇯🇵.*[M]),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇸🇬 新加坡-Media",
-        type: url-test,
-        rule: "(^🇸🇬.*[M]),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - {
-        name: "🇰🇷 韩国-Media",
-        type: url-test,
-        rule: "(^🇰🇷.*[M]),[]REJECT",
-        url: "http://cp.cloudflare.com/generate_204",
-        interval: 180,
-        timeout: 5,
-        tolerance: 60,
-      }
-    - { name: "🎯 直连服务", type: select, rule: "[]DIRECT" }
-    - { name: "🍥 政府网站", type: select, rule: "[]🎯 直连服务" }
-    - {
-        name: "☠️ 软件验证",
-        type: select,
-        rule: "[]REJECT,[]🎯 直连服务,[]🍖 默认代理",
-      }
-    - { name: "⛔️ 广告服务", type: select, rule: "[]REJECT,[]🎯 直连服务" }
-    - { name: "⏰ 时间校准", type: select, rule: "[]🎯 直连服务" }
+    # AI云可用节点
+    - name: "🔄 AI云可达"
+      type: fallback
+      rule:
+        [
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]🗺️ 其他 | 剩余价值",
+        ]
+      url: "http://cp.cloudflare.com/generate_204"
+      interval: 300
+      timeout: 5
+      tolerance: 60
+    # 代理节点选择
+    - name: "⛵ 直挂云帆济沧海"
+      type: select
+      rule:
+        [
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]🗺️ 其他 | 剩余价值",
+          "[]🔄 AI云可达",
+          "[]🏠 锦城虽云乐，不如早还家",
+        ]
+    # 国内网站
+    - name: "🚣 长风破浪会有时"
+      type: select
+      rule: ["[]🏠 锦城虽云乐，不如早还家", "[]⛵ 直挂云帆济沧海"]
+    # 大陆流媒体面向港澳台限定服务
+    - name: "🌏 国内媒体"
+      type: select
+      rule:
+        [
+          "[]🚣 长风破浪会有时",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]⛵ 直挂云帆济沧海",
+        ]
+    # 国际高雅音乐平台
+    - name: "🎵 高雅音乐"
+      type: select
+      rule:
+        [
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]⛵ 直挂云帆济沧海",
+        ]
+    # 国外流媒体解锁
+    - name: "🎞️ 流媒体"
+      type: select
+      rule:
+        [
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]⛵ 直挂云帆济沧海",
+        ]
+    # 国际媒体服务
+    - name: "🌎 国际媒体"
+      type: select
+      rule:
+        [
+          "[]⛵ 直挂云帆济沧海",
+          "[]🔄 AI云可达",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇺🇲 美国 | 探索者号",
+        ]
+    # 青壮年服务
+    - name: "💪 青壮年模式"
+      type: select
+      rule:
+        [
+          "[]⛵ 直挂云帆济沧海",
+          "[]🚣 长风破浪会有时",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇺🇲 美国 | 探索者号",
+        ]
+    # Developer 开发者服务
+    - name: "👨‍💻 开发者服务"
+      type: select
+      rule: ["[]⛵ 直挂云帆济沧海", "[]🚣 长风破浪会有时"]
+    # Scholar 学术服务
+    - name: "👨‍🔬 学术服务"
+      type: select
+      rule: ["[]🚣 长风破浪会有时", "[]⛵ 直挂云帆济沧海"]
+    # Samsung 服务代理
+    - name: "✨ 三星服务"
+      type: select
+      rule: ["[]🚣 长风破浪会有时", "[]⛵ 直挂云帆济沧海"]
+    # Apple 服务代理
+    - name: "🍎 苹果服务"
+      type: select
+      rule: ["[]🚣 长风破浪会有时", "[]⛵ 直挂云帆济沧海"]
+    # Microsoft 服务代理
+    - name: "Ⓜ️ 微软服务"
+      type: select
+      rule: ["[]🚣 长风破浪会有时", "[]⛵ 直挂云帆济沧海"]
+    # SpeedTest 测速
+    - name: "⏱️ 测速服务"
+      type: select
+      rule: ["[]⛵ 直挂云帆济沧海", "[]🚣 长风破浪会有时"]
+    # 广告拦截
+    - name: "🚧 通用拦截"
+      type: select
+      rule: ["[]🈲 一夫当关，万夫莫开", "[]🏠 锦城虽云乐，不如早还家"]
+    - name: "🍃 应用净化"
+      type: select
+      rule:
+        [
+          "[]🚧 通用拦截",
+          "[]🈲 一夫当关，万夫莫开",
+          "[]🏠 锦城虽云乐，不如早还家",
+        ]
+    # 私のDIY
+    - name: "🇭🇰 香港 | Too Naive"
+      type: select
+      rule: ["[]🇭🇰 香港-Others", "[]🇭🇰 深港专线"]
+    - name: "🇭🇰 香港-Others"
+      type: url-test
+      rule: ["(^(?!🇭🇰 深港).*港)"]
+      url: "http://cp.cloudflare.com/generate_204"
+      interval: 300
+      timeout: 5
+      tolerance: 60
+    - name: "🇭🇰 深港专线"
+      type: url-test
+      rule: ["(深港(?!回))", "[]REJECT"]
+      url: "http://cp.cloudflare.com/generate_204"
+      interval: 300
+      timeout: 5
+      tolerance: 60
+    - name: "🇨🇳 台湾 | 你好机车哦"
+      type: url-test
+      rule: ["(台)"]
+      url: "http://cp.cloudflare.com/generate_204"
+      interval: 300
+      timeout: 5
+      tolerance: 60
+    - name: "🇯🇵 日本 | 神罗天征"
+      type: url-test
+      rule: ["(日)"]
+      url: "http://cp.cloudflare.com/generate_204"
+      interval: 300
+      timeout: 5
+      tolerance: 60
+    - name: "🇰🇷 韩国 | 来自星星的你"
+      type: url-test
+      rule: ["(韩)"]
+      url: "http://cp.cloudflare.com/generate_204"
+      interval: 300
+      timeout: 5
+      tolerance: 60
+    - name: "🇸🇬 新加坡 | 绀青之拳"
+      type: url-test
+      rule: ["(🇸🇬.*新)"]
+      url: "http://cp.cloudflare.com/generate_204"
+      interval: 300
+      timeout: 5
+      tolerance: 60
+    - name: "🇺🇲 美国 | 探索者号"
+      type: url-test
+      rule: ["(美)"]
+      url: "http://cp.cloudflare.com/generate_204"
+      interval: 300
+      timeout: 5
+      tolerance: 60
+    - name: "🗺️ 其他 | 剩余价值"
+      type: select
+      rule: ["(^(?!.*港|.*台|.*日|.*韩|🇸🇬.*新|🇺🇸.*美).*)"]
+    # 你以为你能跑？
+    - name: "🕸️ 漏网之鱼"
+      type: select
+      rule: ["[]⛵ 直挂云帆济沧海", "[]🚣 长风破浪会有时"]
+    - name: "🏠 锦城虽云乐，不如早还家"
+      type: select
+      rule: ["[]DIRECT"]
+    - name: "🈲 一夫当关，万夫莫开"
+      type: select
+      rule: ["[]REJECT"]
 
   add_emoji: true
   remove_old_emoji: true
   emojis:
-    - (?i:Bandwidth|expire|流量|时间|应急|过期),🏳️‍🌈
-    - (NetEaseMusic|网易云音乐|网易云解锁),🎶
-    - (Ascension|阿森松),🇦🇨
-    - (Dubai|迪拜),🇦🇪
-    - (AR|阿根廷|Argentina),🇦🇷
-    - (Austria|Vienna|奥地利|维也纳),🇦🇹
-    - (AU|Australia|Sydney|澳大利亚|澳洲|悉尼),🇦🇺
-    - (BE|Belgium|比利时),🇧🇪
-    - (BR|Brazil|Paulo|巴西|圣保罗),🇧🇷
-    - (Canada|Montreal|Vancouver|加(?!州|坡).*(?!▷)|蒙特利尔|温哥华|楓葉|枫叶|CA),🇨🇦
-    - (Switzerland|Zurich|瑞士|苏黎世),🇨🇭
-    - (DE|Germany|法兰克福|德.*(?!▷)),🇩🇪
-    - (Denmark|丹麦),🇩🇰
-    - (Spain|西班牙),🇪🇸
-    - (Europe|欧洲),🇪🇺
-    - (Finland|Helsinki|芬兰|赫尔辛基),🇫🇮
-    - (FR|France|Paris|法国.*(?!▷)|巴黎),🇫🇷
-    - (?i:UK|England|United.*?Kingdom|London|英.*(?!▷)|[^-]英|伦敦),🇬🇧
-    - (Indonesia|Jakarta|印尼|印度尼西亚|雅加达),🇮🇩
-    - (Ireland|Dublin|爱尔兰|都柏林),🇮🇪
-    - (India|Mumbai|印度|孟买),🇮🇳
-    - (Italy|Milan|意大利|米兰),🇮🇹
-    - (?i:JP|Japan|Tokyo|Osaka|Saitama|日.*(?!▷)|东京|大阪|埼玉|沪日|穗日|川日|中日|泉日|杭日|[^-]日),🇯🇵
-    - (KP|North.*?Korea|朝鲜),🇰🇵
-    - (?i:KR|Korea|KOR|首尔|韩|韓),🇰🇷
-    - (MO|Macao|澳.*(?!▷)|CTM),🇲🇴
-    - (MY|Malaysia|马来西亚),🇲🇾
-    - (NL|Netherlands|荷兰|阿姆斯特丹),🇳🇱
-    - (PH|Philippines|菲律宾),🇵🇭
-    - (RO|Romania|罗马尼亚),🇷🇴
-    - (?i:RU|Russia|Moscow|Petersburg|Siberia|俄.*(?!▷)|伯力|莫斯科|圣彼得堡|西伯利亚|新西伯利亚|哈巴罗夫斯克|俄罗斯|京俄|杭俄|[^-]俄),🇷🇺
-    - (Arabia|沙特),🇸🇦
-    - (SE|Sweden|瑞典),🇸🇪
-    - (?i:SG|新(?!▷|西)|Singapore|狮城|沪新|京新|泉新|穗新|深新|杭新|[^-]新),🇸🇬
-    - (TH|Thailand|泰国|曼谷),🇹🇭
-    - (TR|Turkey|土.*(?!▷)|伊斯坦布尔),🇹🇷
-    - (?i:US|America|United.*?States|美.*(?!▷)|[^-]美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|沪美|京美),🇺🇸
-    - (VN|Vietnam|越南),🇻🇳
-    - (ZA|Africa|南非),🇿🇦
-    - (?i:HK|Hong.*?Kong|HKT|HKBN|HGC|WTT|CMI|港(?!▷|回)),🇭🇰
-    - (?i:TW|Taiwan|CHT|HiNet|台.*(?!▷)|台北|台中|新北|彰化|[^-]台),🇹🇼
-    - (?i:CN|China|回国|中.*(?!▷)|苏.*(?!▷)|京.*(?!▷)|沪.*(?!▷)|穗.*(?!▷)|深(?!▷|港)|杭.*(?!▷)|徐.*(?!▷)|青.*(?!▷)|甬.*(?!▷)|镇.*(?!▷)|禅.*(?!▷)|蓉.*(?!▷)|江苏|北京|上海|广州|深圳|杭州|常州|徐州|青岛|宁波|镇江|成都|back),🇨🇳
+    - { match: "(?i:Bandwidth|expire|流量|时间|应急|过期)", emoji: 🏳️‍🌈 }
+    - { match: "(NetEaseMusic|网易云音乐|网易云解锁)", emoji: 🎶 }
+    - { match: "(Ascension|阿森松)", emoji: 🇦🇨 }
+    - { match: "(Dubai|迪拜)", emoji: 🇦🇪 }
+    - { match: "(AR|阿根廷|Argentina)", emoji: 🇦🇷 }
+    - { match: "(Austria|Vienna|奥地利|维也纳)", emoji: 🇦🇹 }
+    - { match: "(AU|Australia|Sydney|澳大利亚|澳洲|悉尼)", emoji: 🇦🇺 }
+    - { match: "(BE|Belgium|比利时)", emoji: 🇧🇪 }
+    - { match: "(BR|Brazil|Paulo|巴西|圣保罗)", emoji: 🇧🇷 }
+    - {
+        match: "(Canada|Montreal|Vancouver|加(?!州|坡).*(?!▷)|蒙特利尔|温哥华|楓葉|枫叶|CA)",
+        emoji: 🇨🇦,
+      }
+    - { match: "(Switzerland|Zurich|瑞士|苏黎世)", emoji: 🇨🇭 }
+    - { match: "(DE|Germany|法兰克福|德.*(?!▷))", emoji: 🇩🇪 }
+    - { match: "(Denmark|丹麦)", emoji: 🇩🇰 }
+    - { match: "(Spain|西班牙)", emoji: 🇪🇸 }
+    - { match: "(Europe|欧洲)", emoji: 🇪🇺 }
+    - { match: "(Finland|Helsinki|芬兰|赫尔辛基)", emoji: 🇫🇮 }
+    - { match: "(FR|France|Paris|法国.*(?!▷)|巴黎)", emoji: 🇫🇷 }
+    - {
+        match: "(?i:UK|England|United.*?Kingdom|London|英.*(?!▷)|[^-]英|伦敦)",
+        emoji: 🇬🇧,
+      }
+    - { match: "(Indonesia|Jakarta|印尼|印度尼西亚|雅加达)", emoji: 🇮🇩 }
+    - { match: "(Ireland|Dublin|爱尔兰|都柏林)", emoji: 🇮🇪 }
+    - { match: "(India|Mumbai|印度|孟买)", emoji: 🇮🇳 }
+    - { match: "(Italy|Milan|意大利|米兰)", emoji: 🇮🇹 }
+    - {
+        match: "(?i:JP|Japan|Tokyo|Osaka|Saitama|日.*(?!▷)|东京|大阪|埼玉|沪日|穗日|川日|中日|泉日|杭日|[^-]日)",
+        emoji: 🇯🇵,
+      }
+    - { match: "(KP|North.*?Korea|朝鲜)", emoji: 🇰🇵 }
+    - { match: "(?i:KR|Korea|KOR|首尔|韩|韓)", emoji: 🇰🇷 }
+    - { match: "(MO|Macao|澳.*(?!▷)|CTM)", emoji: 🇲🇴 }
+    - { match: "(MY|Malaysia|马来西亚)", emoji: 🇲🇾 }
+    - { match: "(NL|Netherlands|荷兰|阿姆斯特丹)", emoji: 🇳🇱 }
+    - { match: "(PH|Philippines|菲律宾)", emoji: 🇵🇭 }
+    - { match: "(RO|Romania|罗马尼亚)", emoji: 🇷🇴 }
+    - {
+        match: "(?i:RU|Russia|Moscow|Petersburg|Siberia|俄.*(?!▷)|伯力|莫斯科|圣彼得堡|西伯利亚|新西伯利亚|哈巴罗夫斯克|俄罗斯|京俄|杭俄|[^-]俄)",
+        emoji: 🇷🇺,
+      }
+    - { match: "(Arabia|沙特)", emoji: 🇸🇦 }
+    - { match: "(SE|Sweden|瑞典)", emoji: 🇸🇪 }
+    - {
+        match: "(?i:SG|新(?!▷|西)|Singapore|狮城|沪新|京新|泉新|穗新|深新|杭新|[^-]新)",
+        emoji: 🇸🇬,
+      }
+    - { match: "(TH|Thailand|泰国|曼谷)", emoji: 🇹🇭 }
+    - { match: "(TR|Turkey|土.*(?!▷)|伊斯坦布尔)", emoji: 🇹🇷 }
+    - {
+        match: "(?i:US|America|United.*?States|美.*(?!▷)|[^-]美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|沪美|京美)",
+        emoji: 🇺🇸,
+      }
+    - { match: "(VN|Vietnam|越南)", emoji: 🇻🇳 }
+    - { match: "(ZA|Africa|南非)", emoji: 🇿🇦 }
+    - {
+        match: "(?i:HK|Hong.*?Kong|HKT|HKBN|HGC|WTT|CMI|港(?!▷|回))",
+        emoji: 🇭🇰,
+      }
+    - {
+        match: "(?i:TW|Taiwan|CHT|HiNet|台.*(?!▷)|台北|台中|新北|彰化|[^-]台)",
+        emoji: 🇹🇼,
+      }
+    - {
+        match: "(?i:CN|China|回国|中.*(?!▷)|苏.*(?!▷)|京.*(?!▷)|沪.*(?!▷)|穗.*(?!▷)|深(?!▷|港)|杭.*(?!▷)|徐.*(?!▷)|青.*(?!▷)|甬.*(?!▷)|镇.*(?!▷)|禅.*(?!▷)|蓉.*(?!▷)|江苏|北京|上海|广州|深圳|杭州|常州|徐州|青岛|宁波|镇江|成都|back)",
+        emoji: 🇨🇳,
+      }
 
-  template_args:
-    - { key: clash.mixed_port, value: 8888 }
-    - { key: clash.redir_port, value: 7890 }
-    - { key: clash.allow_lan, value: false }
-    - { key: clash.log_level, value: silent }
-    - { key: clash.ipv6, value: true }
-    - { key: clash.api_port, value: 0.0.0.0:8080 }
+template_args:
+  - { key: clash.mixed_port, value: 8888 }
+  - { key: clash.redir_port, value: 8890 }
+  - { key: clash.allow_lan, value: false }
+  - { key: clash.log_level, value: silent }
+  - { key: clash.ipv6, value: true }
+  - { key: clash.api_port, value: 0.0.0.0:8080 }
