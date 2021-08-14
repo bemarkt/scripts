@@ -68,7 +68,7 @@ payload:
   - IP-CIDR6,::ffff:0:0:0/96,no-resolve
   - IP-CIDR6,64:ff9b::/96,no-resolve
   - IP-CIDR6,100::/64,no-resolve
-  - IP-CIDR6,2001:0000:/32,no-resolve
+  - IP-CIDR6,2001::/32,no-resolve
   - IP-CIDR6,2001:20::/28,no-resolve
   - IP-CIDR6,2001:db8::/32,no-resolve
   - IP-CIDR6,2002::/16,no-resolve
