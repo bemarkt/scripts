@@ -1,0 +1,10 @@
+payload:
+  # China Area Network
+
+  # Global Area Network
+  # > MicroSoft
+  - DOMAIN-SUFFIX,msftconnecttest.com
+  - DOMAIN-SUFFIX,msftncsi.com
+  # > Steam
+  - DOMAIN,cdn.akamai.steamstatic.com
+  - DOMAIN,steamcdn-a.akamaihd.net

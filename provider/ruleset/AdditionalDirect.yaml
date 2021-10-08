@@ -1,0 +1,204 @@
+payload:
+  # China Area Network
+  # > Alibaba
+  - DOMAIN,log.mmstat.com
+  - DOMAIN,sycm.mmstat.com
+  # > Getui
+  - DOMAIN-SUFFIX,dizhensubao.getui.com
+  # > Tencent
+  - DOMAIN,fairplay.l.qq.com
+  - DOMAIN,livew.l.qq.com
+  - DOMAIN,vd.l.qq.com
+  # > XiaoMi
+  - DOMAIN,tracking.miui.com
+  # > Umeng
+  - DOMAIN-SUFFIX,msg.umeng.com
+  - DOMAIN-SUFFIX,msg.umengcloud.com
+  # > Others
+  - DOMAIN,app.adjust.com
+  - DOMAIN,bdtj.tagtic.cn
+  - DOMAIN-SUFFIX,chinaz.com
+  - DOMAIN-SUFFIX,ip138.com
+  - DOMAIN-SUFFIX,nfmovies.com
+  # >> UUBooster
+  # - PROCESS-NAME,uu.exe
+  # - PROCESS-NAME,uu_ball.exe
+  # >> Download
+  - PROCESS-NAME,aria2c.exe
+  - PROCESS-NAME,BitComet.exe
+  - PROCESS-NAME,fdm.exe
+  # - PROCESS-NAME,IDMan.exe
+  - PROCESS-NAME,NetTransport.exe
+  - PROCESS-NAME,qbittorrent.exe
+  - PROCESS-NAME,Thunder.exe
+  - PROCESS-NAME,transmission-daemon.exe
+  - PROCESS-NAME,transmission-qt.exe
+  - PROCESS-NAME,uTorrent.exe
+  - PROCESS-NAME,WebTorrent.exe
+  - PROCESS-NAME,aria2c
+  - PROCESS-NAME,fdm
+  - PROCESS-NAME,Folx
+  - PROCESS-NAME,NetTransport
+  - PROCESS-NAME,qbittorrent
+  - PROCESS-NAME,Thunder
+  - PROCESS-NAME,Transmission
+  - PROCESS-NAME,uTorrent
+  - PROCESS-NAME,WebTorrent
+  - PROCESS-NAME,WebTorrent Helper
+  # >> LAN
+  - IP-CIDR,0.0.0.0/8,no-resolve
+  - IP-CIDR,10.0.0.0/8,no-resolve
+  - IP-CIDR,100.64.0.0/10,no-resolve
+  - IP-CIDR,127.0.0.0/8,no-resolve
+  - IP-CIDR,169.254.0.0/16,no-resolve
+  - IP-CIDR,172.16.0.0/12,no-resolve
+  - IP-CIDR,192.0.0.0/24,no-resolve
+  - IP-CIDR,192.88.99.0/24,no-resolve
+  - IP-CIDR,192.168.0.0/16,no-resolve
+  - IP-CIDR,198.18.0.0/15,no-resolve
+  - IP-CIDR,198.51.100.0/24,no-resolve
+  - IP-CIDR,203.0.113.0/24,no-resolve
+  - IP-CIDR,224.0.0.0/4,no-resolve
+  - IP-CIDR,233.252.0.0/24,no-resolve
+  - IP-CIDR,240.0.0.0/4,no-resolve
+  - IP-CIDR,255.255.255.255/32,no-resolve
+  - IP-CIDR6,::/0,no-resolve
+  - IP-CIDR6,::/128,no-resolve
+  - IP-CIDR6,::1/128,no-resolve
+  - IP-CIDR6,64:ff9b::/96,no-resolve
+  - IP-CIDR6,100::/64,no-resolve
+  - IP-CIDR6,2001::/32,no-resolve
+  - IP-CIDR6,2001:20::/28,no-resolve
+  - IP-CIDR6,2001:db8::/32,no-resolve
+  - IP-CIDR6,2002::/16,no-resolve
+  - IP-CIDR6,fc00::/7,no-resolve
+  - IP-CIDR6,fe80::/10,no-resolve
+  - IP-CIDR6,ff00::/8,no-resolve
+
+  # Global Area Network
+  # > Akamai
+  - DOMAIN,whatismyip.akamai.com
+  - DOMAIN-SUFFIX,whoami.akamai.net
+  - DOMAIN-SUFFIX,origin-a.akamaihd.net
+  # > Amazon
+  - DOMAIN-SUFFIX,images-cn-8.ssl-images-amazon.com
+  - DOMAIN-SUFFIX,images-cn.ssl-images-amazon.com
+  # > Epicgames
+  - DOMAIN-SUFFIX,ol.epicgames.com
+  # > Google
+  - DOMAIN-SUFFIX,265.com
+  - DOMAIN-SUFFIX,2mdn.net
+  - DOMAIN-SUFFIX,app-measurement.com
+  - DOMAIN-SUFFIX,c.android.clients.google.com
+  - DOMAIN-SUFFIX,cache.pack.google.com
+  - DOMAIN-SUFFIX,clickserve.dartsearch.net
+  - DOMAIN-SUFFIX,clientservices.googleapis.com
+  - DOMAIN-SUFFIX,crl.pki.goog
+  - DOMAIN-SUFFIX,dl.google.com
+  - DOMAIN-SUFFIX,dl.l.google.com
+  - DOMAIN-SUFFIX,googletagmanager.com
+  - DOMAIN-SUFFIX,googletagservices.com
+  - DOMAIN-SUFFIX,gtm.oasisfeng.com
+  - DOMAIN-SUFFIX,imasdk.googleapis.com
+  - DOMAIN-SUFFIX,mtalk.google.com
+  - DOMAIN-SUFFIX,ocsp.pki.goog
+  - DOMAIN-SUFFIX,recaptcha.net
+  - DOMAIN-SUFFIX,safebrowsing-cache.google.com
+  - DOMAIN-SUFFIX,safebrowsing.googleapis.com
+  - DOMAIN-SUFFIX,settings.crashlytics.com
+  - DOMAIN-SUFFIX,ssl-google-analytics.l.google.com
+  - DOMAIN-SUFFIX,ssl.gstatic.com
+  - DOMAIN-SUFFIX,toolbarqueries.google.com
+  - DOMAIN-SUFFIX,tools.google.com
+  - DOMAIN-SUFFIX,tools.l.google.com
+  - DOMAIN-SUFFIX,translate.googleapis.com
+  - DOMAIN-SUFFIX,translation.googleapis.com
+  - DOMAIN-SUFFIX,update.googleapis.com
+  - DOMAIN-SUFFIX,www-googletagmanager.l.google.com
+  - DOMAIN-SUFFIX,www.gstatic.com
+  # >> Google Fonts API
+  - DOMAIN-SUFFIX,fonts.googleapis.com
+  - DOMAIN-SUFFIX,fonts.gstatic.com
+  # >> Firebase Cloud Messaging
+  - DOMAIN-SUFFIX,mtalk.google.com
+  - DOMAIN-SUFFIX,alt1-mtalk.google.com
+  - DOMAIN-SUFFIX,alt2-mtalk.google.com
+  - DOMAIN-SUFFIX,alt3-mtalk.google.com
+  - DOMAIN-SUFFIX,alt4-mtalk.google.com
+  - DOMAIN-SUFFIX,alt5-mtalk.google.com
+  - DOMAIN-SUFFIX,alt6-mtalk.google.com
+  - DOMAIN-SUFFIX,alt7-mtalk.google.com
+  - DOMAIN-SUFFIX,alt8-mtalk.google.com
+  # > Microsoft
+  - DOMAIN-SUFFIX,msftconnecttest.com
+  - DOMAIN-SUFFIX,windowsupdate.com
+  - DOMAIN-SUFFIX,xbox.com
+  - DOMAIN-SUFFIX,xboxlive.com
+  # > Mozilla
+  - DOMAIN-SUFFIX,tracking-protection.cdn.mozilla.net
+
+  # > Steam
+  - DOMAIN-SUFFIX,steampowered.com
+  - DOMAIN-SUFFIX,steam-chat.com
+  - DOMAIN-SUFFIX,steamstatic.com
+  - DOMAIN-SUFFIX,steamcontent.com
+  ## >> Akamai Download CDN
+  - DOMAIN,steambroadcast.akamaized.net
+  - DOMAIN,steamcdn-a.akamaihd.net
+  - DOMAIN,steamcommunity-a.akamaihd.net
+  - DOMAIN-SUFFIX,steampipe.akamaized.net
+  - DOMAIN,steamstore-a.akamaihd.net
+  - DOMAIN,steamusercontent-a.akamaihd.net
+  - DOMAIN,steamuserimages-a.akamaihd.net
+  - DOMAIN,steamvideo-a.akamaihd.net
+  ## >> 阿里云 Download CDN
+  - DOMAIN-SUFFIX,cdn-ali.content.steamchina.com
+  ## >> 白山云 Download CDN
+  - DOMAIN-SUFFIX,st.dl.bscstorage.net
+  - DOMAIN-SUFFIX,st.dl.eccdnx.com
+  - DOMAIN-SUFFIX,st.dl.pinyuncloud.com
+  ## >> 华为云 Download CDN
+  - DOMAIN-SUFFIX,steamcontent.tnkjmec.com
+  ## >> 金山云 Download CDN
+  - DOMAIN-SUFFIX,dl.steam.clngaa.com
+  ## >> 腾讯云 Download CDN
+  - DOMAIN-SUFFIX,cdn-qc.content.steamchina.com
+  ## >> 完美 Download CDN
+  - DOMAIN-SUFFIX,csgo.com.cn
+  - DOMAIN-SUFFIX,dota2.com.cn
+  ## >> 网宿 Download CDN
+  - DOMAIN-SUFFIX,cdn-ws.content.steamchina.com
+  - DOMAIN-SUFFIX,steampowered.com.8686c.com
+  - DOMAIN-SUFFIX,steamstatic.com.8686c.com
+
+  # > Strava
+  - DOMAIN,analytics.strava.com
+  # > Private Tracker
+  - DOMAIN-SUFFIX,awesome-hd.me
+  - DOMAIN-SUFFIX,broadcasthe.net
+  - DOMAIN-SUFFIX,chdbits.co
+  - DOMAIN-SUFFIX,classix-unlimited.co.uk
+  - DOMAIN-SUFFIX,empornium.me
+  - DOMAIN-SUFFIX,gazellegames.net
+  - DOMAIN-SUFFIX,hdchina.org
+  - DOMAIN-SUFFIX,hdsky.me
+  - DOMAIN-SUFFIX,icetorrent.org
+  - DOMAIN-SUFFIX,jpopsuki.eu
+  - DOMAIN-SUFFIX,keepfrds.com
+  - DOMAIN-SUFFIX,madsrevolution.net
+  - DOMAIN-SUFFIX,m-team.cc
+  - DOMAIN-SUFFIX,nanyangpt.com
+  - DOMAIN-SUFFIX,ncore.cc
+  - DOMAIN-SUFFIX,open.cd
+  - DOMAIN-SUFFIX,ourbits.club
+  - DOMAIN-SUFFIX,passthepopcorn.me
+  - DOMAIN-SUFFIX,privatehd.to
+  - DOMAIN-SUFFIX,redacted.ch
+  - DOMAIN-SUFFIX,springsunday.net
+  - DOMAIN-SUFFIX,tjupt.org
+  - DOMAIN-SUFFIX,totheglory.im
+  # > Others
+  - DOMAIN-KEYWORD,announce
+  - DOMAIN-KEYWORD,torrent
+  - DOMAIN-SUFFIX,smtp
+  - DOMAIN-KEYWORD,aria2
