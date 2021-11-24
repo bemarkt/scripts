@@ -272,7 +272,7 @@ rule-providers:
     type: http
     behavior: classical
     path: ./rule-providers/Adult.yaml
-    url: https://cors.bemarkt.workers.dev/?https://gist.githubusercontent.com/bemarkt/b1933e22046237d11f2578b6ad404577/raw/5c5985203d2c37155c49379468630d79ab21c90e/adult.yaml
+    url: https://cors.bemarkt.workers.dev/?https://gist.githubusercontent.com/bemarkt/b1933e22046237d11f2578b6ad404577/raw/adult.yaml
     interval: 43200
   Apple:
     type: http
