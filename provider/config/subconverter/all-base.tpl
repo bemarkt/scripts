@@ -186,7 +186,7 @@ proxy-providers:
   HK:
     type: http
     path: ./proxy-providers/cordcloud-hk.yaml
-    url: {{ getLink("/sub?target=clash&list=true&include=香港&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=香港&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + UrlEncode(request.suburl) }}
     interval: 86400
     health-check:
       enable: true
@@ -195,7 +195,7 @@ proxy-providers:
   S-HK:
     type: http
     path: ./proxy-providers/cordcloud-s-hk.yaml
-    url: {{ getLink("/sub?target=clash&list=true&include=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + UrlEncode(request.suburl) }}
     interval: 86400
     health-check:
       enable: true
@@ -204,7 +204,7 @@ proxy-providers:
   TW:
     type: http
     path: ./proxy-providers/cordcloud-tw.yaml
-    url: {{ getLink("/sub?target=clash&list=true&include=台湾&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=台湾&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + UrlEncode(request.suburl) }}
     interval: 86400
     health-check:
       enable: true
@@ -213,7 +213,7 @@ proxy-providers:
   JP:
     type: http
     path: ./proxy-providers/cordcloud-jp.yaml
-    url: {{ getLink("/sub?target=clash&list=true&include=日本&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=日本&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + UrlEncode(request.suburl) }}
     interval: 86400
     health-check:
       enable: true
@@ -222,7 +222,7 @@ proxy-providers:
   KR:
     type: http
     path: ./proxy-providers/cordcloud-kr.yaml
-    url: {{ getLink("/sub?target=clash&list=true&include=韩国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=韩国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + UrlEncode(request.suburl) }}
     interval: 86400
     health-check:
       enable: true
@@ -231,7 +231,7 @@ proxy-providers:
   SG:
     type: http
     path: ./proxy-providers/cordcloud-sg.yaml
-    url: {{ getLink("/sub?target=clash&list=true&include=新加坡&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=新加坡&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + UrlEncode(request.suburl) }}
     interval: 86400
     health-check:
       enable: true
@@ -240,7 +240,7 @@ proxy-providers:
   US:
     type: http
     path: ./proxy-providers/cordcloud-us.yaml
-    url: {{ getLink("/sub?target=clash&list=true&include=美国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=美国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + UrlEncode(request.suburl) }}
     interval: 86400
     health-check:
       enable: true
@@ -249,7 +249,7 @@ proxy-providers:
   Other:
     type: http
     path: ./proxy-providers/cordcloud-other.yaml
-    url: {{ getLink("/sub?target=clash&list=true&include=美国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=美国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + UrlEncode(request.suburl) }}
     interval: 86400
     health-check:
       enable: true
