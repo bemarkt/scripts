@@ -1,17 +1,18 @@
 {% if request.target == "clash" or request.target == "clashr" %}
 
-mixed-port: {{ default(local.clash.mixed_port,"8888") }}
-redir-port: {{ default(local.clash.redir_port,"8890") }}
+mixed-port: {{ default(request.clash.mixed_port,"8888") }}
+redir-port: {{ default(request.clash.redir_port,"8890") }}
 # authentication:
 #  - "username:password"
-allow-lan: {{ default(local.clash.allow_lan,"true") }}
-mode: rule
-log-level: {{ default(local.clash.log_level,"silent") }}
-ipv6: {{ default(local.clash.ipv6,"true")}}
-external-controller: {{ default(local.clash.api_port,"0.0.0.0:9090")}}
+allow-lan: {{ default(request.clash.allow_lan,"true") }}
+mode: {{ default(request.clash.mode,"rule") }}
+log-level: {{ default(request.clash.log_level,"silent") }}
+ipv6: {{ default(request.clash.ipv6,"true")}}
+external-controller: {{ default(request.clash.api_port,"0.0.0.0:9090")}}
 
 profile:
   store-selected: true
+  store-fakeip: true
   tracing: false
 
 {% if exists("request.clash.dns") %}
@@ -40,7 +41,7 @@ dns:
 {% else %}
 dns:
   enable: true
-  listen: 127.0.0.1:1053
+  listen: 0.0.0.0:1053
 {% endif %}
 {% if exists("request.clash.ipv6") %}
   ipv6: {{ request.clash.ipv6 }}
@@ -51,44 +52,34 @@ dns:
 #  fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     # === LAN ===
-    - '*.lan'
-    - '*.localdomain'
     - '*.example'
+    - '*.home.arpa'
     - '*.invalid'
+    - '*.lan'
+    - '*.local'
+    - '*.localdomain'
     - '*.localhost'
     - '*.test'
-    - '*.local'
-    - '*.home.arpa'
-    # === Linksys Wireless Router ===
-    - '*.linksys.com'
-    - '*.linksyssmartwifi.com'
+    # === Apple Software Update Service ===
+    - 'mesu.apple.com'
+    - 'swscan.apple.com'
     # === ASUS Router ===
     - '*.router.asus.com'
-    # === Apple Software Update Service ===
-    - 'swscan.apple.com'
-    - 'mesu.apple.com'
-    # === Windows 10 Connnect Detection ===
-    - '*.msftconnecttest.com'
-    - '*.msftncsi.com'
-    - 'msftconnecttest.com'
-    - 'msftncsi.com'
     # === Google ===
     - 'lens.l.google.com'
     - 'stun.l.google.com'
     ## Golang
     - 'proxy.golang.org'
+    # === Linksys Wireless Router ===
+    - '*.linksys.com'
+    - '*.linksyssmartwifi.com'
+    # === Windows 10 Connnect Detection ===
+    - '*.ipv6.microsoft.com'
+    - '*.msftconnecttest.com'
+    - '*.msftncsi.com'
+    - 'msftconnecttest.com'
+    - 'msftncsi.com'
     # === NTP Service ===
-    - 'time.*.com'
-    - 'time.*.gov'
-    - 'time.*.edu.cn'
-    - 'time.*.apple.com'
-    - 'time1.*.com'
-    - 'time2.*.com'
-    - 'time3.*.com'
-    - 'time4.*.com'
-    - 'time5.*.com'
-    - 'time6.*.com'
-    - 'time7.*.com'
     - 'ntp.*.com'
     - 'ntp1.*.com'
     - 'ntp2.*.com'
@@ -97,78 +88,93 @@ dns:
     - 'ntp5.*.com'
     - 'ntp6.*.com'
     - 'ntp7.*.com'
+    - 'time.*.apple.com'
+    - 'time.*.com'
+    - 'time.*.gov'
+    - 'time1.*.com'
+    - 'time2.*.com'
+    - 'time3.*.com'
+    - 'time4.*.com'
+    - 'time5.*.com'
+    - 'time6.*.com'
+    - 'time7.*.com'
+    - 'time.*.edu.cn'
     - '*.time.edu.cn'
     - '*.ntp.org.cn'
     - '+.pool.ntp.org'
     - 'time1.cloud.tencent.com'
     # === Game Service ===
-    ## Nintendo Switch
-    - '+.srv.nintendo.net'
-    ## Sony PlayStation
-    - '+.stun.playstation.net'
     ## Microsoft Xbox
+    - 'speedtest.cros.wr.pvp.net'
+    - '*.*.xboxlive.com'
+    - 'xbox.*.*.microsoft.com'
     - 'xbox.*.microsoft.com'
     - 'xnotify.xboxlive.com'
+    ## Nintendo Switch
+    - '*.*.*.srv.nintendo.net'
+    - '+.srv.nintendo.net'
+    ## Sony PlayStation
+    - '*.*.stun.playstation.net'
+    - '+.stun.playstation.net'
+    ## STUN Server
+    - '+.stun.*.*.*.*'
+    - '+.stun.*.*.*'
+    - '+.stun.*.*'
+    - 'stun.*.*.*'
+    - 'stun.*.*'
+    # === Music Service ===
+    ## 咪咕音乐
+    - '*.music.migu.cn'
+    - 'music.migu.cn'
+    ## 太和音乐
+    - 'music.taihe.com'
+    - 'musicapi.taihe.com'
+    ## 腾讯音乐
+    - 'songsearch.kugou.com'
+    - 'trackercdn.kugou.com'
+    - '*.kuwo.cn'
+    - 'api-jooxtt.sanook.com'
+    - 'api.joox.com'
+    - 'joox.com'
+    - 'y.qq.com'
+    - '*.y.qq.com'
+    - 'amobile.music.tc.qq.com'
+    - 'aqqmusic.tc.qq.com'
+    - 'mobileoc.music.tc.qq.com'
+    - 'streamoc.music.tc.qq.com'
+    - 'dl.stream.qqmusic.qq.com'
+    - 'isure.stream.qqmusic.qq.com'
+    ## 网易云音乐
+    - 'music.163.com'
+    - '*.music.163.com'
+    - '*.126.net'
+    ## 虾米音乐
+    - '*.xiami.com'
     # === Other ===
     ## QQ Quick Login
     - 'localhost.ptlogin2.qq.com'
     - 'localhost.sec.qq.com'
-    ## STUN Server
-    - 'stun.*.*'
-    - 'stun.*.*.*'
-    - '+.stun.*.*'
-    - '+.stun.*.*.*'
-    - '+.stun.*.*.*.*'
+    ## BiliBili P2P
+    - '*.mcdn.bilivideo.cn'
   default-nameserver:
-    - 208.67.222.222
-    - 119.29.29.29
-  nameserver:
     - 223.5.5.5
     - 119.29.29.29
-#   - https://dns.alidns.com/dns-query
-#   - https://i.233py.com/dns-query
-#   - https://doh.pub/dns-query
-#   - https://dns.pub/dns-query
-#   - https://dns.cfiec.net/dns-query
-#   - https://dns.rubyfish.cn/dns-query
-#   - https://doh.mullvad.net/dns-query
-#    - https://cdn-doh.ssnm.xyz/dns-query
-#    - tls://dns.233py.com
-#    - https://dns.233py.com/dns-query
-#    - https://dns.twnic.tw/dns-query
-#    - https://dns-unfiltered.adguard.com/dns-query
-#    - https://doh.opendns.com/dns-query
-#    - https://cloudflare-dns.com/dns-query
-#    - https://dns.google/dns-query
-#    - https://dns.quad9.net/dns-query
-#    - https://doh.qis.io/dns-query
-#    - https://doh.powerdns.org
-#    - 101.101.101.101
-#    - tcp://119.29.107.85:9090
-#    - https://doh.dns.sb/dns-query
-#    - tls://cloudflare-dns.com:853
-#    - tls://dns.google:853
-#    - tls://dns-tls.qis.io:853
+  nameserver:
+    - 119.29.29.29
+    - 185.222.222.222
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+    - https://dns.ipv6dns.com/dns-query
+    - https://dns.rubyfish.cn/dns-query
   fallback:
-    - 208.67.222.222
-    - https://doh.opendns.com/dns-query
+    - https://doh.dns.sb/dns-query
+    - https://public.dns.iij.jp/dns-query
     - https://dns.twnic.tw/dns-query
-    - https://1.0.0.1/dns-query
-#    - https://doh.qis.io/dns-query
-#    - https://dns-unfiltered.adguard.com/dns-query
-#    - https://dns.quad9.net/dns-query
-#    - https://cdn-doh.ssnm.xyz/dns-query
-#    - https://dns.google/dns-query
-#    - https://cloudflare-dns.com/dns-query
-#    - tcp://1.1.1.1
-#    - https://dns.alidns.com/dns-query
-#    - https://doh.dns.sb/dns-query
-#    - https://dns.rubyfish.cn/dns-query
-#    - tls://cloudflare-dns.com:853
-#    - tls://dns.google:853
-#    - tls://dns-tls.qis.io:853
+    - https://doh.opendns.com/dns-query
+    - https://cloudflare-dns.com/dns-query
   fallback-filter:
     geoip: true # default
+    geoip-code: CN
     ipcidr: # ips in these subnets will be considered polluted
       - 0.0.0.0/32
       - 100.64.0.0/10
@@ -176,6 +182,79 @@ dns:
       - 240.0.0.0/4
       - 255.255.255.255/32
 
+proxy-providers:
+  HK:
+    type: http
+    path: ./proxy-providers/cordcloud-hk.yaml
+    url: {{ getLink("/sub?target=clash&list=true&include=香港&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  S-HK:
+    type: http
+    path: ./proxy-providers/cordcloud-s-hk.yaml
+    url: {{ getLink("/sub?target=clash&list=true&include=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  TW:
+    type: http
+    path: ./proxy-providers/cordcloud-tw.yaml
+    url: {{ getLink("/sub?target=clash&list=true&include=台湾&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  JP:
+    type: http
+    path: ./proxy-providers/cordcloud-jp.yaml
+    url: {{ getLink("/sub?target=clash&list=true&include=日本&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  KR:
+    type: http
+    path: ./proxy-providers/cordcloud-kr.yaml
+    url: {{ getLink("/sub?target=clash&list=true&include=韩国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  SG:
+    type: http
+    path: ./proxy-providers/cordcloud-sg.yaml
+    url: {{ getLink("/sub?target=clash&list=true&include=新加坡&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  US:
+    type: http
+    path: ./proxy-providers/cordcloud-us.yaml
+    url: {{ getLink("/sub?target=clash&list=true&include=美国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  Other:
+    type: http
+    path: ./proxy-providers/cordcloud-other.yaml
+    url: {{ getLink("/sub?target=clash&list=true&include=美国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=") + UrlEncode(request.suburl) }}
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
 rule-providers:
   AdditionalDirect:
     type: http
@@ -205,31 +284,31 @@ rule-providers:
     type: http
     behavior: classical
     path: ./rule-providers/BanEasyListChina.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml
     interval: 43200
   BanEasyPrivacy:
     type: http
     behavior: classical
     path: ./rule-providers/BanEasyPrivacy.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml
     interval: 43200
   BanProgramAD:
     type: http
     behavior: classical
     path: ./rule-providers/BanProgramAD.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml
     interval: 43200
   ChinaDomain:
     type: http
     behavior: classical
     path: ./rule-providers/ChinaDomain.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml
     interval: 43200
   ChinaIp:
     type: http
     behavior: ipcidr
     path: ./rule-providers/ChinaIp.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaIp.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaIp.yaml
     interval: 43200
   Developer:
     type: http
@@ -283,7 +362,7 @@ rule-providers:
     type: http
     behavior: classical
     path: ./rule-providers/ProxyGFWlist.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml
     interval: 43200
   Samsung:
     type: http
@@ -333,15 +412,18 @@ rule-providers:
     path: ./rule-providers/Telegram.yaml
     url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Telegram.yaml
     interval: 43200
+  TikTok:
+    type: http
+    behavior: classical
+    path: ./rule-providers/TikTok.yaml
+    url: https://cdn.jsdelivr.net/gh/DivineEngine/Profiles@master/Clash/RuleSet/StreamingMedia/Video/TikTok.yaml
+    interval: 43200
   YouTube:
     type: http
     behavior: classical
     path: ./rule-providers/YouTube.yaml
     url: https://cdn.jsdelivr.net/gh/lhie1/Rules@master/Clash/Provider/Media/YouTube.yaml
     interval: 43200
-
-proxies: ~
-proxy-groups: ~
 
 rules:
   # LocalAreaNetwork 本地网络
@@ -367,6 +449,7 @@ rules:
   # 音乐：Spotify、JOOX、Pandora、KKBOX
   # 自定义多区域媒体应用
   # (更多自定义请查阅 https://github.com/ConnersHua/Profiles/tree/master/Surge/Ruleset/Media)
+  - RULE-SET,TikTok,💃Tik Tok
   - RULE-SET,Spotify,🎵 高雅音乐
   - RULE-SET,KKBOX,🎵 高雅音乐
   - RULE-SET,YouTubeMusic,🎵 高雅音乐
@@ -405,6 +488,12 @@ rules:
 script:
   code: |
     def main(ctx, metadata):
+      # No Invis P2P
+      if metadata["network"] == "udp" and ('bilibili' in metadata["host"] or 'mcdn' in metadata["host"] or 'douyu' in metadata["host"]):
+        return "REJECT"
+      # No QUIC
+      if metadata["network"] == "udp" and metadata["dst_port"] == 443 :
+        return "REJECT"
       ruleset_action = {'PrivateNetwork': "🏠 锦城虽云乐，不如早还家",
       'AdditionalProxy': "⛵ 直挂云帆济沧海",
       'AdditionalDirect': "🚣 长风破浪会有时",
@@ -413,6 +502,7 @@ script:
       'BanProgramAD': "🍃 应用净化",
       'Developer': "👨‍💻 开发者服务",
       'Scholar': "👨‍🔬 学术服务",
+      "TikTok":"💃Tik Tok",
       'Spotify': "🎵 高雅音乐",'KKBOX': "🎵 高雅音乐",'YouTubeMusic': "🎵 高雅音乐" ,
       'StreamingSE': "🌏 国内媒体",
       'Adult': "💪 青壮年模式",
@@ -423,18 +513,16 @@ script:
       for ruleset in ctx.rule_providers.keys():
         if ctx.rule_providers[ruleset].match(metadata):
           return ruleset_action[ruleset]
-
       # Router Reject && DNS Error
       ip = metadata["dst_ip"] or ctx.resolve_ip(metadata["host"])
       if ip == "":
         return "🚣 长风破浪会有时"
-
       code = ctx.geoip(ip)
       if code == "CN":
         return "🚣 长风破浪会有时"
       elif metadata["network"] == "udp":
+        ctx.log('[metadata.network]: %s' % metadata["network"])
         return "🇭🇰 深港专线"
-
       return "🕸️ 漏网之鱼"
 
 {% endif %}
