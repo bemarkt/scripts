@@ -2,14 +2,14 @@ custom:
   enable_rule_generator: false
   overwrite_original_rules: false
 
-  clash_rule_base: base/all-base.tpl
-  surge_rule_base: base/all-base.tpl
-  surfboard_rule_base: base/all-base.tpl
-  mellow_rule_base: base/all-base.tpl
-  quan_rule_base: base/all-base.tpl
-  quanx_rule_base: base/all-base.tpl
-  loon_rule_base: base/all-base.tpl
-  sssub_rule_base: base/all-base.tpl
+  clash_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  surge_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  surfboard_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  mellow_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  quan_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  quanx_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  loon_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  sssub_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
 
   exclude_remarks:
     - (剩余流量|到期时间|过期时间|官网地址|产品名称|先购买套餐|流量消耗|唯一官网|更新订阅)
