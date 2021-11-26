@@ -195,7 +195,7 @@ proxy-providers:
   S-HK:
     type: http
     path: ./proxy-providers/cordcloud-s-hk.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=深港&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -521,7 +521,6 @@ script:
       if code == "CN":
         return "🚣 长风破浪会有时"
       elif metadata["network"] == "udp":
-        ctx.log('[metadata.network]: %s' % metadata["network"])
         return "🇭🇰 深港专线"
       return "🕸️ 漏网之鱼"
 
