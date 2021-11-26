@@ -12,7 +12,7 @@ external-controller: {{ default(request.clash.api_port,"0.0.0.0:9090")}}
 
 profile:
   store-selected: true
-  store-fakeip: true
+  store-fake-ip: true
   tracing: false
 
 {% if exists("request.clash.dns") %}
@@ -488,40 +488,47 @@ rules:
 script:
   code: |
     def main(ctx, metadata):
-      # No Invis P2P
-      if metadata["network"] == "udp" and ('bilibili' in metadata["host"] or 'mcdn' in metadata["host"] or 'douyu' in metadata["host"]):
-        return "REJECT"
-      # No QUIC
-      if metadata["network"] == "udp" and metadata["dst_port"] == 443 :
-        return "REJECT"
-      ruleset_action = {'PrivateNetwork': "🏠 锦城虽云乐，不如早还家",
-      'AdditionalProxy': "⛵ 直挂云帆济沧海",
-      'AdditionalDirect': "🚣 长风破浪会有时",
-      'BanEasyList': "🚧 通用拦截",
-      'Hijacking': "🚧 通用拦截",
-      'BanProgramAD': "🍃 应用净化",
-      'Developer': "👨‍💻 开发者服务",
-      'Scholar': "👨‍🔬 学术服务",
-      "TikTok":"💃Tik Tok",
-      'Spotify': "🎵 高雅音乐",'KKBOX': "🎵 高雅音乐",'YouTubeMusic': "🎵 高雅音乐" ,
-      'StreamingSE': "🌏 国内媒体",
-      'Adult': "💪 青壮年模式",
-      'Netflix': "🎞️ 流媒体",'HBO': "🎞️ 流媒体",
-      'YouTube': "🌎 国际媒体", 'GlobalMedia': "🌎 国际媒体",
-      'Samsung': "✨ 三星服务", 'Apple': "🍎 苹果服务", 'Microsoft': "Ⓜ️ 微软服务", 'Speedtest': "⏱️ 测速服务", 'Telegram': "⛵ 直挂云帆济沧海",
-      'ProxyGFWlist': "⛵ 直挂云帆济沧海", 'ChinaDomain': "🚣 长风破浪会有时", 'ChinaIp': "🚣 长风破浪会有时"}
-      for ruleset in ctx.rule_providers.keys():
+      ruleset_action = {"PrivateNetwork": "🏠 锦城虽云乐，不如早还家",
+                        "AdditionalProxy": "⛵ 直挂云帆济沧海",
+                        "AdditionalDirect": "🚣 长风破浪会有时",
+                        "BanEasyList": "🚧 通用拦截",
+                        "Hijacking": "🚧 通用拦截",
+                        "BanProgramAD": "🍃 应用净化",
+                        "Developer": "👨‍💻 开发者服务",
+                        "Scholar": "👨‍🔬 学术服务",
+                        "TikTok": "💃Tik Tok",
+                        "Spotify": "🎵 高雅音乐", "KKBOX": "🎵 高雅音乐", "YouTubeMusic": "🎵 高雅音乐",
+                        "StreamingSE": "🌏 国内媒体",
+                        "Adult": "💪 青壮年模式",
+                        "Netflix": "🎞️ 流媒体", "HBO": "🎞️ 流媒体",
+                        "YouTube": "🌎 国际媒体", "GlobalMedia": "🌎 国际媒体",
+                        "Samsung": "✨ 三星服务", "Apple": "🍎 苹果服务", "Microsoft": "Ⓜ️ 微软服务", "Speedtest": "⏱️ 测速服务", "Telegram": "⛵ 直挂云帆济沧海",
+                        "ProxyGFWlist": "⛵ 直挂云帆济沧海", "ChinaDomain": "🚣 长风破浪会有时", "ChinaIp": "🚣 长风破浪会有时"}
+      host = metadata["host"]
+
+      if metadata["network"] == "udp":
+        if ("bilibili" in host or "mcdn" in host or "douyu" in host or metadata["dst_port"] == 443):
+          ctx.log("[Script] matched QUIC or PCDN traffic use reject")
+          return "REJECT"
+
+      if metadata["dst_ip"] == "":
+        metadata["dst_ip"] = ctx.resolve_ip(metadata["host"])
+
+      for ruleset in ruleset_action:
         if ctx.rule_providers[ruleset].match(metadata):
           return ruleset_action[ruleset]
+
       # Router Reject && DNS Error
-      ip = metadata["dst_ip"] or ctx.resolve_ip(metadata["host"])
+      ip = metadata["dst_ip"]
       if ip == "":
         return "🚣 长风破浪会有时"
       code = ctx.geoip(ip)
       if code == "CN":
+        ctx.log('[Script] GEOIP: CN')
         return "🚣 长风破浪会有时"
       elif metadata["network"] == "udp":
         return "🇭🇰 深港专线"
+      ctx.log('[Script] FINAL')
       return "🕸️ 漏网之鱼"
 
 {% endif %}

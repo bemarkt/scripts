@@ -253,7 +253,7 @@ custom:
       tolerance: 60
     - name: "🇭🇰 深港专线"
       type: select
-      rule: ["!!PROVIDER=S-HK", "[]REJECT"]
+      rule: ["!!PROVIDER=S-HK"]
       url: "http://www.gstatic.com/generate_204"
       interval: 300
       timeout: 5
