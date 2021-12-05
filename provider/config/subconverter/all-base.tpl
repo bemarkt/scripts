@@ -507,7 +507,7 @@ script:
       host = metadata["host"]
 
       if metadata["network"] == "udp":
-        if ("bilibili" in host or "mcdn" in host or "douyu" in host or metadata["dst_port"] == 443):
+        if ("bilibili" in host or "mcdn" in host or "douyu" in host or metadata["dst_port"] == "443"):
           ctx.log("[Script] matched QUIC or PCDN traffic use reject")
           return "REJECT"
 
