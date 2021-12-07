@@ -79,8 +79,8 @@ custom:
     - { match: "(-)", replace: "▷" }
     - { match: "隧道测试", replace: "" }
     - { match: "隧道", replace: "" }
-    - { match: "隧道测试[0-9]组", replace: "" }
-    - { match: "[0-9]组", replace: "" }
+    - { match: "隧道测试2组", replace: "" }
+    - { match: "2组", replace: "" }
     - { match: "(倍率:)", replace: "x" }
     - { match: " ", replace: "" }
     - { match: "[ ]", replace: "" }
