@@ -268,7 +268,7 @@ rule-providers:
     interval: 43200
   Adult:
     type: http
-    behavior: classical
+    behavior: domain
     path: ./rule-providers/Adult.yaml
     url: https://cdn.jsdelivr.net/gh/Kr328/V2rayDomains2Clash@generated/category-porn.yaml
     interval: 43200
