@@ -90,12 +90,17 @@ payload:
   - DOMAIN-SUFFIX,2mdn.net
   - DOMAIN-SUFFIX,app-measurement.com
   - DOMAIN-SUFFIX,c.android.clients.google.com
+  - DOMAIN-SUFFIX,csi-china.l.google.com
+  - DOMAIN-SUFFIX,www.recaptcha.net
+  - DOMAIN-SUFFIX,redirector.gvt1.com
   - DOMAIN-SUFFIX,cache.pack.google.com
   - DOMAIN-SUFFIX,clickserve.dartsearch.net
   - DOMAIN-SUFFIX,clientservices.googleapis.com
   - DOMAIN-SUFFIX,crl.pki.goog
   - DOMAIN-SUFFIX,dl.google.com
   - DOMAIN-SUFFIX,dl.l.google.com
+  - DOMAIN-SUFFIX,googleapis.cn
+  - DOMAIN-SUFFIX,googlecnapps.cn
   - DOMAIN-SUFFIX,googletagmanager.com
   - DOMAIN-SUFFIX,googletagservices.com
   - DOMAIN-SUFFIX,gtm.oasisfeng.com
@@ -107,7 +112,6 @@ payload:
   - DOMAIN-SUFFIX,safebrowsing.googleapis.com
   - DOMAIN-SUFFIX,settings.crashlytics.com
   - DOMAIN-SUFFIX,ssl-google-analytics.l.google.com
-  - DOMAIN-SUFFIX,ssl.gstatic.com
   - DOMAIN-SUFFIX,toolbarqueries.google.com
   - DOMAIN-SUFFIX,tools.google.com
   - DOMAIN-SUFFIX,tools.l.google.com
@@ -115,7 +119,19 @@ payload:
   - DOMAIN-SUFFIX,translation.googleapis.com
   - DOMAIN-SUFFIX,update.googleapis.com
   - DOMAIN-SUFFIX,www-googletagmanager.l.google.com
-  - DOMAIN-SUFFIX,www.gstatic.com
+  - DOMAIN,checkin.gstatic.com
+  - DOMAIN,csi.gstatic.com
+  - DOMAIN,g1.gstatic.com
+  - DOMAIN,g2.gstatic.com
+  - DOMAIN,ssl.gstatic.com
+  - DOMAIN,www.gstatic.com
+  - DOMAIN,connectivitycheck.gstatic.com
+  - DOMAIN,regioninfo-pa.googleapis.com
+  - DOMAIN,translate.googleapis.com
+  - DOMAIN,translation.googleapis.com
+  - DOMAIN,update.googleapis.com
+  - DOMAIN-SUFFIX,gstatic.cn
+  - DOMAIN-SUFFIX,gstaticcnapps.cn
   # >> Google Fonts API
   - DOMAIN-SUFFIX,fonts.googleapis.com
   - DOMAIN-SUFFIX,fonts.gstatic.com
@@ -129,6 +145,7 @@ payload:
   - DOMAIN-SUFFIX,alt6-mtalk.google.com
   - DOMAIN-SUFFIX,alt7-mtalk.google.com
   - DOMAIN-SUFFIX,alt8-mtalk.google.com
+
   # > Microsoft
   - DOMAIN-SUFFIX,msftconnecttest.com
   - DOMAIN-SUFFIX,windowsupdate.com

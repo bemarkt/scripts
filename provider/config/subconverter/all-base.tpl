@@ -73,12 +73,10 @@ dns:
     # === Linksys Wireless Router ===
     - '*.linksys.com'
     - '*.linksyssmartwifi.com'
-    # === Windows 10 Connnect Detection ===
-    - '*.ipv6.microsoft.com'
-    - '*.msftconnecttest.com'
-    - '*.msftncsi.com'
-    - 'msftconnecttest.com'
-    - 'msftncsi.com'
+    # === Windows Connnect Detection ===
+    - '+.ipv6.microsoft.com'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
     # === NTP Service ===
     - 'ntp.*.com'
     - 'ntp1.*.com'
@@ -249,7 +247,7 @@ proxy-providers:
   Other:
     type: http
     path: ./proxy-providers/cordcloud-other.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=美国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&exclude=美国|新加坡|韩国|日本|台湾|香港|深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -272,7 +270,7 @@ rule-providers:
     type: http
     behavior: classical
     path: ./rule-providers/Adult.yaml
-    url: https://cors.bemarkt.workers.dev/?https://gist.githubusercontent.com/bemarkt/b1933e22046237d11f2578b6ad404577/raw/adult.yaml
+    url: https://cdn.jsdelivr.net/gh/Kr328/V2rayDomains2Clash@generated/category-porn.yaml
     interval: 43200
   Apple:
     type: http
@@ -304,17 +302,11 @@ rule-providers:
     path: ./rule-providers/ChinaDomain.yaml
     url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml
     interval: 43200
-  ChinaIp:
-    type: http
-    behavior: ipcidr
-    path: ./rule-providers/ChinaIp.yaml
-    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaIp.yaml
-    interval: 43200
   Developer:
     type: http
     behavior: classical
     path: ./rule-providers/Developer.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Developer.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Developer.yaml
     interval: 43200
   GlobalMedia:
     type: http
@@ -338,13 +330,13 @@ rule-providers:
     type: http
     behavior: classical
     path: ./rule-providers/Microsoft.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Microsoft.yaml
     interval: 43200
   NetEaseMusic:
     type: http
     behavior: classical
     path: ./rule-providers/NetEaseMusic.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/NetEaseMusic.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/NetEaseMusic.yaml
     interval: 43200
   Netflix:
     type: http
@@ -356,7 +348,7 @@ rule-providers:
     type: http
     behavior: classical
     path: ./rule-providers/PrivateNetwork.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml
     interval: 43200
   ProxyGFWlist:
     type: http
@@ -374,7 +366,7 @@ rule-providers:
     type: http
     behavior: classical
     path: ./rule-providers/Scholar.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Scholar.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Scholar.yaml
     interval: 43200
   Speedtest:
     type: http
@@ -410,7 +402,7 @@ rule-providers:
     type: http
     behavior: classical
     path: ./rule-providers/Telegram.yaml
-    url: https://cors.bemarkt.workers.dev/?https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Telegram.yaml
+    url: https://raw.githubusercontents.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Telegram.yaml
     interval: 43200
   TikTok:
     type: http
@@ -480,7 +472,6 @@ rules:
   # China 中国直连
   # > 国内常见域名、直连CDN、IPIP的国内地址段
   - RULE-SET,ChinaDomain,🚣 长风破浪会有时
-  - RULE-SET,ChinaIp,🚣 长风破浪会有时
   - GEOIP,CN,🚣 长风破浪会有时
 
   - MATCH,🕸️ 漏网之鱼
@@ -489,11 +480,11 @@ script:
   code: |
     def main(ctx, metadata):
       ruleset_action = {"PrivateNetwork": "🏠 锦城虽云乐，不如早还家",
-                        "AdditionalProxy": "⛵ 直挂云帆济沧海",
-                        "AdditionalDirect": "🚣 长风破浪会有时",
                         "BanEasyList": "🚧 通用拦截",
                         "Hijacking": "🚧 通用拦截",
                         "BanProgramAD": "🍃 应用净化",
+                        "AdditionalProxy": "⛵ 直挂云帆济沧海",
+                        "AdditionalDirect": "🚣 长风破浪会有时",
                         "Developer": "👨‍💻 开发者服务",
                         "Scholar": "👨‍🔬 学术服务",
                         "TikTok": "💃Tik Tok",
@@ -503,7 +494,7 @@ script:
                         "Netflix": "🎞️ 流媒体", "HBO": "🎞️ 流媒体",
                         "YouTube": "🌎 国际媒体", "GlobalMedia": "🌎 国际媒体",
                         "Samsung": "✨ 三星服务", "Apple": "🍎 苹果服务", "Microsoft": "Ⓜ️ 微软服务", "Speedtest": "⏱️ 测速服务", "Telegram": "⛵ 直挂云帆济沧海",
-                        "ProxyGFWlist": "⛵ 直挂云帆济沧海", "ChinaDomain": "🚣 长风破浪会有时", "ChinaIp": "🚣 长风破浪会有时"}
+                        "ProxyGFWlist": "⛵ 直挂云帆济沧海", "ChinaDomain": "🚣 长风破浪会有时"}
       host = metadata["host"]
 
       if metadata["network"] == "udp":
