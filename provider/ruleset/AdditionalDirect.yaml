@@ -89,35 +89,35 @@ payload:
   - DOMAIN-SUFFIX,265.com
   - DOMAIN-SUFFIX,2mdn.net
   - DOMAIN-SUFFIX,app-measurement.com
-  - DOMAIN-SUFFIX,c.android.clients.google.com
+  - DOMAIN,c.android.clients.google.com
   - DOMAIN,csi-china.l.google.com
-  - DOMAIN,www.recaptcha.net
   - DOMAIN,redirector.gvt1.com
-  - DOMAIN-SUFFIX,cache.pack.google.com
-  - DOMAIN-SUFFIX,clickserve.dartsearch.net
-  - DOMAIN-SUFFIX,clientservices.googleapis.com
-  - DOMAIN-SUFFIX,crl.pki.goog
-  - DOMAIN-SUFFIX,dl.google.com
-  - DOMAIN-SUFFIX,dl.l.google.com
+  - DOMAIN,cache.pack.google.com
+  - DOMAIN,clickserve.dartsearch.net
+  - DOMAIN,clientservices.googleapis.com
+  - DOMAIN,crl.pki.goog
+  - DOMAIN,dl.google.com
+  - DOMAIN,dl.l.google.com
   - DOMAIN-SUFFIX,googlecnapps.cn
   - DOMAIN-SUFFIX,googletagmanager.com
   - DOMAIN-SUFFIX,googletagservices.com
-  - DOMAIN-SUFFIX,gtm.oasisfeng.com
-  - DOMAIN-SUFFIX,imasdk.googleapis.com
+  - DOMAIN,gtm.oasisfeng.com
+  - DOMAIN,imasdk.googleapis.com
   - DOMAIN-SUFFIX,mtalk.google.com
-  - DOMAIN-SUFFIX,ocsp.pki.goog
+  - DOMAIN,ocsp.pki.goog
   - DOMAIN-SUFFIX,recaptcha.net
-  - DOMAIN-SUFFIX,safebrowsing-cache.google.com
-  - DOMAIN-SUFFIX,safebrowsing.googleapis.com
-  - DOMAIN-SUFFIX,settings.crashlytics.com
-  - DOMAIN-SUFFIX,ssl-google-analytics.l.google.com
-  - DOMAIN-SUFFIX,toolbarqueries.google.com
-  - DOMAIN-SUFFIX,tools.google.com
-  - DOMAIN-SUFFIX,tools.l.google.com
-  - DOMAIN-SUFFIX,translate.googleapis.com
-  - DOMAIN-SUFFIX,translation.googleapis.com
-  - DOMAIN-SUFFIX,update.googleapis.com
-  - DOMAIN-SUFFIX,www-googletagmanager.l.google.com
+  - DOMAIN,safebrowsing-cache.google.com
+  - DOMAIN,safebrowsing.googleapis.com
+  - DOMAIN,settings.crashlytics.com
+  - DOMAIN,firebase-settings.crashlytics.com
+  - DOMAIN,ssl-google-analytics.l.google.com
+  - DOMAIN,toolbarqueries.google.com
+  - DOMAIN,tools.google.com
+  - DOMAIN,tools.l.google.com
+  - DOMAIN,translate.googleapis.com
+  - DOMAIN,translation.googleapis.com
+  - DOMAIN,update.googleapis.com
+  - DOMAIN,www-googletagmanager.l.google.com
   - DOMAIN,checkin.gstatic.com
   - DOMAIN,csi.gstatic.com
   - DOMAIN,g1.gstatic.com
