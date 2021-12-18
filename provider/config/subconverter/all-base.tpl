@@ -421,15 +421,15 @@ rules:
   # LocalAreaNetwork 本地网络
   - RULE-SET,PrivateNetwork,🏠 锦城虽云乐，不如早还家
 
-  # Additonal 后续规则修正
-  - RULE-SET,AdditionalProxy,⛵ 直挂云帆济沧海
-  - RULE-SET,AdditionalDirect,🚣 长风破浪会有时
-
   # Advertising 广告（以及隐私追踪）&& Hijacking 劫持（运营商及臭名昭著的网站和应用）
   - RULE-SET,Hijacking,🚧 通用拦截
   - RULE-SET,BanEasyPrivacy,🚧 通用拦截
   - RULE-SET,BanEasyList,🚧 通用拦截
   - RULE-SET,BanProgramAD,🍃 应用净化
+  
+  # Additonal 后续规则修正
+  - RULE-SET,AdditionalProxy,⛵ 直挂云帆济沧海
+  - RULE-SET,AdditionalDirect,🚣 长风破浪会有时
 
   # 流媒体服务中心
   # > 大陆流媒体面向港澳台限定服务（愛奇藝台灣站、bilibili 港澳台限定）
@@ -480,6 +480,7 @@ script:
   code: |
     def main(ctx, metadata):
       ruleset_action = {"PrivateNetwork": "🏠 锦城虽云乐，不如早还家",
+                        "BanEasyPrivacy": "🚧 通用拦截",
                         "BanEasyList": "🚧 通用拦截",
                         "Hijacking": "🚧 通用拦截",
                         "BanProgramAD": "🍃 应用净化",
