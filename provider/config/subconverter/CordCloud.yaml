@@ -79,7 +79,7 @@ custom:
     - { match: "深港专线", replace: "深港" }
     - { match: "(转)", replace: "▷" }
     - { match: "[0-9]组", replace: "" }
-    - { match: "(\[x.*[0-9]\])(.*)", replace: "$2$1" }
+    - { match: '(\[x.*[0-9]\])(.*)', replace: "$2$1" }
     - { match: " ", replace: "" }
     - { match: "[ ]", replace: "" }
     - { match: "( )", replace: "" }
