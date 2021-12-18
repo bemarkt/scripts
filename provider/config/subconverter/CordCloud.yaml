@@ -12,10 +12,10 @@ custom:
   sssub_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
 
   exclude_remarks:
-    - 剩余流量|到期时间|过期时间|官网地址|产品名称|先购买套餐|流量消耗|唯一官网|更新订阅
-    - (.*流量.*剩.*天)
-    - (■等级警报■)
-    - (近期下线)
+    - "(剩余流量|到期时间|过期时间|官网地址|产品名称|先购买套餐|流量消耗|唯一官网|更新订阅)"
+    - "(.*流量.*剩.*天)"
+    - "(■等级警报■)"
+    - "(近期下线)"
 
   rename_node:
     - { match: "^CordCloud - ", replace: "" }
