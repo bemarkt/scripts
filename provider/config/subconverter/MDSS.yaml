@@ -12,8 +12,8 @@ custom:
   sssub_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
 
   rename_node:
-    - { match: "V\d{3}\s*", replace: "" }
-    - { match: "(\d{2})", replace: "BGP $1" }
+    - { match: 'V\d{3}\s*', replace: "" }
+    - { match: '(\d{2})', replace: "BGP $1" }
 
   proxy_groups:
     # AI云可用节点
@@ -221,7 +221,7 @@ custom:
       tolerance: 5
     - name: "🗺️ 其他 | 剩余价值"
       type: select
-      rule: ["!!PROVIDER=Other","!!PROVIDER=cordcloud-kr"]
+      rule: ["!!PROVIDER=Other", "!!PROVIDER=cordcloud-kr"]
     # 你以为你能跑？
     - name: "🕸️ 漏网之鱼"
       type: select
