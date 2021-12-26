@@ -186,7 +186,7 @@ proxy-providers:
   HK:
     type: http
     path: ./proxy-providers/mdss-hk.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=香港&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=香港&udp=true&config=https%3A%2F%2Fgit.io%2FJyCWK&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -195,7 +195,7 @@ proxy-providers:
   TW:
     type: http
     path: ./proxy-providers/mdss-tw.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=台湾&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=台湾&udp=true&config=https%3A%2F%2Fgit.io%2FJyCWK&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -204,7 +204,7 @@ proxy-providers:
   JP:
     type: http
     path: ./proxy-providers/mdss-jp.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=日本&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=日本&udp=true&config=https%3A%2F%2Fgit.io%2FJyCWK&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -213,7 +213,7 @@ proxy-providers:
   KR:
     type: http
     path: ./proxy-providers/mdss-kr.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=韩国&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=韩国&udp=true&config=https%3A%2F%2Fgit.io%2FJyCWK&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -222,7 +222,7 @@ proxy-providers:
   SG:
     type: http
     path: ./proxy-providers/mdss-sg.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=新加坡&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=新加坡&udp=true&config=https%3A%2F%2Fgit.io%2FJyCWK&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -231,7 +231,7 @@ proxy-providers:
   US:
     type: http
     path: ./proxy-providers/mdss-us.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=美国&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=美国&udp=true&config=https%3A%2F%2Fgit.io%2FJyCWK&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -240,7 +240,7 @@ proxy-providers:
   Other:
     type: http
     path: ./proxy-providers/mdss-other.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&exclude=美国|新加坡|日本|台湾|香港&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&exclude=美国|新加坡|日本|台湾|香港&udp=true&config=https%3A%2F%2Fgit.io%2FJyCWK&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -249,7 +249,7 @@ proxy-providers:
   cordcloud-kr:
     type: http
     path: ./proxy-providers/cordcloud-kr.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=韩国&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=韩国&config=https%3A%2F%2Fgit.io%2FJyCWK&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
