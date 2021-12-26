@@ -1,0 +1,456 @@
+custom:
+  enable_rule_generator: false
+  overwrite_original_rules: false
+
+  clash_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  surge_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  surfboard_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  mellow_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  quan_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  quanx_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  loon_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+  sssub_rule_base: https://raw.githubusercontent.com/bemarkt/scripts/master/provider/config/subconverter/all-base.tpl
+
+  exclude_remarks:
+    - "(剩余流量|到期时间|过期时间|官网|产品名称|先购买套餐|流量消耗|唯一官网|更新订阅|本站)"
+    - "(.*流量.*剩.*天)"
+    - "(■等级警报■)"
+    - "(近期下线|暂时下架)"
+    - "(精简)"
+
+  rename_node:
+    - { match: "商宽", replace: "" }
+    - { match: "移动", replace: "CM" }
+    - { match: "电信", replace: "CT" }
+    - { match: "联通", replace: "CU" }
+    - { match: "上海", replace: "沪" }
+    - { match: "中国", replace: "中" }
+    - { match: "云南", replace: "云" }
+    - { match: "佛山", replace: "禅" }
+    - { match: "北京", replace: "京" }
+    - { match: "南京", replace: "宁" }
+    - { match: "南阳", replace: "宛" }
+    - { match: "四川", replace: "川" }
+    - { match: "天津", replace: "津" }
+    - { match: "宁波", replace: "甬" }
+    - { match: "安徽", replace: "皖" }
+    - { match: "广东", replace: "粤" }
+    - { match: "广州", replace: "穗" }
+    - { match: "徐州", replace: "徐" }
+    - { match: "成都", replace: "蓉" }
+    - { match: "杭州", replace: "杭" }
+    - { match: "武汉", replace: "汉" }
+    - { match: "汕头", replace: "汕" }
+    - { match: "江苏", replace: "苏" }
+    - { match: "沈阳", replace: "沈" }
+    - { match: "浙江", replace: "浙" }
+    - { match: "海南", replace: "琼" }
+    - { match: "深圳", replace: "深" }
+    - { match: "湖北", replace: "鄂" }
+    - { match: "湖南", replace: "湘" }
+    - { match: "长沙", replace: "长" }
+    - { match: "珠海", replace: "珠" }
+    - { match: "福建", replace: "闽" }
+    - { match: "瑞士", replace: "瑞" }
+    - { match: "许昌", replace: "许" }
+    - { match: "贵州", replace: "贵" }
+    - { match: "贵阳", replace: "筑" }
+    - { match: "越南", replace: "越" }
+    - { match: "镇江", replace: "镇" }
+    - { match: "青岛", replace: "青" }
+    - { match: "青海", replace: "青" }
+    - { match: "香港", replace: "港" }
+    - { match: "深港专线", replace: "深港" }
+    - { match: "澳门", replace: "澳" }
+    - { match: "台湾", replace: "台" }
+    - { match: "日本", replace: "日" }
+    - { match: "新加坡", replace: "新" }
+    - { match: "韩国", replace: "韩" }
+    - { match: "美国", replace: "美" }
+    - { match: "俄罗斯", replace: "俄" }
+    - { match: "加拿大", replace: "加" }
+    - { match: "印度", replace: "印" }
+    - { match: "马哈拉施特拉", replace: "孟买" }
+    - { match: "芬兰", replace: "芬" }
+    - { match: "英国", replace: "英" }
+    - { match: "法国", replace: "法" }
+    - { match: "土耳其", replace: "土" }
+    - { match: "德国", replace: "德" }
+    - { match: "意大利", replace: "意" }
+    - { match: "泰国", replace: "泰" }
+    - { match: "菲律宾", replace: "菲" }
+    - { match: "(-)", replace: "▷" }
+    - { match: "(A|B|C|D)(\s)?(\d\d)", replace: "$3" }
+    - { match: '(.*)(\[)(倍率:)(.*[0-9])(\])', replace: "$1[x$4]" }
+    - { match: '(\[x.*[0-9]\])(.*)', replace: "$2$1" }
+    - { match: " ", replace: "" }
+    - { match: "[ ]", replace: "" }
+    - { match: "( )", replace: "" }
+  proxy_groups:
+    # AI云可用节点
+    - name: "🔄 AI云可达"
+      type: fallback
+      rule:
+        [
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]🗺️ 其他 | 剩余价值",
+        ]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    # 代理节点选择
+    - name: "⛵ 直挂云帆济沧海"
+      type: select
+      rule:
+        [
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]🗺️ 其他 | 剩余价值",
+          "[]🔄 AI云可达",
+          "[]🏠 锦城虽云乐，不如早还家",
+        ]
+    # 国内网站
+    - name: "🚣 长风破浪会有时"
+      type: select
+      rule: ["[]🏠 锦城虽云乐，不如早还家", "[]⛵ 直挂云帆济沧海"]
+    # 大陆流媒体面向港澳台限定服务
+    - name: "🌏 国内媒体"
+      type: select
+      rule:
+        [
+          "[]🚣 长风破浪会有时",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]⛵ 直挂云帆济沧海",
+        ]
+    - name: "💃Tik Tok"
+      type: select
+      rule:
+        [
+          "[]⛵ 直挂云帆济沧海",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]🗺️ 其他 | 剩余价值",
+        ]
+    # 国际高雅音乐平台
+    - name: "🎵 高雅音乐"
+      type: select
+      rule:
+        [
+          "[]⛵ 直挂云帆济沧海",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]🗺️ 其他 | 剩余价值",
+        ]
+    # 国外流媒体解锁
+    - name: "🎞️ 流媒体"
+      type: select
+      rule:
+        [
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]🗺️ 其他 | 剩余价值",
+          "[]⛵ 直挂云帆济沧海",
+        ]
+    # 国际媒体服务
+    - name: "🌎 国际媒体"
+      type: select
+      rule:
+        [
+          "[]⛵ 直挂云帆济沧海",
+          "[]🔄 AI云可达",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]🗺️ 其他 | 剩余价值",
+        ]
+    # 青壮年服务
+    - name: "💪 青壮年模式"
+      type: select
+      rule:
+        [
+          "[]⛵ 直挂云帆济沧海",
+          "[]🚣 长风破浪会有时",
+          "[]🇭🇰 香港 | Too Naive",
+          "[]🇨🇳 台湾 | 你好机车哦",
+          "[]🇯🇵 日本 | 神罗天征",
+          "[]🇰🇷 韩国 | 来自星星的你",
+          "[]🇸🇬 新加坡 | 绀青之拳",
+          "[]🇺🇲 美国 | 探索者号",
+          "[]🗺️ 其他 | 剩余价值",
+        ]
+    # Developer 开发者服务
+    - name: "👨‍💻 开发者服务"
+      type: select
+      rule: ["[]⛵ 直挂云帆济沧海", "[]🚣 长风破浪会有时"]
+    # Scholar 学术服务
+    - name: "👨‍🔬 学术服务"
+      type: select
+      rule: ["[]🚣 长风破浪会有时", "[]⛵ 直挂云帆济沧海"]
+    # Samsung 服务代理
+    - name: "✨ 三星服务"
+      type: select
+      rule: ["[]🚣 长风破浪会有时", "[]⛵ 直挂云帆济沧海"]
+    # Apple 服务代理
+    - name: "🍎 苹果服务"
+      type: select
+      rule: ["[]🚣 长风破浪会有时", "[]⛵ 直挂云帆济沧海"]
+    # Microsoft 服务代理
+    - name: "Ⓜ️ 微软服务"
+      type: select
+      rule: ["[]🚣 长风破浪会有时", "[]⛵ 直挂云帆济沧海"]
+    # SpeedTest 测速
+    - name: "⏱️ 测速服务"
+      type: select
+      rule: ["[]🚣 长风破浪会有时", "[]⛵ 直挂云帆济沧海"]
+    # 广告拦截
+    - name: "🚧 通用拦截"
+      type: select
+      rule: ["[]🈲 一夫当关，万夫莫开", "[]🏠 锦城虽云乐，不如早还家"]
+    - name: "🍃 应用净化"
+      type: select
+      rule:
+        [
+          "[]🚧 通用拦截",
+          "[]🈲 一夫当关，万夫莫开",
+          "[]🏠 锦城虽云乐，不如早还家",
+        ]
+    # 私のDIY
+    - name: "🇭🇰 香港 | Too Naive"
+      type: select
+      rule:
+        [
+          "[]🇭🇰 香港 | 严选",
+          "[]🇭🇰 深港专线",
+          "[]🇭🇰 香港 | 自选",
+          "[]🇭🇰 香港 | 轮询",
+        ]
+    - name: "🇭🇰 香港 | 严选"
+      type: url-test
+      rule: ["!!PROVIDER=HK"]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    - name: "🇭🇰 香港 | 轮询"
+      type: fallback
+      rule: ["!!PROVIDER=HK"]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    - name: "🇭🇰 香港 | 自选"
+      type: select
+      rule: ["!!PROVIDER=HK"]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    - name: "🇭🇰 深港专线"
+      type: url-test
+      rule: ["!!PROVIDER=S-HK"]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    - name: "🇨🇳 台湾 | 你好机车哦"
+      type: url-test
+      rule: ["!!PROVIDER=TW"]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    - name: "🇯🇵 日本 | 神罗天征"
+      type: url-test
+      rule: ["!!PROVIDER=JP"]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    - name: "🇰🇷 韩国 | 来自星星的你"
+      type: url-test
+      rule: ["!!PROVIDER=KR"]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    - name: "🇸🇬 新加坡 | 绀青之拳"
+      type: url-test
+      rule: ["!!PROVIDER=SG"]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    - name: "🇺🇲 美国 | 探索者号"
+      type: url-test
+      rule: ["!!PROVIDER=US"]
+      url: "http://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 5
+      tolerance: 50
+    - name: "🗺️ 其他 | 剩余价值"
+      type: select
+      rule: ["!!PROVIDER=Other"]
+    # 你以为你能跑？
+    - name: "🕸️ 漏网之鱼"
+      type: select
+      rule: ["[]⛵ 直挂云帆济沧海", "[]🚣 长风破浪会有时"]
+    - name: "🏠 锦城虽云乐，不如早还家"
+      type: select
+      rule: ["[]DIRECT"]
+    - name: "🈲 一夫当关，万夫莫开"
+      type: select
+      rule: ["[]REJECT"]
+
+  add_emoji: true
+  remove_old_emoji: true
+  emojis:
+    - { match: "(?i:Bandwidth|expire|流量|时间|应急|过期)", emoji: "🏳️‍🌈" }
+    - { match: "(NetEaseMusic|网易云音乐|网易云解锁)", emoji: "🎶" }
+    - { match: "(Ascension|阿森松)", emoji: "🇦🇨" }
+    - { match: "(UAE|Dubai|阿联酋|迪拜)", emoji: "🇦🇪" }
+    - { match: "(阿尔巴尼亚|Albania)", emoji: "🇦🇱" }
+    - { match: "(AR|阿根廷|Argentina)", emoji: "🇦🇷" }
+    - { match: "(Austria|Vienna|奥地利|维也纳)", emoji: "🇦🇹" }
+    - { match: "(AU|Australia|Sydney|澳大利亚|澳洲|悉尼)", emoji: "🇦🇺" }
+    - { match: "(阿塞拜疆|Azerbaijan)", emoji: "🇦🇿" }
+    - {
+        match: "(波黑共和国|波士尼亚与赫塞哥维纳|Bosnia|Herzegovina)",
+        emoji: "🇧🇦",
+      }
+    - { match: "(BE|Belgium|比利时)", emoji: "🇧🇪" }
+    - { match: "(保加利亚|Bulgaria)", emoji: "🇧🇬" }
+    - { match: "(BR|Brazil|Paulo|巴西|圣保罗)", emoji: "🇧🇷" }
+    - {
+        match: "(Canada|Montreal|Vancouver|加拿大|加(?!州|坡).*(?!▷|回|转)|蒙特利尔|温哥华|楓葉|枫叶|CA)",
+        emoji: "🇨🇦",
+      }
+    - { match: "(Switzerland|Zurich|瑞士|苏黎世)", emoji: "🇨🇭" }
+    - { match: "(智利|Chile)", emoji: "🇨🇱" }
+    - { match: "(Colombia|哥伦比亚)", emoji: "🇨🇴" }
+    - { match: "(Costa Rica|哥斯达黎加)", emoji: "🇨🇷" }
+    - { match: "(塞浦路斯|Cyprus)", emoji: "🇨🇾" }
+    - { match: "(Czech|捷克)", emoji: "🇨🇿" }
+    - { match: "(?i:DE|Germany|法兰克福|德.*(?!▷|回|转))", emoji: "🇩🇪" }
+    - { match: "(Denmark|丹麦)", emoji: "🇩🇰" }
+    - { match: "(爱沙尼亚|Estonia)", emoji: "🇪🇪" }
+    - { match: "(埃及|Egypt)", emoji: "🇪🇬" }
+    - { match: "(Spain|西班牙)", emoji: "🇪🇸" }
+    - { match: "(Europe|欧洲)", emoji: "🇪🇺" }
+    - { match: "(Finland|Helsinki|芬兰|赫尔辛基)", emoji: "🇫🇮" }
+    - { match: "(FR|France|Paris|法国.*(?!▷|回|转)|巴黎)", emoji: "🇫🇷" }
+    - { match: "(格鲁吉亚|Georgia)", emoji: "🇬🇪" }
+    - { match: "(希腊|Greece)", emoji: "🇬🇷" }
+    - { match: "(克罗地亚|Croatia)", emoji: "🇭🇷" }
+    - { match: "(Hungary|匈牙利)", emoji: "🇭🇺" }
+    - { match: "(Indonesia|Jakarta|印尼|印度尼西亚|雅加达)", emoji: "🇮🇩" }
+    - { match: "(Ireland|Dublin|爱尔兰|都柏林)", emoji: "🇮🇪" }
+    - { match: "(Israel|以色列)", emoji: "🇮🇱" }
+    - { match: "(IMAN|马恩岛|Mann)", emoji: "🇮🇲" }
+    - { match: "(India|Mumbai|印度|孟买)", emoji: "🇮🇳" }
+    - { match: "(伊朗|Iran)", emoji: "🇮🇷" }
+    - { match: "(Iceland|冰岛)", emoji: "🇮🇸" }
+    - { match: "(Italy|Milan|意大利|米兰)", emoji: "🇮🇹" }
+    - { match: "(约旦|Jordan)", emoji: "🇯🇴" }
+    - { match: "(肯尼亚|Kenya)", emoji: "🇰🇪" }
+    - { match: "(吉尔吉斯斯坦|Kyrgyzstan)", emoji: "🇰🇬" }
+    - { match: "(柬埔寨|Cambodia)", emoji: "🇰🇭" }
+    - { match: "(KP|North.*?Korea|朝鲜)", emoji: "🇰🇵" }
+    - { match: "(哈萨克斯坦|Kazakhstan)", emoji: "🇰🇿" }
+    - { match: "(立陶宛|Lietuvos)", emoji: "🇱🇹" }
+    - { match: "(卢森堡|Luxemburg|Luxembourg)", emoji: "🇱🇺" }
+    - { match: "(拉脱维亚|Latvia)", emoji: "🇱🇻" }
+    - { match: "(Moldova|摩尔多瓦)", emoji: "🇲🇩" }
+    - { match: "(北马其顿|Macedonia)", emoji: "🇲🇰" }
+    - { match: "(蒙古|Монголулс|Mongolia)", emoji: "🇲🇳" }
+    - { match: "(MO|Macao|澳.*(?!▷|回|转)|CTM)", emoji: "🇲🇴" }
+    - { match: "(墨西哥|Mexico)", emoji: "🇲🇽" }
+    - { match: "(MY|Malaysia|马来西亚)", emoji: "🇲🇾" }
+    - { match: "(尼日利亚|Nigeria)", emoji: "🇳🇬" }
+    - { match: "(NL|Netherlands|荷兰|阿姆斯特丹)", emoji: "🇳🇱" }
+    - { match: "(Norway|挪威)", emoji: "🇳🇴" }
+    - { match: "(新西兰|纽西兰)", emoji: "🇳🇿" }
+    - { match: "(巴拿马|Panama)", emoji: "🇵🇦" }
+    - { match: "(秘鲁|Peru)", emoji: "🇵🇪" }
+    - { match: "(PH|Philippines|菲律宾)", emoji: "🇵🇭" }
+    - { match: "(Pakistan|巴基斯坦)", emoji: "🇵🇰" }
+    - { match: "(Poland|波兰)", emoji: "🇵🇱" }
+    - { match: "(葡萄牙|Portugal)", emoji: "🇵🇹" }
+    - { match: "(RO|Romania|罗马尼亚)", emoji: "🇷🇴" }
+    - { match: "(塞尔维亚|Serbia)", emoji: "🇷🇸" }
+    - { match: "(SA|Arabia|沙特)", emoji: "🇸🇦" }
+    - { match: "(SE|Sweden|瑞典)", emoji: "🇸🇪" }
+    - { match: "(斯洛文尼亚|Slovenia)", emoji: "🇸🇮" }
+    - { match: "(斯洛伐克|Slovensko)", emoji: "🇸🇰" }
+    - { match: "(TH|Thailand|泰国|曼谷)", emoji: "🇹🇭" }
+    - { match: "(突尼斯|Tunisia)", emoji: "🇹🇳" }
+    - { match: "(TR|Turkey|土耳其|土.*(?!▷|回|转)|伊斯坦布尔)", emoji: "🇹🇷" }
+    - { match: "(乌拉圭|Uruguay)", emoji: "🇺🇾" }
+    - { match: "(VN|Vietnam|越南)", emoji: "🇻🇳" }
+    - { match: "(ZA|Africa|南非)", emoji: "🇿🇦" }
+    - {
+        match: "(?i:UK|England|United.*?Kingdom|London|英.*(?!▷|回|转)|[^-]英|伦敦)",
+        emoji: "🇬🇧",
+      }
+    - {
+        match: "(?i:JP|Japan|Tokyo|Osaka|Saitama|日.*(?!▷|回|转)|东京|大阪|埼玉|沪日|穗日|川日|中日|泉日|杭日|[^-]日)",
+        emoji: "🇯🇵",
+      }
+    - { match: "(?i:KR|Korea|KOR|首尔|韩|韓)", emoji: "🇰🇷" }
+    - {
+        match: "(?i:RU|Russia|Moscow|Petersburg|Siberia|俄.*(?!▷|回|转)|伯力|莫斯科|圣彼得堡|西伯利亚|新西伯利亚|哈巴罗夫斯克|俄罗斯|京俄|杭俄|[^-]俄)",
+        emoji: "🇷🇺",
+      }
+    - {
+        match: "(?i:SG|新加坡|新(?!▷|西)|Singapore|狮城|沪新|京新|泉新|穗新|深新|杭新|[^-]新)",
+        emoji: "🇸🇬",
+      }
+    - {
+        match: "(?i:US|America|United.*?States|美.*(?!▷|回|转)|[^-]美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|沪美|京美)",
+        emoji: "🇺🇸",
+      }
+    - {
+        match: "(?i:HK|Hong.*?Kong|HKT|HKBN|HGC|WTT|CMI|港(?!▷|回|转)|[^-]港)",
+        emoji: "🇭🇰",
+      }
+    - {
+        match: "(?i:TW|Taiwan|CHT|HiNet|台.*(?!▷|回|转)|台北|台中|新北|彰化|[^-]台)",
+        emoji: "🇹🇼",
+      }
+    - {
+        match: "(?i:CN|China|回国|中.*(?!▷|回|转)|苏.*(?!▷|回|转)|京.*(?!▷|回|转)|沪.*(?!▷|回|转)|穗.*(?!▷|回|转)|深(?!▷|港)|杭.*(?!▷|回|转)|徐.*(?!▷|回|转)|青.*(?!▷|回|转)|甬.*(?!▷|回|转)|镇.*(?!▷|回|转)|禅.*(?!▷|回|转)|蓉.*(?!▷|回|转)|江苏|北京|上海|广州|深圳|杭州|常州|徐州|青岛|宁波|镇江|成都|back)",
+        emoji: "🇨🇳",
+      }
+
+template_args:
+  - { key: clash.mixed_port, value: 8888 }
+  - { key: clash.redir_port, value: 8890 }
+  - { key: clash.allow_lan, value: false }
+  - { key: clash.log_level, value: silent }
+  - { key: clash.ipv6, value: true }
+  - { key: clash.api_port, value: 0.0.0.0:8080 }

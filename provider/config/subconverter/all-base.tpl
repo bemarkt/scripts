@@ -160,16 +160,18 @@ dns:
   nameserver:
     - 119.29.29.29
     - 185.222.222.222
+    - 208.67.222.222:5353
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
-    - https://dns.ipv6dns.com/dns-query
     - https://dns.rubyfish.cn/dns-query
   fallback:
     - https://doh.dns.sb/dns-query
-    - https://public.dns.iij.jp/dns-query
-    - https://dns.twnic.tw/dns-query
-    - https://doh.opendns.com/dns-query
+    - https://i.233py.com/dns-query
+    - https://dns.google/dns-query
     - https://cloudflare-dns.com/dns-query
+    - https://doh.opendns.com/dns-query
+    - https://dns.twnic.tw/dns-query
+    - https://dns.adguard.com/dns-query
   fallback-filter:
     geoip: true # default
     geoip-code: CN
@@ -183,17 +185,8 @@ dns:
 proxy-providers:
   HK:
     type: http
-    path: ./proxy-providers/cordcloud-hk.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=香港&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
-    interval: 86400
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-  S-HK:
-    type: http
-    path: ./proxy-providers/cordcloud-s-hk.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=深港&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    path: ./proxy-providers/mdss-hk.yaml
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=香港&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -201,8 +194,8 @@ proxy-providers:
       interval: 300
   TW:
     type: http
-    path: ./proxy-providers/cordcloud-tw.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=台湾&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    path: ./proxy-providers/mdss-tw.yaml
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=台湾&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -210,8 +203,8 @@ proxy-providers:
       interval: 300
   JP:
     type: http
-    path: ./proxy-providers/cordcloud-jp.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=日本&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    path: ./proxy-providers/mdss-jp.yaml
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=日本&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -219,8 +212,8 @@ proxy-providers:
       interval: 300
   KR:
     type: http
-    path: ./proxy-providers/cordcloud-kr.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=韩国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    path: ./proxy-providers/mdss-kr.yaml
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=韩国&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -228,8 +221,8 @@ proxy-providers:
       interval: 300
   SG:
     type: http
-    path: ./proxy-providers/cordcloud-sg.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=新加坡&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    path: ./proxy-providers/mdss-sg.yaml
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=新加坡&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -237,8 +230,8 @@ proxy-providers:
       interval: 300
   US:
     type: http
-    path: ./proxy-providers/cordcloud-us.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=美国&exclude=深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    path: ./proxy-providers/mdss-us.yaml
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=美国&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
@@ -246,13 +239,22 @@ proxy-providers:
       interval: 300
   Other:
     type: http
-    path: ./proxy-providers/cordcloud-other.yaml
-    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&exclude=美国|新加坡|韩国|日本|台湾|香港|深港&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    path: ./proxy-providers/mdss-other.yaml
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&exclude=美国|新加坡|日本|台湾|香港&udp=true&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
     interval: 86400
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
+  cordcloud-kr:
+    type: http
+    path: ./proxy-providers/cordcloud-kr.yaml
+    url: {{ "https://converter-theta.vercel.app/sub?target=clash&list=true&include=韩国&config=https%3A%2F%2Fgit.io%2FJMJig&url=" + request.suburl }}
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 180
 rule-providers:
   AdditionalDirect:
     type: http
@@ -441,7 +443,7 @@ rules:
   # 音乐：Spotify、JOOX、Pandora、KKBOX
   # 自定义多区域媒体应用
   # (更多自定义请查阅 https://github.com/ConnersHua/Profiles/tree/master/Surge/Ruleset/Media)
-  - RULE-SET,TikTok,💃Tik Tok
+  - RULE-SET,TikTok,💃 TikTok
   - RULE-SET,Spotify,🎵 高雅音乐
   - RULE-SET,KKBOX,🎵 高雅音乐
   - RULE-SET,YouTubeMusic,🎵 高雅音乐
@@ -488,7 +490,7 @@ script:
                         "AdditionalDirect": "🚣 长风破浪会有时",
                         "Developer": "👨‍💻 开发者服务",
                         "Scholar": "👨‍🔬 学术服务",
-                        "TikTok": "💃Tik Tok",
+                        "TikTok": "💃 TikTok",
                         "Spotify": "🎵 高雅音乐", "KKBOX": "🎵 高雅音乐", "YouTubeMusic": "🎵 高雅音乐",
                         "StreamingSE": "🌏 国内媒体",
                         "Adult": "💪 青壮年模式",
@@ -519,7 +521,7 @@ script:
         ctx.log('[Script] GEOIP: CN')
         return "🚣 长风破浪会有时"
       elif metadata["network"] == "udp":
-        return "🇭🇰 深港专线"
+        return "🎮 游戏模式"
       ctx.log('[Script] FINAL')
       return "🕸️ 漏网之鱼"
 
