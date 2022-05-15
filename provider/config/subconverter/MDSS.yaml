@@ -13,7 +13,7 @@ custom:
 
   rename_node:
     - { match: 'V\d{3}\s*', replace: "" }
-    - { match: 'HK\s\|\s', replace: "" }
+    - { match: '\w+\s\|\s', replace: "" }
     - { match: '(\d{2})', replace: "BGP $1" }
 
   proxy_groups:
