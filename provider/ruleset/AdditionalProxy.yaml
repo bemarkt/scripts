@@ -2,9 +2,53 @@ payload:
   # China Area Network
 
   # Global Area Network
+  # > BitComet
+  - DOMAIN-SUFFIX,xytalk.net
+  - DOMAIN-SUFFIX,fileshot.net
+  # > EPIC Game
+  - DOMAIN-SUFFIX,epicgames.com
   # > MicroSoft (fixed)
   #- DOMAIN-SUFFIX,msftconnecttest.com
   #- DOMAIN-SUFFIX,msftncsi.com
+  # >> OneDrive
+  - DOMAIN-SUFFIX,onedrive.live.com
   # > Steam
-  - DOMAIN,cdn.akamai.steamstatic.com
+  # >> Steam 社区
+  - DOMAIN-SUFFIX,steamcommunity.com
+  # >> Steam 商店
+  - DOMAIN,store.steampowered.com
+  # - DOMAIN,steamstore-a.akamaihd.net
+  # >> Steam 更新
+  - DOMAIN,media.steampowered.com
+  # >> Steam 图片
   - DOMAIN,steamcdn-a.akamaihd.net
+  - DOMAIN,steamuserimages-a.akamaihd.net
+  - DOMAIN,cdn.akamai.steamstatic.com
+  # >> Steam 好友聊天
+  - DOMAIN,steam-chat.com
+  # >> Steam CDN
+  - DOMAIN,test.steampowered.com # Steam 204 连接检测
+  - DOMAIN-SUFFIX,cloudflare.steamstatic.com
+  - DOMAIN-SUFFIX,akamai.steamstatic.com
+  # >> Steam 杂项
+  - DOMAIN,api.steampowered.com
+  - DOMAIN-SUFFIX,steam-api.com
+  - DOMAIN-SUFFIX,s.team
+  - DOMAIN-SUFFIX,playartifact.com
+  - DOMAIN-SUFFIX,steamdeck.com
+  - DOMAIN-SUFFIX,steamgames.com
+  - DOMAIN-SUFFIX,steamserver.net
+  - DOMAIN-SUFFIX,steamstatic.com
+  - DOMAIN-SUFFIX,steamusercontent.com
+  - DOMAIN-SUFFIX,underlords.com
+  - DOMAIN-SUFFIX,valvesoftware.com
+
+  # > PikPak
+  #- DOMAIN,api-drive.mypikpak.com
+  #- DOMAIN,config.mypikpak.com
+  #- DOMAIN,static.mypikpak.com
+  #- DOMAIN,user.mypikpak.com
+  # > RuTracker
+  - DOMAIN-SUFFIX,rutracker.org
+  # > SM.MS
+  - DOMAIN-SUFFIX,loli.net

@@ -1,0 +1,160 @@
+payload:
+  # > 游戏模式（⚠️所用节点需开启 UDP 转发支持）
+  #  - PROTOCOL,UDP
+  # > Xbox
+  # >> XBox云同步
+  - DOMAIN,titlestorage.xboxlive.com
+  # >> XboxLive相关服务
+  - DOMAIN,editorial.xboxlive.com
+  - DOMAIN,peoplehub.xboxlive.com
+  - DOMAIN,rta.xboxlive.com
+  - DOMAIN,images-eds-ssl.xboxlive.com
+  - DOMAIN,gameclipscontent-d2009.xboxlive.com
+  - DOMAIN,xboxcare.xboxlive.com
+  - DOMAIN,titlehub.xboxlive.com
+  - DOMAIN,activityhub.xboxlive.com
+  - DOMAIN,xnotify.xboxlive.com
+  - DOMAIN,images-eds.xboxlive.com
+  - DOMAIN,xbl-smooth.xboxlive.com
+  - DOMAIN,compass.xboxlive.com
+  # >> XGP首页游戏加载
+  - DOMAIN,catalog.gamepass.com
+  # >> XGP游戏目录列表加载
+  - DOMAIN,beige.xboxservices.com
+  # >> 会员权益跨区领取(系统首选语言不能是简中)
+  - DOMAIN,profile.gamepass.com
+  # >> XboxApp下载地址读取(解决0X87e00005)
+  - DOMAIN,packagespc.xboxlive.com
+  # >> Global
+  - DOMAIN-SUFFIX,xboxlive.com
+
+  # > Steam
+  # >> Steam 社区
+  - DOMAIN-SUFFIX,steamcommunity.com
+  # >> Steam 商店
+  - DOMAIN,store.steampowered.com
+  # - DOMAIN,steamstore-a.akamaihd.net
+  # >> Steam 更新
+  - DOMAIN,media.steampowered.com
+  # >> Steam 图片
+  - DOMAIN,steamcdn-a.akamaihd.net
+  - DOMAIN,steamuserimages-a.akamaihd.net
+  - DOMAIN,cdn.akamai.steamstatic.com
+  # >> Steam 好友聊天
+  - DOMAIN,steam-chat.com
+  # >> Steam CDN
+  - DOMAIN,test.steampowered.com # Steam 204 连接检测
+  - DOMAIN-SUFFIX,cloudflare.steamstatic.com
+  - DOMAIN-SUFFIX,akamai.steamstatic.com
+  ## >> Akamai Download CDN
+  - DOMAIN,steambroadcast.akamaized.net
+  - DOMAIN,steamcommunity-a.akamaihd.net
+  - DOMAIN-SUFFIX,steampipe.akamaized.net
+  - DOMAIN,steamstore-a.akamaihd.net
+  - DOMAIN,steamusercontent-a.akamaihd.net
+  - DOMAIN,steamvideo-a.akamaihd.net
+  ## >> Steam 杂项
+  - DOMAIN,api.steampowered.com
+  - DOMAIN-SUFFIX,steam-api.com
+  - DOMAIN-SUFFIX,s.team
+  - DOMAIN-SUFFIX,playartifact.com
+  - DOMAIN-SUFFIX,steamdeck.com
+  - DOMAIN-SUFFIX,steamgames.com
+  - DOMAIN-SUFFIX,steamserver.net
+  - DOMAIN-SUFFIX,steamstatic.com
+  - DOMAIN-SUFFIX,steamusercontent.com
+  - DOMAIN-SUFFIX,underlords.com
+  - DOMAIN-SUFFIX,valvesoftware.com
+
+  # 来源：https://www.dogfight360.com/blog/knowledge-base/steam-fatal-error-fix/
+  - DOMAIN,client-download.steampowered.com
+
+  # > 修复好友列表无法访问
+  # 来源：https://www.dogfight360.com/blog/knowledge-base/%e4%bf%ae%e5%a4%8dsteam%e5%a5%bd%e5%8f%8b%e5%88%97%e8%a1%a8%e6%97%a0%e9%99%90%e8%bd%bd%e4%b8%ad-%e6%97%a0%e6%b3%95%e8%ae%bf%e9%97%ae/
+  #  - DOMAIN,steamcommunity-a.akamaihd.net
+  - DOMAIN,community.akamai.steamstatic.com
+
+  # > Epic
+  - DOMAIN-SUFFIX,epicgames.com
+
+  # > Ubisoft
+  # >> 账户登录
+  - DOMAIN,public-ubiservices.ubi.com
+  # >> 解决OCSP无法连接导致无法登陆
+  - DOMAIN,ocsp.comodoca.com
+  #  - DOMAIN,ocsp.digicert.com
+  # >> (其他服务也使用digicert OCSP服务-在线证书状态协议 例如Apple(App Store))  归类于Global List
+  # -> Ubisoft广告服务托管
+  - DOMAIN-SUFFIX,ubistayic-a.akamaihd.net
+  # >> 修复 下载问题是出现在没任何错误提示.但速度持续为0
+  # 来源：https://www.dogfight360.com/blog/knowledge-base/uplay_fix0bitandconnect/
+  # -> 该问题为dmx.upc.ubisoft.com域名连接被断开.由于只有一个IP.所以只能使用反代解决
+  - DOMAIN,dmx.upc.ubisoft.com
+  # >> 修复登陆uplay后出现”连接互联网时出现问题…..”
+  # 来源：https://www.dogfight360.com/blog/knowledge-base/uplay_fix0bitandconnect/
+  # -> 该问题为ubistatic3-a.akamaihd.net域名访问异常
+  - DOMAIN,ubistatic3-a.akamaihd.net
+  # >> 客户端更新(有中国服务器)走CDN
+  #  - DOMAIN,static3.cdn.ubi.com
+  # >> 游戏下载(有中国服务器)走CDN
+  #  - DOMAIN,uplaypc-s-ubisoft.cdn.ubi.com
+  #  - DOMAIN,uplaypc-s-ubisoft-ww.cdn.ubi.com
+  # >> 商店
+  - DOMAIN,store.ubi.com
+  # >> 云存储同步
+  - DOMAIN,ubisoft-uplay-savegames.s3.amazonaws.com
+  - DOMAIN,ubisoft-orbit-savegames.s3.amazonaws.com
+  # >> 静态资源
+  - DOMAIN,ubistatic-a.akamaihd.net
+  - DOMAIN,ubistatic1-a.akamaihd.net
+  - DOMAIN,ubistatic2-a.akamaihd.net
+  # >> 兜底
+  - DOMAIN-SUFFIX,ubisoft.com
+  - DOMAIN-SUFFIX,ubi.com
+
+  # > Rockstar Games
+  # >> 账户登录域名(与GTA5线上模式相斥)
+  - DOMAIN,ps-rgl-prod.ros.rockstargames.com
+  - DOMAIN,prs-rgl-prod.ros.rockstargames.com
+  - DOMAIN,prod.ros.rockstargames.com
+  - DOMAIN,auth-rgl-prod.ros.rockstargames.com
+  - DOMAIN,rgl-prod.ros.rockstargames.com
+  - DOMAIN,app-rgl-prod.ros.rockstargames.com
+  # >> 客户端下载更新
+  - DOMAIN,gamedownloads-rockstargames-com.akamaized.net
+  # >> RockStart官网图片/视频
+  - DOMAIN,media-rockstargames-com.akamaized.net
+  - DOMAIN,videos-rockstargames-com.akamaized.net
+  # >> 商店图片
+  - DOMAIN,images.ctfassets.net
+  # >> 商店网页
+  - DOMAIN-SUFFIX,rockstargames.com
+  # > GTAV
+  # >> 差事加载
+  - DOMAIN,prod.telemetry.ros.rockstargames.com
+  # >> 202错误/卡同步
+  - DOMAIN,patches.rockstargames.com
+
+  # > Electronic Arts
+  - DOMAIN-SUFFIX,ea.com
+  - DOMAIN-SUFFIX,tnt-ea.com
+  # > Origin
+  - DOMAIN-SUFFIX,origin.com
+  # >> 解决"线上登录目前暂不提供"问题
+  - DOMAIN,eaassets-a.akamaihd.net
+
+  # > Sony
+  # 来源：https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list
+  # 内容：Sony
+  # 数量：5条
+  - DOMAIN-SUFFIX,playstation.com
+  - DOMAIN-SUFFIX,playstation.net
+  - DOMAIN-SUFFIX,playstationnetwork.com
+  - DOMAIN-SUFFIX,sony.com
+  - DOMAIN-SUFFIX,sonyentertainmentnetwork.com
+
+  # > GOG
+  - DOMAIN-SUFFIX,gog.com
+  - DOMAIN-SUFFIX,gog-statics.com
+  # >> 云存储同步
+  - DOMAIN,cloudstorage.gog.com

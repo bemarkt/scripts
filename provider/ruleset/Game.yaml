@@ -1,0 +1,16 @@
+payload:
+  # 游戏
+  # > GTAV
+  # >> 差事加载
+  - DOMAIN,prod.telemetry.ros.rockstargames.com
+  # >> 202错误/卡同步
+  - DOMAIN,patches.rockstargames.com
+
+  # > 战地1/4/5加快UI，服务器列表加载
+  - DOMAIN,sparta-gw.battlelog.com
+  - DOMAIN,sparta-gw-bfv.battlelog.com
+  - DOMAIN,sparta-gw-bf4.battlelog.com
+
+  # > CS:GO
+  - PROCESS-NAME,csgo.exe
+  - DST-PORT,27015
