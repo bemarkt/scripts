@@ -1,0 +1,15 @@
+#!name= TikTok JP
+#!desc= 解锁 TikTok 日本 地区
+#!openUrl= https://github.com/bemarkt/scripts/tree/master/provider/Loon/Plugin
+#!author= Semporia && lodepuly
+#!homepage= https://github.com/bemarkt/scripts/tree/master/provider/Loon/Plugin
+#!icon= https://raw.githubusercontent.com/Semporia/Hand-Painted-icon/master/Social_Media/TikTok.png
+
+[Rewrite]
+(?<=_region=)CN(?=&) JP 307
+(?<=&mcc_mnc=)4 2 307
+^(https?:\/\/(tnc|dm)[\w-]+\.\w+\.com\/.+)(\?)(.+) $1$4 302
+(?<=\d\/\?\w{7}_\w{4}=)1[6-9]..(?=.?.?&) 18.4 307
+
+[MITM]
+hostname = *.tiktokv.com,*.byteoversea.com,*.tik-tokapi.com
