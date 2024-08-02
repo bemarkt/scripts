@@ -1,0 +1,46 @@
+#!name = 彩云天气净化[墨鱼版]
+#!desc = 移除移除首页推广、弹窗、悬浮窗、底栏天气助手和工具箱入口，移除我的页面广告横幅。
+#!openUrl = https://apps.apple.com/app/id847764912
+#!author = ddgksf2013
+#!keyword = 去广告, ddgksf2013
+#!homepage = https://github.com/bemarkt/scripts
+#!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/ColorfulClouds.png
+#!date = 2024-08-02
+[Rewrite]
+# > 通用广告请求@ddgksf2013
+^https?:\/\/ad.cyapi.cn/v\d reject-200
+
+[Script]
+# > 伪装VIP解锁48小时降水[需登录]@ddgksf2013
+http-response ^https?:\/\/biz\.cyapi\.cn\/v\d\/user script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=伪装VIP解锁48小时降水[需登录]
+
+# > 图层推广@ddgksf2013
+http-response ^https?:\/\/wrapper\.cyapi\.cn\/v\d\/activity script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=图层推广
+
+# > 活动推广@ddgksf2013
+http-response ^https?:\/\/api\.caiyunapp\.com\/v\d\/activity script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=活动推广
+
+# > 首页顶部推广@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn/v\d/operation/homefeatures script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=首页顶部推广
+
+# > SVIP提醒推广@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn/v\d/notification/message_center script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=SVIP提醒推广
+
+# > 雨季特惠提醒@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn/v\d/config/cypage script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=雨季特惠提醒
+
+# > 发现页信息流推荐@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn/v\d/operation/feeds script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=发现页信息流推荐
+
+# > 发现页banners@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn/v\d/operation/banners script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=发现页banners
+
+# > 发现页中间部分@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn/v\d/operation/features script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=发现页中间部分
+
+# > 发现页活动@ddgksf2013
+http-response ^https?:\/\/starplucker\.cyapi\.cn/v\d/campaigns script-path=https://github.com/ddgksf2013/Scripts/raw/master/caiyun_json.js, requires-body=true, timeout=60, tag=发现页活动
+
+[MITM]
+hostname = wrapper.cyapi.cn, api.caiyunapp.com, starplucker.cyapi.cn, ad.cyapi.cn, biz.cyapi.cn
+
