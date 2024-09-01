@@ -5,6 +5,6 @@ obj.data?.INDEX_TOP_BANNER?.contents?.forEach((item) => {
   delete item.bubble;
   delete item.figure;
   item.value =
-    "https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Resource/Script/WexinMiniPrograms/chayanyuese/cyys.jpg";
+    "https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Resources/cyys.jpg";
 });
 $done({ body: JSON.stringify(obj) });
