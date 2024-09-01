@@ -2,14 +2,14 @@
 > 应用名称：墨鱼自用彩云天气去广告脚本
 > 脚本作者：@ddgksf2013
 > 微信账号：墨鱼手记
-> 更新时间：2024-08-02
+> 更新时间：2024-09-01
 > 通知频道：https://t.me/ddgksf2021
 > 贡献投稿：https://t.me/ddgksf2013_bot
 > 问题反馈：ddgksf2013@163.com
 > 特别提醒：如需转载请注明出处，谢谢合作！
 ***********************************************/
 
-const version = "V1.0.6";
+const version = "V1.0.8";
 
 let responseBody = {};
 $request.url.includes("/v2/user")
@@ -18,6 +18,15 @@ $request.url.includes("/v2/user")
     (responseBody.result.wt.vip.expired_at = 1892260800),
     (responseBody.result.svip_take_effect = 1),
     (responseBody.result.vip_type = "s"))
+  : $request.url.includes("user_detail")
+  ? ((responseBody = JSON.parse($response.body)),
+    ["svip", "vip"].forEach((e) => {
+      responseBody.vip_info[e] &&
+        (responseBody.vip_info[e] = {
+          expires_time: "1892260800",
+          is_auto_renewal: !0,
+        });
+    }))
   : $request.url.includes("activity")
   ? (responseBody = $request.url.includes("type_id=A03")
       ? {
