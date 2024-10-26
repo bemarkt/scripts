@@ -1,0 +1,32 @@
+name: Fetch Plugin
+on:
+  workflow_dispatch:
+    schedule:
+      - cron: "30 22 * * *" # 6:30 AM UTC+8
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch
+        env:
+          USER_AGENT: ${{ secrets.USER_AGENT_KL }}
+        run: |
+          cd ./provider/Loon/Resources || exit 1
+          bash fetch.sh
+          mv kelee ../Plugin
+
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Update Loon Plugins on ${{ env.BUILDTIME }}"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
