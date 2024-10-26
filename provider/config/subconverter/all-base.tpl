@@ -362,7 +362,7 @@ rule-providers:
     type: http
     behavior: classical
     path: ./rule-providers/Samsung.yaml
-    url: https://cdn.jsdelivr.net/gh/bemarkt/scripts/provider/ruleset/Samsung.yaml
+    url: https://cdn.jsdelivr.net/gh/bemarkt/scripts/master/provider/ruleset/Samsung.yaml
     interval: 43200
   Scholar:
     type: http

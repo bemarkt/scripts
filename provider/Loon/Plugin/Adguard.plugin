@@ -4,7 +4,7 @@
 #!icon = https://raw.githubusercontent.com/bemarkt/Scripts/master/provider/Loon/Resources/Icons/app/adguard.png
 #!date = 2024-10-26 15:47
 [Script]
-http-response ^https?:\/\/mobile-api\.adguard\.org\/api\/.+\/ios_validate_receipt requires-body=1,script-path=https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/adguard_pro.js
+http-response ^https?:\/\/mobile-api\.adguard\.org\/api\/.+\/ios_validate_receipt requires-body=1,script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/adguard_pro.js
 
 [MITM] 
 hostname = mobile-api.adguard.org

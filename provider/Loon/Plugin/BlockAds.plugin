@@ -352,45 +352,45 @@ URL-REGEX, ^http:\/\/\w{32}\.jddebug\.com\/diagnose\?, REJECT
 
 [Script]
 # 12306 //ad.12306.cn, mobile.12306.cn
-http-request ^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$ script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/12306.js, requires-body = true, tag = 12306_splash
-http-response ^https:\/\/mobile\.12306\.cn\/otsmobile\/app\/mgs\/mgw\.htm$ script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/header.js, tag = 12306_appin
+http-request ^https:\/\/ad\.12306\.cn\/ad\/ser\/getAdList$ script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/12306.js, requires-body = true, tag = 12306_splash
+http-response ^https:\/\/mobile\.12306\.cn\/otsmobile\/app\/mgs\/mgw\.htm$ script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/header.js, tag = 12306_appin
 
 # 阿里云盘 //*api.alipan.com, member.alipan.com
-http-response ^https:\/\/(biz)?api\.alipan\.com\/apps\/v\d\/users?\/home\/(?:news|widgets) script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/adrive.js, requires-body = true, tag = aliyun_mine
-http-response ^https:\/\/member\.alipan\.com\/v1\/users\/onboard_list script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/adrive.js, requires-body = true, tag = aliyun_board
+http-response ^https:\/\/(biz)?api\.alipan\.com\/apps\/v\d\/users?\/home\/(?:news|widgets) script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/adrive.js, requires-body = true, tag = aliyun_mine
+http-response ^https:\/\/member\.alipan\.com\/v1\/users\/onboard_list script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/adrive.js, requires-body = true, tag = aliyun_board
 
 # 阿里巴巴 //acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com
-http-response ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.(?:cloudvideo\.video\.query|wireless\.home\.splash\.awesome\.get) script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/myBlockAds.js, requires-body = true, tag = taobao_1
-http-response ^https:\/\/poplayer\.template\.alibaba\.com\/\w+\.json script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/myBlockAds.js, requires-body = true, tag = taobao_2
+http-response ^https:\/\/guide-acs\.m\.taobao\.com\/gw\/mtop\.taobao\.(?:cloudvideo\.video\.query|wireless\.home\.splash\.awesome\.get) script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/myBlockAds.js, requires-body = true, tag = taobao_1
+http-response ^https:\/\/poplayer\.template\.alibaba\.com\/\w+\.json script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/myBlockAds.js, requires-body = true, tag = taobao_2
 
 # 草榴社区 //2023.redircdn.com
-http-response ^https:\/\/2023\.redircdn\.com\/web\/mob_post\.js\? script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/myBlockAds.js, requires-body = true, tag = caoliu
+http-response ^https:\/\/2023\.redircdn\.com\/web\/mob_post\.js\? script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/myBlockAds.js, requires-body = true, tag = caoliu
 
 # 昌原云充 五代十路 //www.washpayer.com
-http-response ^https:\/\/www\.washpayer\.com\/user\/message\/equipmentPara\? script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/changyuan.js, requires-body = true, tag = changyuan
+http-response ^https:\/\/www\.washpayer\.com\/user\/message\/equipmentPara\? script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/changyuan.js, requires-body = true, tag = changyuan
 
 # 京东 //api.m.jd.com
-http-response ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(?:deliverLayer|getTabHomeInfo|myOrderInfo|orderTrackBusiness|personinfoBusiness|start|welcomeHome) script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/jingdong.js, requires-body = true, tag = jingdong
+http-response ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=(?:deliverLayer|getTabHomeInfo|myOrderInfo|orderTrackBusiness|personinfoBusiness|start|welcomeHome) script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/jingdong.js, requires-body = true, tag = jingdong
 
 # 酷安 //api.coolapk.com
-http-response ^https:\/\/api\.coolapk\.com\/v6\/(?:feed\/detail|feed\/replyList|page\/dataList|main\/dataList|main\/indexV8|main\/init) script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/coolapk.js, requires-body = true, tag = coolapk
+http-response ^https:\/\/api\.coolapk\.com\/v6\/(?:feed\/detail|feed\/replyList|page\/dataList|main\/dataList|main\/indexV8|main\/init) script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/coolapk.js, requires-body = true, tag = coolapk
 
 # 酷狗音乐 //adserviceretry.kglink.cn, gateway.kugou.com
-http-response ^https:\/\/gateway\.kugou\.com\/(?:adp\/ad\/v1\/mine_top_banner|ads\.gateway\/v2\/home_card) script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/kugou.js, requires-body = true, tag = kg_gateway
-http-response ^https?:\/\/adserviceretry\.kglink\.cn\/v\d\/mobile\w+ script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/kugou.js, requires-body = true, tag = kg_linkcn
+http-response ^https:\/\/gateway\.kugou\.com\/(?:adp\/ad\/v1\/mine_top_banner|ads\.gateway\/v2\/home_card) script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/kugou.js, requires-body = true, tag = kg_gateway
+http-response ^https?:\/\/adserviceretry\.kglink\.cn\/v\d\/mobile\w+ script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/kugou.js, requires-body = true, tag = kg_linkcn
 
 # 微信封禁页面 //weixin110.qq.com, security.wechat.com
-http-response ^https\:\/\/(?:weixin110\.qq|security\.wechat)\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi\? script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/wechat/unlockUrls.js, requires-body = true, tag = wechat
+http-response ^https\:\/\/(?:weixin110\.qq|security\.wechat)\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi\? script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/wechat/unlockUrls.js, requires-body = true, tag = wechat
 
 # 小米商城 //api.m.mi.com, shop-api.retail.mi.com
-http-response ^https:\/\/api\.m\.mi\.com\/v1\/app\/start script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/myBlockAds.js, requires-body = true, tag = mi_mall
+http-response ^https:\/\/api\.m\.mi\.com\/v1\/app\/start script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/myBlockAds.js, requires-body = true, tag = mi_mall
 
 # 中国农业银行 //mobilepaas.abchina.com.cn
-http-request ^https:\/\/mobilepaas\.abchina\.com\.cn:441\/mgw\.htm$ script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/header.js, tag = abchina
+http-request ^https:\/\/mobilepaas\.abchina\.com\.cn:441\/mgw\.htm$ script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/header.js, tag = abchina
 
 # 中国移动云盘 //ad.mcloud.139.com, jzts.cmpassport.com
-http-response ^https:\/\/ad\.mcloud\.139\.com\/advertapi\/adv-filter\/ script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/cloud139.js, requires-body = true, tag = cloud139_1
-http-response ^https:\/\/jzts\.cmpassport\.com\/personalized\/getPushContent script-path = https://raw.githubusercontent.com/bemarkt/scripts/provider/Loon/Scripts/RuCu6/cloud139.js, requires-body = true, tag = cloud139_2
+http-response ^https:\/\/ad\.mcloud\.139\.com\/advertapi\/adv-filter\/ script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/cloud139.js, requires-body = true, tag = cloud139_1
+http-response ^https:\/\/jzts\.cmpassport\.com\/personalized\/getPushContent script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/cloud139.js, requires-body = true, tag = cloud139_2
 
 [MITM]
 hostname = ad.12306.cn, mobile.12306.cn, list-app-m.i4.cn, *api.alipan.com, member.alipan.com, acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com, pan.baidu.com, 2023.redircdn.com, www.washpayer.com, api.douban.com, img3.doubanio.com, qnmob3.doubanio.com, image.mybank.icbc.com.cn, hfapp-service.qweather.net, acs-m.freshippo.com, api.m.jd.com, gab.122.gov.cn, api.coolapk.com, adserviceretry.kglink.cn, gateway.kugou.com, p0.pipi.cn, flowplus.meituan.net, img.meituan.net, s3plus.meituan.net, osg-service.sgcc.com.cn, mp.weixin.qq.com, weixin110.qq.com, security.wechat.com, api.m.mi.com, home.mi.com, shop-api.retail.mi.com, wallet.95516.com, mobilepaas.abchina.com.cn, ad.mcloud.139.com, jzts.cmpassport.com
