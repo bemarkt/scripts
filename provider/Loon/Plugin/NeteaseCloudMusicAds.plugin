@@ -8,10 +8,8 @@
 #!loon_version = 3.2.1(749)
 #!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/NeteaseCloudMusic.png
-#!date = 2024-10-11 07:22:12
+#!date = 2024-10-27 23:05
 
-argument="{"MY":"{{{漫游}}}","DT":"{{{动态}}}","TJ":"{{{推荐}}}","FX":"{{{发现}}}"}"
-argument="{"PRGG":"{{{问候语}}}","PRDRD":"{{{每日推荐}}}","PRSCVPT":"{{{推荐歌单}}}","PRST":"{{{最近常听}}}","HMPR":"{{{音乐合伙人}}}","PRRR":"{{{雷达歌单}}}","PRRK":"{{{排行榜}}}","PRMST":"{{{推荐专属歌单}}}","PRCN":"{{{你的专属歌单}}}"}"
 [Argument]
 MY = switch, false, tag = 显示漫游标签, desc = 显示TAB栏的漫游
 DT = switch, false, tag = 显示动态标签, desc = 显示TAB栏的动态
