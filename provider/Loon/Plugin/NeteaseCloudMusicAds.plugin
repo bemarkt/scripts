@@ -1,0 +1,88 @@
+#!name = 网易云音乐去广告
+#!desc = 过滤网易云音乐广告，并允许自定义界面。
+#!openUrl = https://apps.apple.com/app/id590338362
+#!author = RuCu6[https://github.com/RuCu6], Keywos[https://github.com/Keywos]
+#!tag = 去广告
+#!system = 
+#!system_version = 
+#!loon_version = 3.2.1(749)
+#!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
+#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/NeteaseCloudMusic.png
+#!date = 2024-10-11 07:22:12
+
+argument="{"MY":"{{{漫游}}}","DT":"{{{动态}}}","TJ":"{{{推荐}}}","FX":"{{{发现}}}"}"
+argument="{"PRGG":"{{{问候语}}}","PRDRD":"{{{每日推荐}}}","PRSCVPT":"{{{推荐歌单}}}","PRST":"{{{最近常听}}}","HMPR":"{{{音乐合伙人}}}","PRRR":"{{{雷达歌单}}}","PRRK":"{{{排行榜}}}","PRMST":"{{{推荐专属歌单}}}","PRCN":"{{{你的专属歌单}}}"}"
+[Argument]
+MY = switch, false, tag = 显示漫游标签, desc = 显示TAB栏的漫游
+DT = switch, false, tag = 显示动态标签, desc = 显示TAB栏的动态
+TJ = switch, true, tag = 显示推荐标签, desc = 显示TAB栏的推荐
+FX = switch, false, tag = 显示发现标签, desc = 显示TAB栏的发现
+PRGG = switch, false, tag = 显示首页问候语, desc = 显示首页问候语卡片
+PRRK = switch, false, tag = 显示首页排行榜, desc = 显示首页排行榜卡片
+PRDRD = switch, true, tag = 显示首页每日推荐, desc = 显示首页每日推荐卡片
+PRSCVPT = switch, true, tag = 显示首页推荐歌单, desc = 显示首页推荐歌卡片
+PRST = switch, true, tag = 显示首页最近常听, desc = 显示首页最近常听卡片
+PRRR = switch, false, tag = 显示首页雷达歌单, desc = 显示首页雷达歌单卡片
+HMPR = switch, false, tag = 显示首页音乐合伙人, desc = 显示首页音乐合伙人卡片
+PRMST = switch, false, tag = 显示首页推荐专属歌单, desc = 显示首页推荐专属歌单卡片
+PRCN = switch, false, tag = 显示首页你的专属歌单, desc = 显示首页你的专属歌单卡片
+
+[Rule]
+DOMAIN, httpdns.music.163.com, REJECT
+DOMAIN, httpdns.n.netease.com, REJECT
+DOMAIN, iadmat.nosdn.127.net, REJECT
+DOMAIN, iadmatapk.nosdn.127.net, REJECT
+DOMAIN, iadmusicmat.music.126.net, REJECT
+# DOMAIN, iadmusicmatvideo.music.126.net, REJECT
+DOMAIN-SUFFIX, 163jiasu.com, REJECT
+
+[Rewrite]
+# 新版加密通用处理
+^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/e?api\/(?:batch|v\d\/resource\/comment\/floor\/get|homepage\/block\/page|link\/page\/rcmd\/(block\/resource\/multi\/refresh|resource\/show)|user\/follow\/users\/mixed\/get|link\/home\/framework\/tab) header-del x-aeapi
+
+# 开屏广告
+# ^https?:\/\/interface\d?\.music\.163\.com\/e?api\/(ocpc\/)?ad\/ reject-dict
+^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/ad mock-response-body data-type=json data-path="https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Mocks/cloudmusic/eapiad.json"
+
+
+# 今日运势 商城 Beat专区 音乐收藏家 | type:ACTIVITY | 低至5.2折
+^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:delivery\/(batch-)?deliver|moment\/tab\/info\/|side-bar\/mini-program\/music-service\/account|yunbei\/account\/entrance\/) reject-dict
+
+# 播放页歌名下方∶乐迷团｜关注｜播放页提示｜音乐应用红点｜播放提示?
+^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:community\/friends\/fans-group\/artist\/group\/|mine\/applet\/redpoint|music\/songshare\/text\/recommend\/|resniche\/position\/play\/new\/|resource\/comments?\/musiciansaid\/|user\/sub\/artist) reject-dict
+^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:ios\/version|mlivestream\/entrance\/playpage\/|link\/position\/show\/strategy|link\/scene\/show\/resource|v1\/content\/exposure\/comment\/banner\/) reject-dict
+
+# 搜索词
+^https?:\/\/interface\d?\.music\.163\.com\/w?e?api\/search\/default mock-response-body data-type=json data-path="https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Mocks/cloudmusic/keyword.json"
+
+# 搜索页热搜卡片｜猜你喜欢｜我的应用下方提醒
+^https?:\/\/interface\d?\.music\.163\.com\/w?e?api\/(?:search\/(chart|rcmd\/keyword|specialkeyword)|resource-exposure\/|activity\/bonus\/playpage\/time\/query) reject-dict
+^https?:\/\/interface\d?\.music\.163\.com\/eapi\/(?:mlivestream\/entrance\/playpage|link\/(position\/show\/strategy|scene\/show)|ios\/version|v\d\/content\/exposure\/comment\/banner) reject-dict
+
+# 主页播客推荐
+^https?:\/\/interface\d?\.music\.163\.com\/eapi\/my\/podcast\/tab\/recommend reject-dict
+
+[Script]
+# 热推、有话想说、分享一下、歌曲下的祝福等小提示、评论区、乐迷、星评等级、关注等图标
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(batch|v\d\/resource\/comment\/floor\/get) script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/neteasecloudmusic_ads.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = 评论区
+
+# 推荐、home、主页
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(homepage\/block\/page|link\/page\/rcmd\/(resource\/show|block\/resource\/multi\/refresh)) script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/neteasecloudmusic_ads.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = 主页, argument = [{PRGG},{PRRK},{PRDRD},{PRSCVPT},{PRST},{PRRR},{HMPR},{PRMST},{PRCN}]
+
+# 底部选项卡
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/home\/framework\/tab script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/neteasecloudmusic_ads.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = 底部选项卡, argument = [{MY},{DT},{TJ},{FX}]
+
+# 发现
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/page\/discovery\/resource\/show script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/neteasecloudmusic_ads.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = 发现页
+
+# 播放音效
+# http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/song\/play\/more\/list\/v\d script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/neteasecloudmusic_ads.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = 播放音效
+
+# 我的页面
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/position\/show\/resource script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/neteasecloudmusic_ads.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = 我的页面
+
+# 显示未关注你
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/user\/follow\/users\/mixed\/get script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/neteasecloudmusic_ads.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = 显示未关注你的人
+
+[MitM]
+hostname = interface.music.163.com, interface3.music.163.com, interface9.music.163.com, httpdns.n.netease.com, ipv4.music.163.com
