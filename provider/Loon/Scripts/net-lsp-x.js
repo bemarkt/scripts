@@ -3,7 +3,13 @@ const $ = new Env(NAME);
 
 let arg;
 if (typeof $argument != "undefined") {
-  arg = Object.fromEntries($argument.split("&").map((item) => item.split("=")));
+  if ($.isLoon()) {
+    arg = $argument;
+  } else {
+    arg = Object.fromEntries(
+      $argument.split("&").map((item) => item.split("="))
+    );
+  }
 } else {
   arg = {};
 }

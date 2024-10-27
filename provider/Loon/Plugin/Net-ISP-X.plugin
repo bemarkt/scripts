@@ -45,10 +45,10 @@ DOMAIN-SUFFIX,ip.plus,DIRECT
 http-request ^https?:\/\/net-lsp-x\.com script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/net-lsp-x.js, timeout=120, tag=网络信息请求
 
 # Event
-network-changed script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag=网络信息变化, argument="TYPE=EVENT&icon={ICON}&icon-color={ICON-COLOR}&LAN={LAN}&SSID={SSID}&IPv6={IPv6}&MASK={MASK}&DOMESTIC_IPv4={DOMESTIC_IPv4}&DOMESTIC_IPv6={DOMESTIC_IPv6}&LANDING_IPv4={LANDING_IPv4}&LANDING_IPv6={LANDING_IPv6}&PRIVACY={PRIVACY}&FLAG={FLAG}&ENTRANCE_DELAY={ENTRANCE_DELAY}&TIMEOUT={TIMEOUT}&EVENT_DELAY={EVENT_DELAY}&RETRIES={RETRIES}&RETRY_DELAY={RETRY_DELAY}&ASN={ASN}&ORG={ORG}&DOMESTIC_IPv4_KEY={DOMESTIC_IPv4_KEY}"
+network-changed script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag=网络信息变化, argument=[{ICON},{ICON-COLOR},{LAN},{SSID},{IPv6},{MASK},{DOMESTIC_IPv4},{DOMESTIC_IPv6},{LANDING_IPv4},{LANDING_IPv6},{PRIVACY},{FLAG},{ENTRANCE_DELAY},{TIMEOUT},{EVENT_DELAY},{RETRIES},{RETRY_DELAY},{ASN},{ORG},{DOMESTIC_IPv4_KEY}]
 
 # Interaction
-generic script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag=网络信息查询, img-url=location.circle.system, argument="icon={ICON}&icon-color={ICON-COLOR}&LAN={LAN}&SSID={SSID}&IPv6={IPv6}&MASK={MASK}&DOMESTIC_IPv4={DOMESTIC_IPv4}&DOMESTIC_IPv6={DOMESTIC_IPv6}&LANDING_IPv4={LANDING_IPv4}&LANDING_IPv6={LANDING_IPv6}&PRIVACY={PRIVACY}&FLAG={FLAG}&ENTRANCE_DELAY={ENTRANCE_DELAY}&TIMEOUT={TIMEOUT}&EVENT_DELAY={EVENT_DELAY}&RETRIES={RETRIES}&RETRY_DELAY={RETRY_DELAY}&ASN={ASN}&ORG={ORG}&DOMESTIC_IPv4_KEY={DOMESTIC_IPv4_KEY}"
+generic script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag=网络信息查询, img-url=location.circle.system, argument=[{ICON},{ICON-COLOR},{LAN},{SSID},{IPv6},{MASK},{DOMESTIC_IPv4},{DOMESTIC_IPv6},{LANDING_IPv4},{LANDING_IPv6},{PRIVACY},{FLAG},{ENTRANCE_DELAY},{TIMEOUT},{EVENT_DELAY},{RETRIES},{RETRY_DELAY},{ASN},{ORG},{DOMESTIC_IPv4_KEY}]
 
 [MITM]
 hostname = net-lsp-x.com
