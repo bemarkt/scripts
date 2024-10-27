@@ -1,0 +1,54 @@
+#!name = 网络信息 𝕏
+#!desc = 国内外 IP, 运营商, ASN, ORG, 位置, 策略; IPv6; 入口落地; 隐私; LAN; SSID. 自己设置对应域名的分流. 支持网络变化时进行查询通知. 支持长按节点进行查询. 提供 https://net-lsp-x.com 数据接口, 参数与模块参数相同. 详细参数设置见频道说明: https://t.me/zhetengsha
+#!author = keywos,xream[https://t.me/zhetengsha]
+#!tag = xream
+#!system = 
+#!system_version = 
+#!loon_version = 3.2.1(733)
+#!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
+#!icon = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+#!date = 2024-10-27 23:30
+
+[Argument]
+LAN = switch, true, tag = 显示LAN IP, desc = 国内 IPv4 来源
+SSID = switch, true, tag = 显示SSID, desc = 显示 SSID
+IPv6 = switch, true, tag = 显示IPv6地址, desc = 显示 IPv6 地址
+MASK = switch, true, tag = 打码 , desc = 保护隐私
+DOMESTIC_IPv4 = select,"spcn","cip", "bilibili", "126", "ipip", "ip233", "pingan", "qixin", "muhan", "ipim", "ali", true, tag = 国内 IPv4 来源,desc = "国内 IPv4 来源, 可选 spcn(请设置分流 DOMAIN-SUFFIX,speedtest.cn), cip, bilibili, 126, ipip, ip233, pingan, qixin, muhan, ipim(请设置分流 DOMAIN-SUFFIX,ip.im), ali(将阿里云 IP 服务的 APPCODE 填到 DOMESTIC_IPv4_KEY)"
+DOMESTIC_IPv4_KEY = input, "", tag = API KEY , desc = "若接口需要就填(多个 key 用 , 分隔)"
+DOMESTIC_IPv6 = select, "ddnspod", "neu6", tag = 国内IPv6来源, 可选 , desc = "国内 IPv6 来源"
+LANDING_IPv4 = select, "ipapi", "ipsb", "ipinfo", "ipscore", "ipwhois", tag = 落地IPv4来源, desc = "落地 IPv4 来源"
+LANDING_IPv6 = select, "ipsb", "ident", "ipify", tag = 落地IPv6来源, desc = "落地 IPv6 来源"
+DNS = select, "google", "cf", "ali", "tencent", tag = 解析域名, desc = 解析域名
+ASN = switch, true, tag = 显示ASN信息, desc = 显示 ASN 信息
+ORG = switch, true, tag = 显示ORG信息, desc = 显示 ORG 信息
+PRIVACY = switch, true, tag = 显示Privacy/Security等信息, desc = "(当落地为 ipwhois, ipinfo 时)显示 Privacy/Security 等信息"
+FLAG = switch, true, tag = 是否显示国旗, desc = 是否显示国旗
+TIMEOUT = input, "5", tag = 超时设置(秒), desc = 超时设置(单位: 秒)
+RETRIES = input, "1", tag = 请求重试次数, desc = 请求重试次数
+RETRY_DELAY = input, "1", tag = 请求重试等待时间(秒), desc = 请求重试等待时间(单位: 秒)
+ENTRANCE_DELAY = input, "0", tag = "落地、入口查询间隔" , desc = "查询落地之后紧接着查询入口可能会导致请求太频繁而风控. 可适当调节此延时(单位: 秒)"
+EVENT_SCRIPT_NAME = input, "网络信息变化", tag = 网络变化脚本, desc = "网络变化时进行查询通知的脚本名称. 若要禁用此脚本, 请输入 #"
+EVENT_DELAY = input, "3", tag = 网络变化延时, desc = "网络变化时, 延后查询信息(单位: 秒)"
+PANEL_NAME = input,"网络信息面板", tag = 面板名, desc = "网络信息面板名称. 若要禁用此面板, 请输入 #"
+UPDATE-INTERVAL = input,"-1", tag = 面板刷新时间, desc = "您可以在这里指定一个小的时间（例如 1），以使面板每次自动更新。"
+ICON = input,"globe.asia.australia", tag = ICON, desc = ICON
+ICON-COLOR = input, "#6699FF", tag = ICON颜色, desc = ICON颜色
+
+[Rule]
+DOMAIN-SUFFIX,speedtest.cn,DIRECT
+DOMAIN-SUFFIX,ip.im,DIRECT
+DOMAIN-SUFFIX,ip.plus,DIRECT
+
+[Script]
+# Request
+http-request ^https?:\/\/net-lsp-x\.com script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/net-lsp-x.js, timeout=120, tag=网络信息请求
+
+# Event
+network-changed script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag={EVENT_SCRIPT_NAME}, argument="TYPE=EVENT&icon={{{ICON}}}&icon-color={{{ICON-COLOR}}}&LAN={{{LAN}}}&SSID={{{SSID}}}&IPv6={{{IPv6}}}&MASK={{{MASK}}}&DOMESTIC_IPv4={{{DOMESTIC_IPv4}}}&DOMESTIC_IPv6={{{DOMESTIC_IPv6}}}&LANDING_IPv4={{{LANDING_IPv4}}}&LANDING_IPv6={{{LANDING_IPv6}}}&PRIVACY={{{PRIVACY}}}&FLAG={{{FLAG}}}&ENTRANCE_DELAY={{{ENTRANCE_DELAY}}}&TIMEOUT={{{TIMEOUT}}}&EVENT_DELAY={{{EVENT_DELAY}}}&RETRIES={{{RETRIES}}}&RETRY_DELAY={{{RETRY_DELAY}}}&ASN={{{ASN}}}&ORG={{{ORG}}}&DOMESTIC_IPv4_KEY={{{DOMESTIC_IPv4_KEY}}}"
+
+# Interaction
+generic script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag=网络信息查询, img-url=location.circle.system, argument="icon={{{ICON}}}&icon-color={{{ICON-COLOR}}}&LAN={{{LAN}}}&SSID={{{SSID}}}&IPv6={{{IPv6}}}&MASK={{{MASK}}}&DOMESTIC_IPv4={{{DOMESTIC_IPv4}}}&DOMESTIC_IPv6={{{DOMESTIC_IPv6}}}&LANDING_IPv4={{{LANDING_IPv4}}}&LANDING_IPv6={{{LANDING_IPv6}}}&PRIVACY={{{PRIVACY}}}&FLAG={{{FLAG}}}&ENTRANCE_DELAY={{{ENTRANCE_DELAY}}}&TIMEOUT={{{TIMEOUT}}}&EVENT_DELAY={{{EVENT_DELAY}}}&RETRIES={{{RETRIES}}}&RETRY_DELAY={{{RETRY_DELAY}}}&ASN={{{ASN}}}&ORG={{{ORG}}}&DOMESTIC_IPv4_KEY={{{DOMESTIC_IPv4_KEY}}}"
+
+[MITM]
+hostname = net-lsp-x.com
