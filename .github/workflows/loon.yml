@@ -1,8 +1,8 @@
 name: Fetch Plugin
 on:
+  schedule:
+    - cron: "30 22 * * *" # 6:30 AM UTC+8
   workflow_dispatch:
-    schedule:
-      - cron: "30 22 * * *" # 6:30 AM UTC+8
 jobs:
   fetch:
     runs-on: ubuntu-latest
