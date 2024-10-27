@@ -28,7 +28,7 @@ TIMEOUT = input, "5", tag = 超时设置(秒), desc = 超时设置(单位: 秒)
 RETRIES = input, "1", tag = 请求重试次数, desc = 请求重试次数
 RETRY_DELAY = input, "1", tag = 请求重试等待时间(秒), desc = 请求重试等待时间(单位: 秒)
 ENTRANCE_DELAY = input, "0", tag = "落地、入口查询间隔" , desc = "查询落地之后紧接着查询入口可能会导致请求太频繁而风控. 可适当调节此延时(单位: 秒)"
-EVENT_SCRIPT_NAME = input, "网络信息变化", tag = 网络变化脚本, desc = "网络变化时进行查询通知的脚本名称. 若要禁用此脚本, 请输入 #"
+EVENT_SCRIPT_NAME = input, "网络信息变化", tag = 网络变化脚本(不要更改), desc = "网络变化时进行查询通知的脚本名称. 若要禁用此脚本, 请输入 #"
 EVENT_DELAY = input, "3", tag = 网络变化延时, desc = "网络变化时, 延后查询信息(单位: 秒)"
 PANEL_NAME = input,"网络信息面板", tag = 面板名, desc = "网络信息面板名称. 若要禁用此面板, 请输入 #"
 UPDATE-INTERVAL = input,"-1", tag = 面板刷新时间, desc = "您可以在这里指定一个小的时间（例如 1），以使面板每次自动更新。"
@@ -45,10 +45,10 @@ DOMAIN-SUFFIX,ip.plus,DIRECT
 http-request ^https?:\/\/net-lsp-x\.com script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/net-lsp-x.js, timeout=120, tag=网络信息请求
 
 # Event
-network-changed script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag={EVENT_SCRIPT_NAME}, argument="TYPE=EVENT&icon={{{ICON}}}&icon-color={{{ICON-COLOR}}}&LAN={{{LAN}}}&SSID={{{SSID}}}&IPv6={{{IPv6}}}&MASK={{{MASK}}}&DOMESTIC_IPv4={{{DOMESTIC_IPv4}}}&DOMESTIC_IPv6={{{DOMESTIC_IPv6}}}&LANDING_IPv4={{{LANDING_IPv4}}}&LANDING_IPv6={{{LANDING_IPv6}}}&PRIVACY={{{PRIVACY}}}&FLAG={{{FLAG}}}&ENTRANCE_DELAY={{{ENTRANCE_DELAY}}}&TIMEOUT={{{TIMEOUT}}}&EVENT_DELAY={{{EVENT_DELAY}}}&RETRIES={{{RETRIES}}}&RETRY_DELAY={{{RETRY_DELAY}}}&ASN={{{ASN}}}&ORG={{{ORG}}}&DOMESTIC_IPv4_KEY={{{DOMESTIC_IPv4_KEY}}}"
+network-changed script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag=网络信息变化, argument="TYPE=EVENT&icon={ICON}&icon-color={ICON-COLOR}&LAN={LAN}&SSID={SSID}&IPv6={IPv6}&MASK={MASK}&DOMESTIC_IPv4={DOMESTIC_IPv4}&DOMESTIC_IPv6={DOMESTIC_IPv6}&LANDING_IPv4={LANDING_IPv4}&LANDING_IPv6={LANDING_IPv6}&PRIVACY={PRIVACY}&FLAG={FLAG}&ENTRANCE_DELAY={ENTRANCE_DELAY}&TIMEOUT={TIMEOUT}&EVENT_DELAY={EVENT_DELAY}&RETRIES={RETRIES}&RETRY_DELAY={RETRY_DELAY}&ASN={ASN}&ORG={ORG}&DOMESTIC_IPv4_KEY={DOMESTIC_IPv4_KEY}"
 
 # Interaction
-generic script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag=网络信息查询, img-url=location.circle.system, argument="icon={{{ICON}}}&icon-color={{{ICON-COLOR}}}&LAN={{{LAN}}}&SSID={{{SSID}}}&IPv6={{{IPv6}}}&MASK={{{MASK}}}&DOMESTIC_IPv4={{{DOMESTIC_IPv4}}}&DOMESTIC_IPv6={{{DOMESTIC_IPv6}}}&LANDING_IPv4={{{LANDING_IPv4}}}&LANDING_IPv6={{{LANDING_IPv6}}}&PRIVACY={{{PRIVACY}}}&FLAG={{{FLAG}}}&ENTRANCE_DELAY={{{ENTRANCE_DELAY}}}&TIMEOUT={{{TIMEOUT}}}&EVENT_DELAY={{{EVENT_DELAY}}}&RETRIES={{{RETRIES}}}&RETRY_DELAY={{{RETRY_DELAY}}}&ASN={{{ASN}}}&ORG={{{ORG}}}&DOMESTIC_IPv4_KEY={{{DOMESTIC_IPv4_KEY}}}"
+generic script-path=https://raw.githubusercontent.com/xream/scripts/main/surge/modules/network-info/net-lsp-x.js, timeout=120, tag=网络信息查询, img-url=location.circle.system, argument="icon={ICON}&icon-color={ICON-COLOR}&LAN={LAN}&SSID={SSID}&IPv6={IPv6}&MASK={MASK}&DOMESTIC_IPv4={DOMESTIC_IPv4}&DOMESTIC_IPv6={DOMESTIC_IPv6}&LANDING_IPv4={LANDING_IPv4}&LANDING_IPv6={LANDING_IPv6}&PRIVACY={PRIVACY}&FLAG={FLAG}&ENTRANCE_DELAY={ENTRANCE_DELAY}&TIMEOUT={TIMEOUT}&EVENT_DELAY={EVENT_DELAY}&RETRIES={RETRIES}&RETRY_DELAY={RETRY_DELAY}&ASN={ASN}&ORG={ORG}&DOMESTIC_IPv4_KEY={DOMESTIC_IPv4_KEY}"
 
 [MITM]
 hostname = net-lsp-x.com
