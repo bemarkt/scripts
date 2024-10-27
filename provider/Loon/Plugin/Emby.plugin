@@ -1,6 +1,7 @@
 #!name = Emby Filter
 #!desc = Emby服务器分流。
 #!author = RuCu6[https://github.com/RuCu6]
+#!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
 #!icon = https://raw.githubusercontent.com/bemarkt/Scripts/master/provider/Loon/Resources/Icons/app/emby.png
 #!date = 2024-10-03 02:20
 

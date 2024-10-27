@@ -6,7 +6,7 @@
 #!system = 
 #!system_version = 
 #!loon_version = 3.2.1(745)
-#!homepage = https://github.com/bemarkt/scripts
+#!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
 #!icon = https://gitlab.com/lodepuly/iconlibrary/-/raw/main/App_icon/120px/ColorfulClouds.png
 #!date = 2024-09-01 22:39:49
 [Rewrite]

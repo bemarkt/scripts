@@ -1,0 +1,23 @@
+#!name = 酷安去广告
+#!desc = 过滤酷安广告
+#!openUrl = https://apps.apple.com/app/id14225818691
+#!author = RuCu6[https://github.com/RuCu6], ddgksf2013[https://github.com/ddgksf2013]
+#!tag = 去广告
+#!system = 
+#!system_version = 
+#!loon_version = 3.2.1(749)
+#!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
+#!icon = https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/CoolApk.png
+#!date = 2024-10-27 15:14
+
+[Rewrite]
+# 热搜
+^https:\/\/api\.coolapk\.com\/v6\/search\?.*type=hotSearch reject_dict
+
+[Script]
+http-response ^https:\/\/api\.coolapk\.com\/v6\/feed\/(detail|replyList)\? script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/coolapk_ads.js, requires-body = true, tag = 动态相关 (详情页广告、评论广告)
+http-response ^https:\/\/api\.coolapk\.com\/v6\/main\/(init|indexV8|dataList) script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/coolapk_ads.js, requires-body = true, tag = 主页相关 (开屏广告、首页广告、推广广告)
+http-response ^https:\/\/api\.coolapk\.com\/v6\/page\/dataList\? script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/coolapk_ads.js, requires-body = true, tag = 数据列表 (酷品推广、应用集)
+
+[MitM]
+hostname = api.coolapk.com
