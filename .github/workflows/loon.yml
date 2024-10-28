@@ -16,7 +16,8 @@ jobs:
         run: |
           cd ./provider/Loon/Resources || exit 1
           bash fetch.sh
-          mv -f kelee ../Plugin
+          cp -r kelee ../Plugin
+          rm -rf kelee
 
       - name: Commit files
         run: |
