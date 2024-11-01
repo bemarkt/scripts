@@ -108,6 +108,7 @@ https://kelee.one/Tool/Loon/Plugin/ChengFenMiao_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/FC_Box_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/KGRing_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/ZongHeng_remove_ads.plugin
+https://kelee.one/Tool/Loon/Plugin/51Job_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/UnionPay_remove_ads_with_ssl_unpinning.plugin
 https://kelee.one/Tool/Loon/Plugin/DouBan_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/BaiduMap_remove_ads.plugin
