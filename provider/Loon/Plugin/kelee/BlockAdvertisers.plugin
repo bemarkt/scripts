@@ -8,7 +8,7 @@
 #!loon_version = 3.2.1(749)
 #!homepage = https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon = https://raw.githubusercontent.com/luestr/IconResource/main/Website_icon/120px/TencentAd.png
-#!date = 2024-10-04 03:37:48
+#!date = 2024-11-01 15:51:57
 
 [Rule]
 # 字节跳动广告
@@ -169,6 +169,7 @@ DOMAIN, huatuocode.huatuo.qq.com, REJECT
 DOMAIN, info4.video.qq.com, REJECT
 DOMAIN, info6.video.qq.com, REJECT
 DOMAIN, ios.bugly.qq.com, REJECT
+DOMAIN, pro.bugly.qq.com, REJECT
 DOMAIN, ios.video.mpush.qq.com, REJECT
 # DOMAIN, mazu.m.qq.com, REJECT // 误杀
 DOMAIN, mi.gdt.qq.com, REJECT
