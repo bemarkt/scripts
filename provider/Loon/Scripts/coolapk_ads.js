@@ -1,20 +1,36 @@
 /*
 整合优化版本
 更新日期: 2024-10-27
-版本: V1.0.0
+版本: V1.1.0
 */
 
 const url = $request.url;
 if (!$response.body) $done({});
-let obj = JSON.parse($response.body);
+const obj = JSON.parse($response.body);
 
-// 通用方法：检查数组是否存在并过滤
-const filterArray = (arr, condition) => {
-  return arr?.length > 0 ? arr.filter(condition) : arr;
+const URL_PATTERNS = {
+  detail: /\/(feed\/detail|detail)/,
+  replyList: /\/(feed\/replyList|replyList)/,
+  dataList: /\/(main\/dataList|page\/dataList|dataList)/,
+  indexV8: /\/main\/indexV8/,
+  init: /\/main\/init/,
 };
 
-// 处理详情页
-if (url.includes("/feed/detail") || url.includes("/detail")) {
+const BLOCKED_CONFIGS = {
+  templates: [
+    "sponsorCard",
+    "iconButtonGridCard",
+    "iconLargeScrollCard",
+    "imageScaleCard",
+  ],
+  titles: ["精选配件", "酷安热搜", "流量"],
+  entityIds: [8639, 29349, 33006, 32557, 944, 945, 6390],
+  keywords: ["值得买", "红包"],
+};
+
+const filterArray = (arr, condition) => arr?.filter(condition) || arr;
+
+if (URL_PATTERNS.detail.test(url)) {
   // 处理评论
   obj.data.hotReplyRows = filterArray(
     obj.data?.hotReplyRows,
@@ -25,74 +41,43 @@ if (url.includes("/feed/detail") || url.includes("/detail")) {
     (item) => item?.id
   );
 
-  // 清理广告相关数据
-  const itemsToClear = [
-    "detailSponsorCard",
-    "include_goods",
-    "include_goods_ids",
-  ];
-  itemsToClear.forEach((key) => {
-    if (obj.data?.[key]) {
-      obj.data[key] = [];
-    }
+  // 清理广告数据
+  ["detailSponsorCard", "include_goods", "include_goods_ids"].forEach((key) => {
+    obj.data[key] = [];
   });
-}
-// 处理评论列表
-else if (url.includes("/feed/replyList") || url.includes("replyList")) {
+} else if (URL_PATTERNS.replyList.test(url)) {
   obj.data = filterArray(obj.data, (item) => item?.id);
-}
-// 处理数据列表
-else if (
-  url.includes("/main/dataList") ||
-  url.includes("/page/dataList") ||
-  url.includes("dataList")
-) {
-  obj.data = filterArray(obj.data, (item) => {
-    const blockedTemplates = [
-      "sponsorCard",
-      "iconButtonGridCard",
-      "iconLargeScrollCard",
-      "imageScaleCard",
-    ];
-    const blockedTitles = ["精选配件", "酷安热搜", "流量"];
-
-    return !(
-      blockedTemplates.includes(item?.entityTemplate) ||
-      blockedTitles.some((title) => item?.title?.includes(title))
-    );
-  });
-}
-// 处理首页V8
-else if (url.includes("/main/indexV8")) {
-  obj.data = filterArray(obj.data, (item) => {
-    const blockedEntityIds = [8639, 29349, 33006, 32557];
-    const blockedKeywords = ["值得买", "红包"];
-
-    return !(
-      item?.entityTemplate === "sponsorCard" ||
-      blockedEntityIds.includes(item?.entityId) ||
-      blockedKeywords.some((keyword) => item?.title?.includes(keyword))
-    );
-  });
-}
-// 处理主页初始化
-else if (url.includes("/main/init")) {
-  if (obj.data?.length > 0) {
-    // 过滤主要数据
-    let newData = obj.data.filter((item) => {
-      const blockedIds = [944, 945, 6390]; // 944热门搜索 945开屏广告 6390首页Tab
-      return !blockedIds.includes(item?.entityId);
-    });
-
-    // 处理发现页顶部项目
-    newData = newData.map((item) => {
-      if (item?.entityId === 20131 && item?.entities?.length > 0) {
-        item.entities = item.entities.filter((i) => i?.title !== "酷品");
-      }
-      return item;
-    });
-
-    obj.data = newData;
+} else if (URL_PATTERNS.dataList.test(url)) {
+  obj.data = filterArray(
+    obj.data,
+    (item) =>
+      !(
+        BLOCKED_CONFIGS.templates.includes(item?.entityTemplate) ||
+        BLOCKED_CONFIGS.titles.some((title) => item?.title?.includes(title))
+      )
+  );
+} else if (URL_PATTERNS.indexV8.test(url)) {
+  obj.data = filterArray(
+    obj.data,
+    (item) =>
+      !(
+        item?.entityTemplate === "sponsorCard" ||
+        BLOCKED_CONFIGS.entityIds.includes(item?.entityId) ||
+        BLOCKED_CONFIGS.keywords.some((keyword) =>
+          item?.title?.includes(keyword)
+        )
+      )
+  );
+} else if (URL_PATTERNS.init.test(url)) {
+  if (obj.data?.length) {
+    obj.data = obj.data
+      .filter((item) => !BLOCKED_CONFIGS.entityIds.includes(item?.entityId))
+      .map((item) => {
+        if (item?.entityId === 20131 && item?.entities?.length) {
+          item.entities = item.entities.filter((i) => i?.title !== "酷品");
+        }
+        return item;
+      });
   }
 }
 
