@@ -30,7 +30,7 @@ https://kelee.one/Tool/Loon/Plugin/YouKu_Video_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/BabyTree_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/Tencent_Video_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/CaixinMedia_remove_ads.plugin
-https://kelee.one/Tool/Loon/Plugin/Mango_Viedo_remove_ads.plugin
+https://kelee.one/Tool/Loon/Plugin/MangoTV_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/Umetrip_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/JD_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/PiPiXia_remove_ads.plugin
@@ -126,6 +126,7 @@ https://kelee.one/Tool/Loon/Plugin/QtingFM_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/KOOK_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/CCLive_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/KebidaDushu_remove_ads.plugin
+https://kelee.one/Tool/Loon/Plugin/KuaiShou_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/UnionPay_remove_ads_with_ssl_unpinning.plugin
 https://kelee.one/Tool/Loon/Plugin/DouBan_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/BaiduMap_remove_ads.plugin

@@ -1,5 +1,5 @@
 #!name=皮皮虾去广告
-#!desc=移除开屏广告、评论区广告、视频流广告，精简我的页面。已知问题，评论区无内容。
+#!desc=移除开屏广告、评论区广告、视频流广告，精简我的页面。
 #!openUrl=https://apps.apple.com/app/id1393912676
 #!author=可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 #!tag=去广告
@@ -8,10 +8,12 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/luestr/ProxyResource/blob/main/README.md
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/PiPiXia.png
-#!date=2024-11-28 00:00:00
+#!date=2025-03-06 16:30:23
 
 [Rule]
+# 字节跳动广告
 AND,((DOMAIN-KEYWORD,-ad-),(DOMAIN-SUFFIX,byteimg.com)),REJECT
+# AND,((DOMAIN-KEYWORD,-sign-),(DOMAIN-SUFFIX,tiktokcdn.com)),REJECT
 AND,((DOMAIN-KEYWORD,-ttam-),(DOMAIN-SUFFIX,ibyteimg.com)),REJECT
 AND,((DOMAIN-KEYWORD,ssdk-),(DOMAIN-SUFFIX,pangle.io)),REJECT
 AND,((DOMAIN-KEYWORD,pangolin),(DOMAIN-SUFFIX,sgsnssdk.com)),REJECT
@@ -20,6 +22,7 @@ AND,((DOMAIN-KEYWORD,v),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com)),REJECT
 AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-be-pack.pglstatp-toutiao.com)),REJECT
 AND,((DOMAIN-KEYWORD,s),(DOMAIN-KEYWORD,-fe-scm.pglstatp-toutiao.com)),REJECT
 AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-ttcdn-tos.pstatp.com)),REJECT
+# AND,((DOMAIN-KEYWORD,p),(DOMAIN-KEYWORD,-be-pack-sign.pglstatp-toutiao.com)),REJECT // 被更精细的规则替代
 AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-fe-tos.pglstatp-toutiao.com)),REJECT
 AND,((DOMAIN-KEYWORD,sf),(DOMAIN-KEYWORD,-static.i18n-pglstatp.com)),REJECT
 AND,((DOMAIN-KEYWORD,if),(DOMAIN-KEYWORD,-cdn-tos.bytescm.com)),REJECT //误杀
@@ -61,13 +64,20 @@ DOMAIN-KEYWORD,video-cn.snssdk.com,REJECT
 DOMAIN-KEYWORD,asiad.byteactivity,REJECT
 
 [Rewrite]
+# 广告下发
 ^https:\/\/api(5-lq)?\.pipix\.com\/api\/ad\/ reject-dict
+
+# 横幅
 ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/banner\/ reject-dict
+
+# 关注 - 近期热门皮友
 ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/feed\/follow_feed\/ reject-dict
 
-[Script]
-http-response ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/feed\/stream\/v2\/ script-path=https://kelee.one/Resource/Script/PiPiXia/PiPiXia_remove_ads.js,requires-body=true,tag=移除视频流广告
-http-response ^https:\/\/api(5-lq)?\.pipix\.com\/bds\/user\/check_in\/ script-path=https://kelee.one/Resource/Script/PiPiXia/PiPiXia_remove_ads.js,requires-body=true,tag=精简我的页面
+# 移除视频流广告
+^https:\/\/api(5-lq)?\.pipix\.com\/bds\/feed\/stream\/v2\/ response-body-json-jq '.data.data |= map(select(has("ad_info") | not))'
+
+# 精简我的页面
+^https:\/\/api(5-lq)?\.pipix\.com\/bds\/user\/check_in\/ response-body-json-jq '.data.profile_entrances |= map(select(.title != "放心借" and .title != "洋钱罐借款")) | del(.data.pet_interface_message)'
 
 [MitM]
 hostname=api.pipix.com,api5-lq.pipix.com
