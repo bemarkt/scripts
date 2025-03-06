@@ -1,0 +1,16 @@
+#!name=Revenuecat & Rc-backup 
+#!desc=如有侵权联系我删除
+#!system= ios
+#!category= 通杀脚本
+#!author=原作者@langkhach270389 @fly 
+
+
+#{"request_date_ms":1728463564126,"request_date":"2024-10-09T08:46:04Z","subscriber":{"non_subscriptions":{},"first_seen":"2024-10-09T08:46:04Z","original_application_version":"1","other_purchases":{},"management_url":"https://t.me/Jsforbaby","subscriptions":{},"entitlements":{},"original_purchase_date":"2024-06-10T11:12:09Z","original_app_user_id":"$RCAnonymousID:c6c7b7d107034590bf95e0ad80a13b37","last_seen":"2024-10-09T08:46:04Z"},"加入作者频道":"@Jsforbaby"}
+#{"request_date_ms":1728463564126,"request_date":"2024-10-09T08:46:04Z","subscriber":{"non_subscriptions":{},"first_seen":"2024-10-09T08:46:04Z","original_application_version":"1","other_purchases":{},"management_url":"https://t.me/Jsforbaby","subscriptions":{},"entitlements":{},"original_purchase_date":"2024-06-10T11:12:09Z","original_app_user_id":"$RCAnonymousID:c6c7b7d107034590bf95e0ad80a13b37","last_seen":"2024-10-09T08:46:04Z"},"加入作者频道":"https://t.me/Jsforbaby"}
+
+[URL Rewrite]
+^https:\/\/(api\.revenuecat\.com|api\.rc-backup\.com)\/.+\/(receipts$|subscribers\/[^/]+$) https://rc-backup.lovebabyforever.workers.dev header
+^https:\/\/(api\.revenuecat\.com|api\.rc-backup\.com)\/.+\/(receipts$|subscribers\/[^/]+$) https://reven.lovebabyforever.workers.dev header
+
+[MITM]
+hostname = %APPEND% api.revenuecat.com, api.rc-backup.com
