@@ -1,0 +1,16 @@
+#!name= 扫描全能王
+#!desc= 解锁扫描全能王
+#!openUrl = https://apps.apple.com/app/id388627783
+#!tag = 解锁
+#!system=
+#!system_version=
+#!loon_version=3.2.4(787)
+#!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
+#!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/cs.png
+#!date = 2025-03-06 22:38
+
+[Rewrite]
+^https:\/\/(api|api-cs|api-cs-cn)\.intsig\.net\/purchase\/cs\/query_property\? response-body-json-jq '.data.psnl_vip_property = { "renew_method": "appstore", "initial_tm": "1614867690", "svip": 1, "auto_renewal": true, "ms_first_pay": 0, "pending": 0, "group2_paid": 0, "inherited_flag": 0, "nxt_renew_tm": "9915126887", "level_info": { "level": 1, "days": 1, "end_days": 30 }, "group1_paid": 1, "ys_first_pay": 0, "renew_type": "year", "expiry": 9915130487, "grade": 2, "last_payment_method": "appstore", "product_id": "com.intsig.camscanner.premiums.oneyear.autorenewable.svip.low" }'
+
+[Mitm]
+hostname = ap*.intsig.net
