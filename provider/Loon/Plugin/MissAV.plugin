@@ -1,0 +1,20 @@
+#!name = MissAV去广告
+#!desc = MissAV去广告，禁弹窗，禁止失焦自动暂停
+#!openUrl = https://missav.ws
+#!author = kokoryh[https://github.com/kokoryh]
+#!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
+#!icon = https://raw.githubusercontent.com/bemarkt/Scripts/master/provider/Loon/Resources/Icons/app/javdb.png
+#!tag = 去广告
+#!loon_version = 3.2.1(749)
+#!date = 2025-03-18 14:22
+
+[Rule]
+DOMAIN-SUFFIX,creative.myavlive.com,REJECT
+DOMAIN-SUFFIX,trackwilltrk.com,REJECT
+DOMAIN-SUFFIX,tsyndicate.com,REJECT
+
+[Script]
+http-response ^https:\/\/missav\.(?:ai|ws)\/(?!(build|fonts|img|js|api|cdn-cgi)\/). script-path=https://raw.githubusercontent.com/kokoryh/Sparkle/refs/heads/master/dist/missav.html.js,requires-body=true, tag = MissAV去广告
+
+[MITM]
+hostname = missav.ai, missav.ws
