@@ -129,6 +129,7 @@ https://kelee.one/Tool/Loon/Plugin/KebidaDushu_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/KuaiShou_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/HKDouYin_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/WPS_Documents_remove_ads.plugin
+https://kelee.one/Tool/Loon/Plugin/TXDocs_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/UnionPay_remove_ads_with_ssl_unpinning.plugin
 https://kelee.one/Tool/Loon/Plugin/DouBan_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/BaiduMap_remove_ads.plugin
