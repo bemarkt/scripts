@@ -131,6 +131,8 @@ https://kelee.one/Tool/Loon/Plugin/HKDouYin_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/WPS_Documents_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/TXDocs_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/Jump_remove_ads.plugin
+https://kelee.one/Tool/Loon/Plugin/CosmosPodcast_remove_ads.plugin
+https://kelee.one/Tool/Loon/Plugin/DingdongMaicai_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/UnionPay_remove_ads_with_ssl_unpinning.plugin
 https://kelee.one/Tool/Loon/Plugin/DouBan_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/BaiduMap_remove_ads.plugin
