@@ -29,33 +29,6 @@
       "version": "1.0.0",
       "author": "Ti",
       "url": "https://gist.githubusercontent.com/bemarkt/17e04f66b772d4ab9ab839c12a8ad608/raw/javday.js"
-    },
-    {
-      "id": "ti.bemarkt.javbus",
-      "title": "JavBus",
-      "description": "获取 JavBus 列表",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Ti",
-      "url": "https://gist.githubusercontent.com/bemarkt/17e04f66b772d4ab9ab839c12a8ad608/raw/javbus.js"
-    },
-    {
-      "id": "ti.bemarkt.javdb",
-      "title": "JavDB",
-      "description": "获取 JavDB 推荐",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Ti",
-      "url": "https://gist.githubusercontent.com/bemarkt/17e04f66b772d4ab9ab839c12a8ad608/raw/javdb.js"
-    },
-    {
-      "id": "ti.bemarkt.missav",
-      "title": "MissAV",
-      "description": "MissAV Widget 占位",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Ti",
-      "url": "https://gist.githubusercontent.com/bemarkt/17e04f66b772d4ab9ab839c12a8ad608/raw/missav.js"
     }
   ]
 }
