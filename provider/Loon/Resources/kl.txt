@@ -133,11 +133,13 @@ https://kelee.one/Tool/Loon/Plugin/TXDocs_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/Jump_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/CosmosPodcast_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/DingdongMaicai_remove_ads.plugin
-https://kelee.one/Tool/Loon/Plugin/UnionPay_remove_ads_with_ssl_unpinning.plugin
+https://kelee.one/Tool/Loon/Plugin/BodianMusic_remove_ads.plugin
+https://kelee.one/Tool/Loon/Plugin/ShopKeeperAdmin_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/DouBan_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/BaiduMap_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/FC_Box_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/ZhiLianZhaoPin_remove_ads.plugin
+https://kelee.one/Tool/Loon/Plugin/Block_HTTPDNS.plugin
 https://kelee.one/Tool/Loon/Plugin/LoonGallery.plugin
 https://kelee.one/Tool/Loon/Plugin/Script-Hub.plugin
 https://kelee.one/Tool/Loon/Plugin/Sub-Store.plugin
@@ -154,9 +156,7 @@ https://kelee.one/Tool/Loon/Plugin/Switch_github_mirror.plugin
 https://kelee.one/Tool/Loon/Plugin/Node_detection_tool.plugin
 https://kelee.one/Tool/Loon/Plugin/QQ_Redirect.plugin
 https://kelee.one/Tool/Loon/Plugin/Fileball_mount.plugin
-https://kelee.one/Tool/Loon/Plugin/Block_HTTPDNS.plugin
 https://kelee.one/Tool/Loon/Plugin/Weixin_external_links_unlock.plugin
-https://kelee.one/Tool/Loon/Plugin/TikTok_redirect.plugin
 https://kelee.one/Tool/Loon/Plugin/Spotify_lyrics_translation.plugin
 https://kelee.one/Tool/Loon/Plugin/QuickSearch.plugin
 https://kelee.one/Tool/Loon/Plugin/UnnooQuan_remove_watermark.plugin
