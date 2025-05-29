@@ -290,6 +290,19 @@ DOMAIN, e.jparking.cn, REJECT
 ^https:\/\/mcsp\.cloudpnr\.com\/api\/miniapp\/popular\/T_MINIAPP$ response-body-json-del data
 ^https:\/\/saas-ad\.cloudpnr\.com\/huifuad-base-api\/api\/tactics\/ad$ response-body-json-del data[0] data[1] data[2]
 
+^https:\/\/api\.szbgcx\.cn\/account\/adv\/ reject
+
+^https:\/\/rms\.meituan\.com\/api\/v1\/rmsmina\/c\/queryShopPortalInfo\? response-body-json-del data.popUpWindows
+
+^https:\/\/chong\.qq\.com\/tws\/wxmobile\/GetProduct4App\? response-body-json-jq 'del(.respInfo.reserveProductList) | .respInfo.shortcut |= map(select(.name != "充流量" and .name != "领话费券"))'
+^https:\/\/chong\.qq\.com\/tws\/wxmobile4app\/GetSecondProduct\? response-body-json-jq 'del(.respInfo.productList) | .respInfo.shortcut |= map(select(.name != "充流量" and .name != "领话费券"))'
+^https:\/\/chong\.qq\.com\/tws\/usernumberinfo\/GetUserInfo\? response-body-json-del data.request.number.markSeat.servicehallOperList data.request.number.servicehallOperList data.request.number.markSeat.servicehallFuncList data.request.number.servicehallFuncList
+^https:\/\/wx\.online-cmcc\.cn\/contactpoint\/customer\/api\/list\? reject-dict
+^https:\/\/wx\.10086\.cn\/qwhdhub\/activity\/info reject-dict
+
+# 茶颜悦色 miniapp.sexytea2013.com
+^https:\/\/miniapp\.sexytea2013\.com\/cms\/slot\/queryByCodes\?codes=INDEX_TOP_BANNER response-body-json-jq 'del(.data.INDEX_SLOT_01, .data.INDEX_SLOT_02) | if (.data.INDEX_TOP_BANNER.contents? | type == "array") then .data.INDEX_TOP_BANNER.contents |= map(del(.bubble, .figure) | .value = "https://image.bemarkt.top/file/AgACAgUAAyEGAASgzqiBAAMGaDhQ0i7nAnDm5nGrMJ2iERrkvMwAAmbCMRuZA8FV1IPbN5aE85sBAAMCAAN5AAM2BA.jpg") else . end'
+
 [Script]
 # 掌上公交 @ddgksf2013
 http-response ^https?:\/\/wx\.mygolbs\.com\/WxBusServer\/ApiData\.do script-path=https://github.com/ddgksf2013/Scripts/raw/master/zhangshanggongjiao.js, requires-body = true, tag = 掌上公交去广告
@@ -308,9 +321,6 @@ http-response ^https:\/\/minifm\.maxxipoint\.com\/banner\/list script-path = htt
 
 # 罗森点点 lawsonapi.yorentown.com, plt.yorentown.com
 http-response ^https:\/\/lawsonapi\.yorentown\.com\/area\/sh-lawson\/app\/v1\/home script-path = https://kelee.one/Resource/Script/WexinMiniPrograms/lawson/lawson.js, requires-body = true, tag = 罗森点点去广告
-
-# 茶颜悦色 miniapp.sexytea2013.com
-http-response ^https:\/\/miniapp\.sexytea2013\.com\/cms\/slot\/queryByCodes\?codes=INDEX_TOP_BANNER script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/chayanyuese_remove_ads.js, requires-body = true, tag = 茶颜悦色去广告
 
 # COCO点单 coco-com.e.verystar.net
 http-response ^https:\/\/coco-com\.e\.verystar\.net\/v1\/home\/info script-path = https://kelee.one/Resource/Script/WexinMiniPrograms/coco/coco.js, requires-body = true, tag = COCO点单去广告
