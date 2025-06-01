@@ -135,6 +135,7 @@ https://kelee.one/Tool/Loon/Plugin/CosmosPodcast_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/DingdongMaicai_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/BodianMusic_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/ShopKeeperAdmin_remove_ads.plugin
+https://kelee.one/Tool/Loon/Plugin/YueDanBa_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/DouBan_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/BaiduMap_remove_ads.plugin
 https://kelee.one/Tool/Loon/Plugin/FC_Box_remove_ads.plugin
