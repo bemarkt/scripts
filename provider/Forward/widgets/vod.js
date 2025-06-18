@@ -1,10 +1,10 @@
 var WidgetMetadata = {
   id: "ti.bemarkt.vod.maccms",
   title: "VOD",
-  description: "获取苹果CMS的VOD视频列表和搜索结果",
+  description: "获取 VOD 影视数据",
   author: "Ti",
   site: "https://github.com/bemarkt/scripts/tree/master/provider/Forward",
-  version: "1.0.0",
+  version: "1.1.0",
   requiredVersion: "0.0.1",
   modules: [
     {
@@ -273,20 +273,19 @@ function buildRequestUrl(baseUrl, queryParams = {}) {
 /**
  * 从 vod_play_url 中解析剧集和播放链接 (供 loadDetail 使用)
  * @param {string} vodPlayUrl
- * @param {string} numericalVodId - 当前视频的 vod_id，用于生成子项ID
  * @param {string} mainTitle - 视频主标题，用于生成剧集标题
- * @returns {{bestVideoUrl: string|null, childItems: Array<object>}}
+ * @returns {{bestVideoUrl: string|null, episodeItems: Array<object>}}
  */
-function parsePlayUrlData(vodPlayUrl, numericalVodId, mainTitle = "播放") {
-  const childItems = [];
+function parsePlayUrlData(vodPlayUrl, mainTitle = "播放") {
+  const episodeItems = [];
   let bestVideoUrl = null;
 
   if (!vodPlayUrl || typeof vodPlayUrl !== "string") {
     console.warn(
-      `parsePlayUrlData: vod_play_url is invalid for numericalVodId ${numericalVodId}. Received:`,
+      `parsePlayUrlData: vod_play_url is invalid. Received:`,
       vodPlayUrl
     );
-    return { bestVideoUrl, childItems };
+    return { bestVideoUrl, episodeItems };
   }
 
   const playSources = vodPlayUrl.split("$$$");
@@ -315,20 +314,17 @@ function parsePlayUrlData(vodPlayUrl, numericalVodId, mainTitle = "播放") {
       ) {
         bestVideoUrl = directUrl;
       }
-      childItems.push({
-        id: `${numericalVodId}_ep${childItems.length}_direct`,
+      episodeItems.push({
+        id: (episodeItems.length + 1).toString(), // 自增ID
         type: "url",
         title: mainTitle,
         videoUrl: directUrl,
-        mediaType: "episode",
+        mediaType: "tv",
       });
-      // console.log( // 减少列表解析时的日志量
-      //   `parsePlayUrlData: Found direct URL in source for ${numericalVodId}: ${directUrl}`
-      // );
       if (
         bestVideoUrl &&
         bestVideoUrl.toLowerCase().includes(".m3u8") &&
-        childItems.length > 0
+        episodeItems.length > 0
       ) {
         break;
       }
@@ -345,14 +341,14 @@ function parsePlayUrlData(vodPlayUrl, numericalVodId, mainTitle = "播放") {
         let potentialUrl = "";
 
         if (parts.length >= 2) {
-          episodeName = parts[0].trim() || `第 ${childItems.length + 1} 集`;
+          episodeName = parts[0].trim() || `第 ${episodeItems.length + 1} 集`;
           potentialUrl = parts[1].trim();
         } else if (
           parts.length === 1 &&
           parts[0].trim().toLowerCase().startsWith("http")
         ) {
           potentialUrl = parts[0].trim();
-          episodeName = `播放 ${childItems.length + 1}`;
+          episodeName = `播放 ${episodeItems.length + 1}`;
         }
 
         if (potentialUrl && potentialUrl.toLowerCase().startsWith("http")) {
@@ -363,8 +359,8 @@ function parsePlayUrlData(vodPlayUrl, numericalVodId, mainTitle = "播放") {
           ) {
             bestVideoUrl = potentialUrl;
           }
-          childItems.push({
-            id: `${numericalVodId}_ep${childItems.length}`,
+          episodeItems.push({
+            id: (episodeItems.length + 1).toString(),
             type: "url",
             title: episodeName,
             videoUrl: potentialUrl,
@@ -373,7 +369,7 @@ function parsePlayUrlData(vodPlayUrl, numericalVodId, mainTitle = "播放") {
         }
       }
       if (
-        childItems.length > 0 &&
+        episodeItems.length > 0 &&
         bestVideoUrl &&
         bestVideoUrl.toLowerCase().includes(".m3u8")
       ) {
@@ -381,11 +377,11 @@ function parsePlayUrlData(vodPlayUrl, numericalVodId, mainTitle = "播放") {
       }
     }
   }
-  return { bestVideoUrl, childItems };
+  return { bestVideoUrl, episodeItems };
 }
 
 /**
- * 解析接口返回的视频数据
+ * 解析接口视频数据
  * @param {object} apiVideoData - 从API获取的单个视频对象
  * @returns {object} Forward VideoItem格式的对象
  */
@@ -431,13 +427,12 @@ function parseItemFromListApi(apiVideoData) {
       apiVideoData.vod_blurb ||
       apiVideoData.vod_remarks ||
       apiVideoData.vod_content,
-    videoUrl: null,
     link: detailPageApiUrl,
   };
 }
 
 /**
- * 获取视频列表的处理函数
+ * 获取视频列表
  */
 async function getVodList(params = {}) {
   const apiUrl = params.apiUrl;
@@ -502,7 +497,7 @@ async function getVodList(params = {}) {
 }
 
 /**
- * 搜索视频的处理函数
+ * 搜索视频
  */
 async function searchVod(params = {}) {
   const apiUrl = params.apiUrl;
@@ -597,93 +592,92 @@ async function loadDetail(detailPageApiUrl) {
     throw new Error("详情URL格式无效。");
   }
 
-  console.log(
-    `loadDetail: 请求VOD详情API: ${detailPageApiUrl} (解析出的 numericalVodId: ${numericalVodId})`
-  );
+  console.log(`loadDetail: 请求VOD详情API: ${detailPageApiUrl}`);
 
   try {
     const response = await Widget.http.get(detailPageApiUrl);
     const data = response.data;
 
-    if (!data) {
+    if (
+      !data ||
+      data.code !== 1 ||
+      !Array.isArray(data.list) ||
+      data.list.length === 0
+    ) {
+      const errorMsg = data ? data.msg || "未知API错误" : "未收到任何数据";
       console.error(
-        "loadDetail: 详情API请求失败，未收到任何数据。URL:",
-        detailPageApiUrl
-      );
-      throw new Error("详情API请求失败: 未收到任何数据。");
-    }
-    if (data.code !== 1) {
-      const errorMsg = data.msg || "未知API错误";
-      console.error(
-        "loadDetail: 详情API请求返回错误:",
+        "loadDetail: 详情API请求失败或返回数据无效:",
         errorMsg,
         "响应代码:",
-        data.code
+        data ? data.code : "N/A"
       );
-      throw new Error(`详情API请求失败: ${errorMsg} (code: ${data.code})`);
+      throw new Error(`详情API请求失败: ${errorMsg}`);
     }
 
-    if (data.list && Array.isArray(data.list) && data.list.length > 0) {
-      const videoInfo = data.list[0];
-      const parsedPlayData = parsePlayUrlData(
-        videoInfo.vod_play_url,
-        numericalVodId,
-        videoInfo.vod_name
-      );
+    const videoInfo = data.list[0];
+    const parsedPlayData = parsePlayUrlData(
+      videoInfo.vod_play_url,
+      videoInfo.vod_name
+    );
+    const parsedEpisodeCount = parsedPlayData.episodeItems.length;
 
+    let returnObject = {
+      id: detailPageApiUrl,
+      type: "url",
+      title: videoInfo.vod_name || "未知标题",
+      description:
+        videoInfo.vod_blurb ||
+        videoInfo.vod_remarks ||
+        videoInfo.vod_content ||
+        "",
+      posterPath: videoInfo.vod_pic,
+      backdropPath: videoInfo.vod_pic_slide || videoInfo.vod_pic,
+      releaseDate: videoInfo.vod_time,
+      genreTitle: videoInfo.type_name,
+      videoUrl: parsedPlayData.bestVideoUrl,
+      link: detailPageApiUrl,
+    };
+
+    // 解析集数
+    if (parsedEpisodeCount > 1) {
+      returnObject.mediaType = "tv";
+      returnObject.episodeItems = parsedPlayData.episodeItems;
+
+      let totalEpisodes = parsedEpisodeCount;
+      if (videoInfo.vod_remarks) {
+        const remarks = String(videoInfo.vod_remarks);
+        const match = remarks.match(/(?:全|至|更新至|第)\s*(\d+)\s*集/);
+        if (match && match[1]) {
+          totalEpisodes = parseInt(match[1], 10);
+        }
+      }
+      returnObject.episode = totalEpisodes;
+    } else {
+      // 单集或电影
       let finalMediaType = "movie";
-      const episodeCount = parsedPlayData.childItems.length;
       if (videoInfo.type_name) {
         const typeName = String(videoInfo.type_name).toLowerCase();
         if (
           typeName.includes("剧") ||
           typeName.includes("电视") ||
+          typeName.includes("动漫") ||
           typeName.includes("连续") ||
-          typeName.includes("系列") ||
-          (typeName.includes("动漫") && episodeCount > 1)
+          typeName.includes("系列")
         ) {
           finalMediaType = "tv";
         }
       }
-      if (finalMediaType === "movie" && episodeCount > 1) {
-        finalMediaType = "tv";
-      }
       if (
         videoInfo.vod_remarks &&
-        String(videoInfo.vod_remarks).match(/第(\d+|全)集/) &&
-        finalMediaType === "movie"
+        String(videoInfo.vod_remarks).includes("集")
       ) {
         finalMediaType = "tv";
       }
-
-      const videoUrl = parsedPlayData.bestVideoUrl;
-      console.log("loadDetail returning with bestVideoUrl:", videoUrl);
-
-      return {
-        id: detailPageApiUrl,
-        videoUrl: videoUrl,
-        type: "url",
-        title: videoInfo.vod_name || "未知标题",
-        description:
-          videoInfo.vod_blurb ||
-          videoInfo.vod_remarks ||
-          videoInfo.vod_content ||
-          "",
-        posterPath: videoInfo.vod_pic,
-        backdropPath: videoInfo.vod_pic_slide || videoInfo.vod_pic,
-        releaseDate: videoInfo.vod_time,
-        mediaType: finalMediaType,
-        genreTitle: videoInfo.type_name,
-        childItems: parsedPlayData.childItems,
-        link: detailPageApiUrl,
-      };
-    } else {
-      console.warn(
-        "loadDetail: 详情API返回的视频列表 'list' 为空、格式不正确或未找到指定ID。",
-        data
-      );
-      throw new Error("未能从API获取到视频详情。");
+      returnObject.mediaType = finalMediaType;
     }
+
+    console.log("loadDetail returning object:", returnObject);
+    return returnObject;
   } catch (error) {
     console.error(
       `loadDetail: 加载视频详情时发生错误 (ID: ${numericalVodId}, URL: ${detailPageApiUrl}):`,
