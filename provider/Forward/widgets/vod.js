@@ -22,20 +22,28 @@ var WidgetMetadata = {
           value: "https://api.wwzy.tv/api.php/provide/vod/",
           placeholders: [
             {
-              title: "扶风资源",
-              value: "http://60.204.225.89:1122/api.php/provide/vod/",
-            },
-            {
               title: "极速资源",
               value: "https://jszyapi.com/api.php/provide/vod/",
             },
             {
+              title: "木耳资源",
+              value: "https://json02.heimuer.xyz/api.php/provide/vod/",
+            },
+            {
               title: "虾米资源",
-              value: "https://zy.hls.one/api.php/provide/vod/",
+              value: "https://gctf.tfdh.top/api.php/provide/vod/",
             },
             {
               title: "魔抓资源",
               value: "https://mozhuazy.com/api.php/provide/vod/",
+            },
+            {
+              title: "无尽资源",
+              value: "https://api.wujinapi.me/api.php/provide/vod/",
+            },
+            {
+              title: "金鹰资源",
+              value: "https://jyzyapi.com/provide/vod/from/jinyingm3u8/at/json",
             },
             {
               title: "旺旺短剧",
@@ -46,28 +54,8 @@ var WidgetMetadata = {
               value: "https://cj.lziapi.com/api.php/provide/vod/at/json/",
             },
             {
-              title: "如意资源",
-              value: "https://cj.rycjapi.com/api.php/provide/vod/at/json/",
-            },
-            {
-              title: "九零资源",
-              value: "https://oknnews.com/api.php/provide/vod/",
-            },
-            {
               title: "猫咪资源",
               value: "http://zy.xiaomaomi.cc/api.php/provide/vod/",
-            },
-            {
-              title: "豆瓣资源",
-              value: "https://caiji.dbzy.tv/api.php/provide/vod/at/josn/",
-            },
-            {
-              title: "含羞资源",
-              value: "https://api.souavzy.vip/api.php/provide/vod/",
-            },
-            {
-              title: "阿里资源",
-              value: "https://alivod.com/api.php/provide/vod/",
             },
             {
               title: "卧龙资源",
@@ -78,20 +66,44 @@ var WidgetMetadata = {
               value: "https://www.wyvod.com/api.php/provide/vod/",
             },
             {
+              title: "如意资源",
+              value: "https://cj.rycjapi.com/api.php/provide/vod/at/json/",
+            },
+            {
+              title: "九零资源",
+              value: "https://oknnews.com/api.php/provide/vod/",
+            },
+            {
+              title: "含羞资源",
+              value: "https://api.souavzy.vip/api.php/provide/vod/",
+            },
+            {
               title: "玉兔资源",
               value: "https://apiyutu.com/api.php/provide/vod/",
             },
             {
-              title: "先锋资源",
-              value: "http://60.204.225.89:1122/api.php/provide/vod/",
+              title: "魔抓资源",
+              value: "https://mozhuazy.com/api.php/provide/vod/",
+            },
+            {
+              title: "豆瓣资源",
+              value: "https://caiji.dbzy.tv/api.php/provide/vod/at/josn/",
             },
             {
               title: "搜诶微",
               value: "https://api.souavzy.vip/api.php/provide/vod/",
             },
             {
+              title: "阿里资源",
+              value: "https://alivod.com/api.php/provide/vod/",
+            },
+            {
               title: "LSP",
               value: "https://apilsbzy1.com/api.php/provide/vod",
+            },
+            {
+              title: "先锋资源",
+              value: "http://60.204.225.89:1122/api.php/provide/vod/",
             },
           ],
         },
