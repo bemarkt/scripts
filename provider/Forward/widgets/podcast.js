@@ -1,53 +1,38 @@
 var WidgetMetadata = {
   id: "ti.bemarkt.podcast",
   title: "Podcast",
-  version: "1.0.0",
+  version: "2.0.0",
   requiredVersion: "0.0.1",
   description: "获取 RSS 播客数据",
   author: "Ti",
   site: "https://github.com/bemarkt/scripts/tree/master/provider/Forward",
   modules: [
     {
-      title: "浏览播客分类",
-      functionName: "listPodcastsByCategory",
+      title: "播客订阅",
+      description: "从JSON格式的订阅地址加载播客列表",
+      functionName: "getPodcastsFromJson",
       params: [
         {
-          name: "selectedCategoryAnchorId",
-          title: "选择分类",
-          type: "enumeration",
-          value: "播客",
-          enumOptions: [
-            { title: "推荐播客", value: "播客" },
-            { title: "人文", value: "人文" },
-            { title: "新闻热点", value: "新闻热点" },
-            { title: "影视与读书", value: "影视与读书" },
-            { title: "教育", value: "教育" },
-            { title: "历史", value: "历史" },
-            { title: "音乐", value: "音乐" },
-            { title: "情感", value: "情感" },
-            { title: "有声书", value: "有声书" },
-          ],
-        },
-        { name: "page", title: "页码", type: "page" },
-        {
-          name: "count",
-          title: "每页数量",
+          name: "jsonUrl",
+          title: "JSON订阅地址",
           type: "input",
-          description: "每页返回多少条数据",
-          value: "20",
-          placeholders: [{ title: "例如: 20", value: "20" }],
+          description: "包含播客RSS列表的JSON文件URL",
+          value: "",
+          placeholders: [
+            {
+              title: "Ti's Podcast List",
+              value:
+                "https://gist.githubusercontent.com/bemarkt/30c24fbd840284220773d7a36f2fce4a/raw/podcast.json",
+            },
+          ],
         },
       ],
     },
   ],
 };
 
-const MAX_EPISODES_PER_PODCAST = 15;
-
 /**
  * 清理可能包含在CDATA块中的文本
- * @param {string} text
- * @returns {string}
  */
 function cleanCData(text) {
   if (typeof text === "string") {
@@ -61,203 +46,113 @@ function cleanCData(text) {
 }
 
 /**
- * 获取指定分类下的播客列表
+ * 从JSON格式的订阅地址加载播客列表
  */
-async function listPodcastsByCategory(params = {}) {
-  const page = parseInt(params.page, 10) || 1;
-  const count = parseInt(params.count, 10) || 20;
-  const { selectedCategoryAnchorId } = params;
-
-  if (!selectedCategoryAnchorId) {
-    console.error("错误：选择的分类 anchorId 参数无效。");
-    throw new Error("选择的分类无效。");
+async function getPodcastsFromJson(params = {}) {
+  const { jsonUrl } = params;
+  if (!jsonUrl || !jsonUrl.toLowerCase().startsWith("http")) {
+    return [
+      {
+        id: "invalid_json_url_" + Date.now(),
+        type: "url",
+        title: "错误：无效的JSON地址",
+        description: "请提供一个有效的、可公开访问的JSON文件URL。",
+        posterPath:
+          "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+      },
+    ];
   }
-
-  let categoryDisplayName = selectedCategoryAnchorId;
-  const categoryEnumParam = WidgetMetadata.modules[0].params.find(
-    (p) => p.name === "selectedCategoryAnchorId"
-  );
-  if (categoryEnumParam && categoryEnumParam.enumOptions) {
-    const selectedOption = categoryEnumParam.enumOptions.find(
-      (opt) => opt.value === selectedCategoryAnchorId
-    );
-    if (selectedOption && selectedOption.title) {
-      categoryDisplayName = selectedOption.title;
-    }
-  }
-
-  return await listPodcastsInGrid({
-    categoryAnchorId: selectedCategoryAnchorId,
-    categoryDisplayName: categoryDisplayName,
-    page: page,
-    count: count,
-  });
-}
-
-/**
- * 从 getpodcast.xyz 抓取指定分类下的播客列表
- */
-async function listPodcastsInGrid(params = {}) {
-  const {
-    categoryAnchorId,
-    categoryDisplayName,
-    page = 1,
-    count = 20,
-  } = params;
-  const siteUrl = "https://getpodcast.xyz/";
-  console.log(
-    `抓取网页 "${siteUrl}" 分类 "${categoryDisplayName}" (ID: ${categoryAnchorId}) 的播客列表`
-  );
-
   try {
-    const response = await Widget.http.get(siteUrl);
-    if (!response || !response.data)
-      throw new Error(`获取网页内容失败: ${siteUrl}`);
-    const htmlString = response.data;
-    const $ = Widget.html.load(htmlString);
-
-    const anchorDiv = $(`div.anchor_gap#${categoryAnchorId}`);
-    if (anchorDiv.length === 0) return [];
-    const picListUl = anchorDiv.next("h2.classify_title").next("ul.pic_list");
-    if (picListUl.length === 0) return [];
-
-    const podcasts = [];
-    picListUl.find("li > a").each((index, linkTagElement) => {
-      const linkTag = $(linkTagElement);
-      const podcastRssUrl = linkTag.attr("href");
-      const podcastTitle = linkTag.find("strong.title").text().trim();
-      const podcastCover = linkTag.find("img.logo").attr("src");
-
-      if (podcastRssUrl && podcastTitle) {
-        podcasts.push({
-          id: podcastRssUrl,
+    const response = await Widget.http.get(jsonUrl);
+    if (!response || !response.data) {
+      throw new Error("无法获取JSON文件，或文件内容为空。");
+    }
+    const podcasts = response.data;
+    if (!Array.isArray(podcasts)) {
+      throw new Error("JSON文件格式不正确，期望得到一个对象数组。");
+    }
+    const podcastItemsPromises = podcasts.map(async (podcast) => {
+      if (!podcast.rssUrl) return null;
+      const channelInfo = await getPodcastChannelInfo(podcast.rssUrl);
+      if (!channelInfo) {
+        return {
+          id: podcast.rssUrl,
           type: "url",
-          title: podcastTitle,
-          posterPath: podcastCover || "",
-          backdropPath: podcastCover || "",
-          description: `分类: ${categoryDisplayName}`,
-          link: podcastRssUrl,
-        });
+          title: podcast.title || "播客加载失败",
+          description: "无法从此RSS源获取信息，但仍可尝试点击加载。",
+          posterPath:
+            "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+          backdropPath:
+            "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+          mediaType: "audio",
+          genreTitle: "播客",
+          link: podcast.rssUrl,
+        };
       }
+      return {
+        id: podcast.rssUrl,
+        type: "url",
+        title: channelInfo.title || podcast.title || "未知播客",
+        posterPath:
+          channelInfo.cover ||
+          "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+        backdropPath:
+          channelInfo.cover ||
+          "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+        description: channelInfo.description,
+        mediaType: "audio",
+        genreTitle: "播客",
+        link: podcast.rssUrl,
+      };
     });
-
-    const numericPage = parseInt(page, 10) || 1;
-    const numericCount = parseInt(count, 10) || 20;
-    const startIndex = (numericPage - 1) * numericCount;
-    const endIndex = startIndex + numericCount;
-    return podcasts.slice(startIndex, endIndex);
+    return (await Promise.all(podcastItemsPromises)).filter(Boolean);
   } catch (error) {
-    console.error(
-      `处理网页抓取或HTML解析时出错 (分类: ${categoryDisplayName}): ${error.message}`
-    );
-    throw new Error(`无法加载分类 "${categoryDisplayName}" 的播客列表。`);
+    console.error(`处理JSON播客列表失败 (${jsonUrl}): ${error.message}`);
+    return [
+      {
+        id: "json_error_" + Date.now(),
+        type: "url",
+        title: "JSON处理异常",
+        description: `处理此JSON文件时发生错误: ${error.message}`,
+        posterPath:
+          "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+      },
+    ];
   }
 }
 
 /**
- * 爽听
- * @param {string} channelRssUrl
- * @returns {Promise<object>}
+ * 获取播客频道基本信息 (标题、封面、描述)
  */
-async function loadDetail(channelRssUrl) {
-  if (
-    !channelRssUrl ||
-    typeof channelRssUrl !== "string" ||
-    !channelRssUrl.toLowerCase().includes("http")
-  ) {
-    console.error(
-      "loadDetail: 接收到的 linkValue 不是一个有效的频道 RSS URL:",
-      channelRssUrl
-    );
-    return {
-      id: channelRssUrl || "unknown_id_on_error_in_loadDetail",
-      type: "url",
-      title: "错误",
-      description: "无效的播客频道链接。",
-      videoUrl: null,
-      childItems: [],
-      link: channelRssUrl,
-    };
-  }
-
-  console.log(
-    `loadDetail: 开始加载频道详情和单集列表，RSS URL: ${channelRssUrl}`
-  );
-
-  let channelTitleInRss = "播客频道";
-  let channelCoverInRss = "";
-  let channelDescriptionInRss = "";
-  let firstEpisodeUrl = null;
-
-  try {
-    const episodes = await fetchEpisodesForPodcast(
-      channelRssUrl,
-      (parsedChannelInfo) => {
-        if (parsedChannelInfo) {
-          channelTitleInRss = parsedChannelInfo.title || channelTitleInRss;
-          channelCoverInRss = parsedChannelInfo.cover || channelCoverInRss;
-          channelDescriptionInRss =
-            parsedChannelInfo.description || channelDescriptionInRss;
-        }
-      }
-    );
-
-    if (episodes && episodes.length > 0 && episodes[0].videoUrl) {
-      firstEpisodeUrl = episodes[0].videoUrl;
-    }
-
-    return {
-      id: channelRssUrl,
-      type: "url",
-      title: channelTitleInRss,
-      posterPath: channelCoverInRss,
-      description: channelDescriptionInRss,
-      childItems: episodes,
-      videoUrl: firstEpisodeUrl,
-      link: channelRssUrl,
-    };
-  } catch (error) {
-    console.error(
-      `为播客频道 (RSS: ${channelRssUrl}) 加载单集失败: ${error.message}`
-    );
-    return {
-      id: channelRssUrl,
-      type: "url",
-      title: "播客频道加载失败",
-      description: `无法加载此播客频道的单集列表 (源: ${channelRssUrl})。错误: ${error.message}`,
-      childItems: [],
-      videoUrl: null,
-      link: channelRssUrl,
-    };
-  }
-}
-
-/**
- * 从指定的RSS Feed获取并解析播客单集，并尝试获取频道信息。
- * @param {string} rssUrl
- * @param {function} channelInfoCallback
- * @returns {Promise<Array<object>>} VideoItem对象数组
- */
-async function fetchEpisodesForPodcast(rssUrl, channelInfoCallback) {
-  console.log(
-    `获取播客单集列表，RSS: ${rssUrl}, 最多 ${MAX_EPISODES_PER_PODCAST} 集`
-  );
+async function getPodcastChannelInfo(rssUrl) {
   try {
     const response = await Widget.http.get(rssUrl);
-    if (!response || !response.data)
-      throw new Error(`获取RSS Feed失败: ${rssUrl}`);
+    if (!response || !response.data) {
+      console.warn(`获取RSS Feed失败，无响应数据: ${rssUrl}`);
+      return null;
+    }
+
     const xmlString = response.data;
     const $ = Widget.html.load(xmlString, {
-      xmlMode: true,
-      decodeEntities: false,
+      xml: { decodeEntities: false },
     });
 
     const rawChannelTitle = $("channel > title").first().text();
-    const channelTitle = cleanCData(rawChannelTitle) || "未知频道";
-    const channelCover =
-      $("channel > itunes\\:image").attr("href") ||
-      $("channel > image > url").first().text() ||
-      "";
+    const channelTitle = cleanCData(rawChannelTitle) || "未知播客频道";
+
+    let channelCover = "";
+    const itunesCover = $("channel > itunes\\:image").attr("href");
+    if (itunesCover) {
+      channelCover = itunesCover;
+    } else {
+      // FW的cheerio存在bug，<image>直接被解析拆分成<img>, <url>, <title>, <link>
+      // 直接查找<channel>下的<url>标签
+      const flattenedUrl = $("channel > url").first().text();
+      if (flattenedUrl) {
+        channelCover = flattenedUrl;
+      }
+    }
+
     let rawChannelDescription = $("channel > description").first().text();
     let channelDescription = cleanCData(rawChannelDescription);
     channelDescription = channelDescription
@@ -266,99 +161,227 @@ async function fetchEpisodesForPodcast(rssUrl, channelInfoCallback) {
       .replace(/&[a-zA-Z0-9#]+;/g, " ")
       .replace(/\s\s+/g, " ")
       .trim();
-    if (channelDescription.length > 200)
-      channelDescription = channelDescription.substring(0, 197) + "...";
 
-    if (typeof channelInfoCallback === "function") {
-      channelInfoCallback({
-        title: channelTitle,
-        cover: channelCover,
-        description: channelDescription,
-      });
+    if (channelDescription.length > 200) {
+      channelDescription = channelDescription.substring(0, 197) + "...";
+    }
+    if (!channelDescription) {
+      channelDescription = "暂无描述信息。";
     }
 
-    const episodes = [];
-    $("item").each((index, element) => {
-      if (episodes.length >= MAX_EPISODES_PER_PODCAST) return false;
+    return {
+      title: channelTitle,
+      cover: channelCover,
+      description: channelDescription,
+    };
+  } catch (error) {
+    console.error(`获取播客频道信息失败 (${rssUrl}): ${error.message}`);
+    return null;
+  }
+}
 
+/**
+ * 加载播客详情，包括剧集列表
+ */
+async function loadDetail(channelRssUrl) {
+  if (
+    !channelRssUrl ||
+    typeof channelRssUrl !== "string" ||
+    !channelRssUrl.toLowerCase().includes("http")
+  ) {
+    return {
+      id: channelRssUrl || "unknown_id_on_error_in_loadDetail_" + Date.now(),
+      type: "url",
+      title: "错误：无效的播客链接",
+      description: "传递给loadDetail的链接不是一个有效的播客频道RSS URL。",
+      posterPath:
+        "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+      episodeItems: [],
+      videoUrl: null,
+    };
+  }
+
+  try {
+    const episodes = await fetchPodcastEpisodes(channelRssUrl);
+    const channelInfo = await getPodcastChannelInfo(channelRssUrl);
+
+    let firstEpisodeUrl = null;
+    if (episodes && episodes.length > 0 && episodes[0].videoUrl) {
+      firstEpisodeUrl = episodes[0].videoUrl;
+    }
+
+    if (!channelInfo) {
+      return {
+        id: channelRssUrl,
+        type: "url",
+        title: "播客频道 (信息加载不全)",
+        description: "无法完全加载此播客频道的详细信息，但剧集列表可能可用。",
+        posterPath:
+          "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+        episodeItems: episodes,
+        videoUrl: firstEpisodeUrl,
+      };
+    }
+
+    return {
+      id: channelRssUrl,
+      type: "url",
+      title: channelInfo.title,
+      posterPath:
+        channelInfo.cover ||
+        "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+      backdropPath:
+        channelInfo.cover ||
+        "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+      description: channelInfo.description,
+      episodeItems: episodes,
+      videoUrl: firstEpisodeUrl,
+    };
+  } catch (error) {
+    console.error(
+      `loadDetail: 为播客频道 (RSS: ${channelRssUrl}) 加载剧集失败: ${error.message}`
+    );
+    return {
+      id: channelRssUrl,
+      type: "url",
+      title: "播客剧集加载失败",
+      description: `无法加载此播客频道的剧集列表 (源: ${channelRssUrl})。错误: ${error.message}`,
+      posterPath:
+        "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+      videoUrl: null,
+    };
+  }
+}
+
+/**
+ * 从指定的RSS Feed获取并解析播客单集
+ */
+async function fetchPodcastEpisodes(rssUrl) {
+  try {
+    const response = await Widget.http.get(rssUrl);
+    if (!response || !response.data) {
+      throw new Error(`获取RSS Feed失败，无响应数据: ${rssUrl}`);
+    }
+
+    const xmlString = response.data;
+    const $ = Widget.html.load(xmlString, {
+      xmlMode: true,
+      decodeEntities: true,
+    });
+
+    const episodes = [];
+    const allItems = $("item");
+    const totalEpisodes = allItems.length;
+    const channelAuthor =
+      cleanCData($("channel > itunes\\:author").first().text()) ||
+      cleanCData($("channel > dc\\:creator").first().text()) ||
+      cleanCData($("channel > author").first().text()) ||
+      "";
+
+    let channelGlobalCover = "";
+    const itunesCover = $("channel > itunes\\:image").attr("href");
+    if (itunesCover) {
+      channelGlobalCover = itunesCover;
+    } else {
+      const flattenedUrl = $("channel > url").first().text();
+      if (flattenedUrl) {
+        channelGlobalCover = flattenedUrl;
+      }
+    }
+
+    allItems.each((index, element) => {
       const itemXml = $(element);
       const rawItemTitle = itemXml.find("title").first().text();
-      const title = cleanCData(rawItemTitle) || "未知标题";
-      let guid = itemXml.find("guid").first().text().trim();
+      const title = cleanCData(rawItemTitle) || "未知剧集标题";
       const enclosureNode = itemXml.find("enclosure");
       const videoUrl = enclosureNode.attr("url");
 
-      if (!guid && videoUrl) guid = videoUrl;
-      if (!guid) guid = rssUrl + "#episode#" + index + "#" + Date.now();
+      if (
+        !videoUrl ||
+        typeof videoUrl !== "string" ||
+        !videoUrl.toLowerCase().startsWith("http")
+      ) {
+        return;
+      }
 
-      const pubDate = itemXml.find("pubDate").first().text().trim();
-      const rawItemDescription = itemXml.find("description").first().text();
-      let descriptionText = cleanCData(rawItemDescription);
+      const episodeId = (totalEpisodes - index).toString();
+      let pubDateStr = itemXml.find("pubDate").first().text().trim();
+      let releaseDate = "";
+      if (pubDateStr) {
+        try {
+          const date = new Date(pubDateStr);
+          releaseDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+        } catch (e) {
+          /* 忽略无效日期 */
+        }
+      }
+
+      let rawDescription =
+        itemXml.find("description").first().text() ||
+        itemXml.find("content\\:encoded").first().text() ||
+        itemXml.find("itunes\\:summary").first().text();
+      let descriptionText = cleanCData(rawDescription) || "";
       descriptionText = descriptionText
         .replace(/<[^>]+>/g, " ")
         .replace(/&nbsp;/g, " ")
         .replace(/&[a-zA-Z0-9#]+;/g, " ")
         .replace(/\s\s+/g, " ")
         .trim();
-      if (descriptionText.length > 150)
-        descriptionText = descriptionText.substring(0, 147) + "...";
+      if (descriptionText.length > 250) {
+        descriptionText = descriptionText.substring(0, 247) + "...";
+      }
 
       let durationText = itemXml
         .find("itunes\\:duration")
         .first()
         .text()
         .trim();
-      if (durationText && /^\d+$/.test(durationText)) {
-        const totalSeconds = parseInt(durationText, 10);
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        if (hours > 0) {
-          durationText = `${String(hours).padStart(2, "0")}:${String(
-            minutes
-          ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-        } else {
-          durationText = `${String(minutes).padStart(2, "0")}:${String(
-            seconds
-          ).padStart(2, "0")}`;
+      if (durationText) {
+        if (durationText.match(/^\d+$/)) {
+          const seconds = parseInt(durationText, 10);
+          const minutes = Math.floor(seconds / 60);
+          const remainingSeconds = seconds % 60;
+          durationText = `${minutes
+            .toString()
+            .padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+        } else if (!durationText.includes(":")) {
+          durationText = "";
         }
-      } else if (
-        !durationText ||
-        durationText.toLowerCase() === "unknown" ||
-        durationText.includes(":")
-      ) {
-        if (!durationText || durationText.toLowerCase() === "unknown")
-          durationText = "未知";
-      } else {
-        durationText = "未知";
       }
 
-      const episodeImage = itemXml.find("itunes\\:image").attr("href");
-      const author =
+      const episodeImage =
+        itemXml.find("itunes\\:image").attr("href") || channelGlobalCover;
+      const episodeAuthor =
         cleanCData(itemXml.find("itunes\\:author").first().text()) ||
-        cleanCData($("channel > itunes\\:author").first().text()) ||
-        channelTitle;
+        channelAuthor ||
+        "";
 
-      if (videoUrl) {
-        episodes.push({
-          id: guid,
-          type: "url",
-          title: title,
-          posterPath: episodeImage || channelCover,
-          backdropPath: episodeImage || channelCover,
-          releaseDate: pubDate,
-          mediaType: "audio",
-          genreTitle: channelTitle,
-          durationText: durationText,
-          videoUrl: videoUrl,
-          description: descriptionText,
-          author: author,
-        });
-      }
+      episodes.push({
+        id: episodeId,
+        type: "url",
+        title: title,
+        posterPath:
+          episodeImage ||
+          "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+        backdropPath:
+          episodeImage ||
+          "https://placehold.co/200x300/A8D19E/F6F7F1?text=Made%5Cnby%5CnLove&font=source-sans-pro",
+        releaseDate: releaseDate,
+        mediaType: "audio",
+        durationText: durationText,
+        videoUrl: videoUrl,
+        description: descriptionText,
+        author: episodeAuthor,
+      });
     });
-    return episodes;
+
+    return episodes.reverse();
   } catch (error) {
-    console.error(`处理播客RSS "${rssUrl}" 的单集时出错: ${error.message}`);
-    throw new Error(`无法加载播客 "${rssUrl}" 的单集列表。`);
+    console.error(
+      `fetchPodcastEpisodes: 解析播客单集失败 (${rssUrl}): ${error.message}`
+    );
+    throw error;
   }
 }
