@@ -8,19 +8,19 @@
 #!date = 2025-03-16 23:34
 
 [Rule]
-DOMAIN,dig.zjurl.cn
-DOMAIN,dig.bdurl.net
-DOMAIN,ichannel.snssdk.com
-DOMAIN,is.snssdk.com
-DOMAIN,toutiao-frontier.snssdk.com
-DOMAIN,ug.snssdk.com
-DOMAIN,tp-pay.snssdk.com
-DOMAIN,mssdk.zijieapi.com
-DOMAIN,vcs.zijieapi.com
-DOMAIN,timon.zijieapi.com
-DOMAIN,feedback-c.zijieapi.com
-DOMAIN,polaris.zijieapi.com
-DOMAIN,i.snssdk.com
-DOMAIN,effect.snssdk.com
-AND,((DOMAIN-KEYWORD,tnc,extended-matching),(OR,((DOMAIN-SUFFIX,zijieapi.com,extended-matching),(DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching))))
-AND,((DOMAIN-KEYWORD,pangolin,extended-matching),(OR,((DOMAIN-SUFFIX,zijieapi.com,extended-matching),(DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching))))
+DOMAIN,dig.zjurl.cn,REJECT
+DOMAIN,dig.bdurl.net,REJECT
+DOMAIN,ichannel.snssdk.com,REJECT
+DOMAIN,is.snssdk.com,REJECT
+DOMAIN,toutiao-frontier.snssdk.com,REJECT
+DOMAIN,ug.snssdk.com,REJECT
+DOMAIN,tp-pay.snssdk.com,REJECT
+DOMAIN,mssdk.zijieapi.com,REJECT
+DOMAIN,vcs.zijieapi.com,REJECT
+DOMAIN,timon.zijieapi.com,REJECT
+DOMAIN,feedback-c.zijieapi.com,REJECT
+DOMAIN,polaris.zijieapi.com,REJECT
+DOMAIN,i.snssdk.com,REJECT
+DOMAIN,effect.snssdk.com,REJECT
+AND,((DOMAIN-KEYWORD,tnc,extended-matching),(OR,((DOMAIN-SUFFIX,zijieapi.com,extended-matching),(DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching)))),REJECT
+AND,((DOMAIN-KEYWORD,pangolin,extended-matching),(OR,((DOMAIN-SUFFIX,zijieapi.com,extended-matching),(DOMAIN-SUFFIX,snssdk.com,extended-matching),(DOMAIN-SUFFIX,sgsnssdk.com,extended-matching)))),REJECT
