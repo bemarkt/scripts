@@ -8,12 +8,15 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/BodianMusic.png
-#!date=2025-05-23 14:49:53
+#!date=2025-08-27 03:06:07
 
 [Rewrite]
-^https:\/\/bd-api\.kuwo\.cn\/api\/play\/advert\/ reject-dict
+^https:\/\/bd-api\.kuwo\.cn\/api\/(play|service|advert)\/advert\/ reject-dict
 
 ^https:\/\/bd-api\.kuwo\.cn\/api\/popup\/ reject-dict
+^https:\/\/bd-api\.kuwo\.cn\/api\/pay\/vip\/invitation\/assist\/popup\? reject-dict
+
+^https:\/\/bd-api\.kuwo\.cn\/api\/ucenter\/vip\/give\/config\? reject-dict
 
 ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/banner\/ reject-dict
 ^https:\/\/bd-api\.kuwo\.cn\/api\/service\/home\/module\?.*&moduleId=6 reject-dict
