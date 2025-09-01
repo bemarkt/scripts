@@ -8,26 +8,26 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/KuaiShou.png
-#!date=2025-08-31 06:22:12
+#!date=2025-09-01 01:59:30
 
 [Rewrite]
 ^https:\/\/(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/system\/startup\? response-body-json-del reskinConfig sidebarExSquareStyle.moreList sidebarExSquareStyle.topList
 
 ^https:\/\/(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/system\/startup\? response-body-json-jq '.sidebarExSquareStyle.commonlyUsedList |= map(select(.title == "设置" or .title == "历史记录" or .title == "草稿箱" or .title == "我的钱包" or .title == "小程序" or .title == "未成年人模式" or .title == "官方客服" or .title == "内容偏好" or .title == "离线模式" or .title == "稍后再看" or .title == "举报中心" or .title == "挂件"))'
 
-^https:\/\/az\d-api\.ksapisrv\.com\/rest\/n\/nearby\/widget\/info\? reject-dict
+^https:\/\/(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/n\/nearby\/widget\/info\? reject-dict
 
-^https:\/\/az\d-live\.ksapisrv\.com\/rest\/n\/live\/feed\/square\/refresh\? response-body-json-del data.banners
+^https:\/\/(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/n\/live\/feed\/square\/refresh\? response-body-json-del data.banners
 
-^https:\/\/az\d-api\.ksapisrv\.com\/rest\/n\/taskCenter\/task\/report\? reject-dict
+^https:\/\/(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/n\/taskCenter\/task\/report\? reject-dict
 
-^https:\/\/az\d-api\.ksapisrv\.com\/rest\/n\/ad\/ reject-dict
+^https:\/\/(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/n\/ad\/ reject-dict
 
-^https:\/\/az\d-api(-idc)?\.ksapisrv\.com\/rest\/n\/feed\/selectionFast\? response-body-json-jq 'if (.feeds | type) == "array" then .feeds |= map(select(.ad | not)) else . end'
+^https:\/\/(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/n\/feed\/selectionFast\? response-body-json-jq 'if (.feeds | type) == "array" then .feeds |= map(select(.ad | not)) else . end'
 
-^https:\/\/az\d-api-js\.gifshow\.com\/rest\/n\/user\/profile\/v2\? response-body-json-del postRecommends
+^https:\/\/(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/n\/user\/profile\/v2\? response-body-json-del postRecommends
 
-^https:\/\/az\d-api\.ksapisrv\.com\/rest\/im\/wd\/top\/navigation\/getRecommendedSession\? response-body-json-del data.operationRecommendationList
+^https:\/\/(apissl|az\d-api(-js|-idc)?)\.(gifshow|ksapisrv)\.com\/rest\/im\/wd\/top\/navigation\/getRecommendedSession\? response-body-json-del data.operationRecommendationList
 
 [MitM]
 hostname=az*-api.ksapisrv.com, az4-api-idc.ksapisrv.com, az*-api-idc.ksapisrv.com, apissl.gifshow.com, apissl.ksapisrv.com, az*-api-js.gifshow.com, az*-live.ksapisrv.com
