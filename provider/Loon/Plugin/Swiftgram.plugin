@@ -1,17 +1,18 @@
 #!name = Swiftgram
 #!desc = Telegram外部链接跳转至Swiftgram
 #!openUrl = https://apps.apple.com/app/id6471879502
-#!author = sooyaaabo[https://github.com/sooyaaabo]
+#!author = sooyaaabo[https://github.com/sooyaaabo],Ins-game[https://github.com/Ins-game]
 #!tag =
 #!system = 
 #!system_version = 
 #!loon_version = 3.3.5(904)
-#!homepage = https://github.com/sooyaaabo/Loon/blob/main/README.md
+#!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
 #!icon = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/Swiftgram.png
-#!date = 2025-10-16 00:00
+#!date = 2025-10-19 01:57
 
 [Rewrite]
-(https:\/\/)?t\.me\/(.+) 302 sg://resolve?domain=$2
+(https:\/\/)?t\.me\/(.+) 307 sg://resolve?domain=$2
+^https?:\/\/api\.swiftgram\.app\/v0\/settings response-body-json-jq '.subscription = true | .isPro = true | .iCloudSubscription = true'
 
 [MitM]
-hostname = t.me
+hostname = t.me, api.swiftgram.app
