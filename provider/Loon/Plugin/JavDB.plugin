@@ -1,19 +1,14 @@
 #!name = JavDB
 #!desc = 看个片而已，别让广告扫兴。
-#!author = RuCu6[https://github.com/RuCu6]
+#!author = Tlomlgm[https://github.com/Tlomlgm]
 #!homepage = https://github.com/bemarkt/scripts/blob/master/provider/Loon/README.md
 #!icon = https://raw.githubusercontent.com/bemarkt/Scripts/master/provider/Loon/Resources/Icons/app/javdb.png
-#!date = 2024-09-24 01:50
-
-[Rule]
-DOMAIN, api.liquidlink.cn, REJECT
+#!date = 2025-11-22 01:00
 
 [Script]
-# 会员部分
-# http-request ^https:\/\/api\.hechuangxinxi\.xyz\/api\/v1\/movies\/\w+\/play\? script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/break/javdb.js, tag = jav_vip
+http-response ^https?:\/\/(api\.hechuangxinxi\.xyz|jdforrepam\.com|api\.ffaoa\.com|api\.btyjscl\.com|api\.pxxgg\.xyz|api\.ujvnmkx\.cn|api\.yijingluowangluo\.xyz)\/api\/(v1\/(ads|startup|users)|v4\/movies\/\w+) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/javdb_pro.js, requires-body=true, timeout=10, tag=JavDB 广告
 
-# 广告部分
-http-response ^https:\/\/api\.hechuangxinxi\.xyz\/api\/(v1\/(ads|startup|users)|v4\/movies\/\w+) script-path = https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/RuCu6/myBlockAds.js, requires-body = true, tag = jav_splash
+http-request ^https?:\/\/(api\.hechuangxinxi\.xyz|jdforrepam\.com|api\.ffaoa\.com|api\.btyjscl\.com|api\.pxxgg\.xyz|api\.ujvnmkx\.cn|api\.yijingluowangluo\.xyz)\/api\/v1\/movies\/\w+\/play script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/javdb.js, requires-body=false, timeout=10, tag=JavDB 会员
 
 [MITM]
-hostname = api.hechuangxinxi.xyz
+hostname = api.pxxgg.xyz, api.ujvnmkx.cn, api.yijingluowangluo.xyz, api.hechuangxinxi.xyz, api.ffaoa.com, api.btyjscl.com
