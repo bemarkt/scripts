@@ -1,14 +1,14 @@
 #!name=高德地图去广告
 #!desc=过滤高德地图开屏广告、各页面推广，精简我的页面。
 #!openUrl=https://apps.apple.com/app/id461703208
-#!author=RuCu6[https://github.com/RuCu6], kelv1n1n[https://github.com/kelv1n1n]
+#!author=RuCu6[https://github.com/RuCu6], kelv1n1n[https://github.com/kelv1n1n], 可莉🅥[https://github.com/luestr/ProxyResource/blob/main/README.md]
 #!tag=去广告
 #!system=
 #!system_version=
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Amap.png
-#!date=2025-12-05 04:20:51
+#!date=2026-02-22 06:04:15
 
 [Rule]
 DOMAIN, amap-aos-info-nogw.amap.com, REJECT
@@ -16,6 +16,10 @@ DOMAIN, free-aos-cdn-image.amap.com, REJECT
 DOMAIN-SUFFIX, v.smtcdns.com, REJECT
 
 [Rewrite]
+^https:\/\/m5-zb\.amap\.com\/ws\/ride\/home\/page\/get_commuting_card\? reject-dict
+
+^https:\/\/m5\.amap\.com\/ws\/shield\/search_business\/process\/orderList\? reject-dict
+
 
 ^https:\/\/m5\.amap\.com\/ws\/shield\/search\/new_hotword\? reject-dict
 ^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/card-service-(?:car-end|route-plan) reject-dict
@@ -24,6 +28,7 @@ DOMAIN-SUFFIX, v.smtcdns.com, REJECT
 ^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/tips_adv\? reject-dict
 ^https:\/\/oss\.amap\.com\/ws\/banner\/lists\/\? reject-dict
 
+^https:\/\/ai\.amap\.com\/v1\/ai_rec\/ reject-dict
 ^https:\/\/m5\.amap\.com\/ws\/aos\/main\/page\/product\/list\? reject-dict
 ^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/(?:main-page-assets|main-page-location|ridewalk-end-fc|usr-profile-fc\/homeV2) reject-dict
 ^https:\/\/m5\.amap\.com\/ws\/(?:mapapi\/hint_text\/offline_data|message\/notice\/list|shield\/search\/new_hotword) reject-dict
@@ -35,22 +40,33 @@ DOMAIN-SUFFIX, v.smtcdns.com, REJECT
 ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/(?:pay\/web\/paySuccess\/info\/request|transportation\/diversion\/resource\/driving) reject-dict
 ^https:\/\/m5-zb\.amap\.com\/ws\/sharedtrip\/taxi\/order_detail_car_tips\? response-body-json-del data.carTips.data.popupInfo
 
-^https:\/\/ai\.amap\.com\/v1\/ai_rec\/home_qs\? reject-dict
-
 [Script]
 http-response ^https:\/\/m5\.amap\.com\/ws\/aos\/perception\/publicTravel\/beforeNavi\? script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除路线规划推广
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/bus\/plan\/integrate\? script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除路线规划、导航结束页推广
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/c3frontend\/(?:af-(?:hotel|launch)\/page\/main|af-nearby\/nearby) script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除导航详情页底部酒店、处理附近页
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/perception\/drive\/(?:routeInfo|routePlan) script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除路线规划推广
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/shield\/search_bff\/hotword\? script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除搜索栏推广
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/shield\/search_poi\/(?:mps|search\/sp|sug|tips_operation_location) script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除搜索详情页推广
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/faas\/amap-navigation\/(?:card-service-plan-home|main-page) script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除首页推广
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/shield\/frogserver\/aocs\/updatable\/1\? script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除首页推广
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/shield\/dsp\/profile\/index\/nodefaasv3\? script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除我的页面推广
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/shield\/search\/nearbyrec_smart\? script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除附近页推广
+
 http-response ^https:\/\/m5\.amap\.com\/ws\/valueadded\/alimama\/splash_screen\? script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除开屏广告
+
 http-response ^https:\/\/m5-zb\.amap\.com\/ws\/boss\/(?:car\/order\/content_info|order_web\/friendly_information) script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除打车页推广卡片、弹窗
+
 http-response ^https:\/\/m5-zb\.amap\.com\/ws\/promotion-web\/resource(\/home)?\? script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除打车页红点角标、天气图标
+
 http-response ^https:\/\/(?:info|m5)\.amap\.com\/ws\/shield\/search\/(?:common\/coupon\/info|poi\/detail) script-path=https://kelee.one/Resource/JavaScript/Amap/Amap_remove_ads.js, requires-body=true, tag=移除导航详情页推广
 
 [MitM]
