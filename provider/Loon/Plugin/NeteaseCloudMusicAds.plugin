@@ -63,23 +63,23 @@ DOMAIN, httpdns.music.163.com, REJECT-NO-DROP
 ^https?:\/\/interface\d?\.music\.163\.com\/store\/e?api\/(webconfig|entryconfig) reject-dict
 
 [Script]
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(batch|v\d\/resource\/comment\/floor\/get) script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=通用 (评论区/广告/红点), argument=[{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(batch|v\d\/resource\/comment\/floor\/get) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=通用 (评论区/广告/红点), argument=[{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(music-vip-membership\/(client|front)\/vip\/info|vipnewcenter\/app\/resource\/newaccountpage|vip-center-bff\/(card\/entry\/list|float\/data)) script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=伪 VIP, argument=[{VipEnabled},{VipLevel},{GrowthValue},{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(music-vip-membership\/(client|front)\/vip\/info|vipnewcenter\/app\/resource\/newaccountpage|vip-center-bff\/(card\/entry\/list|float\/data)) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=伪 VIP, argument=[{VipEnabled},{VipLevel},{GrowthValue},{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/home\/framework\/tab script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=底部 Tab, argument=[{FX},{MY},{DT},{GZ},{SOU},{SY_NAME},{WD_NAME},{MY_NAME},{DT_NAME},{FX_NAME},{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/home\/framework\/tab script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=底部 Tab, argument=[{FX},{MY},{DT},{GZ},{SOU},{SY_NAME},{WD_NAME},{MY_NAME},{DT_NAME},{FX_NAME},{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/home\/framework\/top\/tab script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=顶部 Tab, argument=[{AIXG},{HDTAB},{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/home\/framework\/top\/tab script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=顶部 Tab, argument=[{AIXG},{HDTAB},{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/vipactivity\/app\/cashier\/setting\/get script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=收银台广告, argument=[{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/vipactivity\/app\/cashier\/setting\/get script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=收银台广告, argument=[{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(homepage\/block\/page|link\/page\/rcmd\/(resource\/show|block\/resource\/multi\/refresh)) script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=首页推荐, argument=[{PRGG},{PRDRD},{PRSCVPT},{PRST},{HMPR},{PRRR},{PRRK},{PRMST},{PRCN},{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(homepage\/block\/page|link\/page\/rcmd\/(resource\/show|block\/resource\/multi\/refresh)) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=首页推荐, argument=[{PRGG},{PRDRD},{PRSCVPT},{PRST},{HMPR},{PRRR},{PRRK},{PRMST},{PRCN},{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/page\/discovery\/resource\/show script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=发现页, argument=[{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/page\/discovery\/resource\/show script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=发现页, argument=[{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/position\/show\/resource script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=我的页面广告, argument=[{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/position\/show\/resource script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=我的页面广告, argument=[{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/user\/follow\/users\/mixed\/get script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=显示未关注你的人, argument=[{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/user\/follow\/users\/mixed\/get script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=显示未关注你的人, argument=[{LogLevel}]
 
 [MitM]
 hostname = music.163.com, interface.music.163.com, interface3.music.163.com, interface9.music.163.com, httpdns.n.netease.com, ipv4.music.163.com
