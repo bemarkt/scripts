@@ -8,7 +8,7 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://hub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/smzdm.png
-#!date=2026-05-15 23:50:59
+#!date=2026-05-16 00:09:01
 
 [Rule]
 DOMAIN, adx-api.zdmimg.com, REJECT
@@ -48,7 +48,7 @@ DOMAIN, adx-api.zdmimg.com, REJECT
 
 ^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? response-body-json-del data.search_faxian data.tonglan data.hongbao
 
-^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? response-body-json-jq '.data.hot_tab |= map(select(.tab1_name? != "热点主题榜") | .rows |= map(select((.article_tag.article_title? != "广告") and has("pos"))))'
+^https:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\? response-body-json-jq '.data.hot_tab |= (if type == "array" then map(select(.search_method != "热点主题榜")) else . end) | if .data.hot_tab then .data.hot_tab |= map(if .search_method == "热搜榜搜索热榜" and .rows then .rows |= map(select(.pos != null and ((.pos | tonumber) != null))) else . end) else . end'
 
 ^https:\/\/s-api\.smzdm\.com\/sou\/popup_coupon\? reject-dict
 
