@@ -7,14 +7,14 @@
 #!loon_version=3.2.4(787)
 #!homepage=https://github.com/Yu9191/NeteasemusicAd
 #!icon=https://raw.githubusercontent.com/Keywos/rule/main/tv/app/144px/Netease.png
-#!date=2026-04-25 09:38:00
+#!date=2026-05-28 23:30:53
 
 [Argument]
 
 # ===== 底部 Tab (1=隐藏, 0=显示) =====
 FX = switch, false, true, tag=[底部 Tab] 隐藏发现, desc=
 MY = switch, true, false, tag=[底部 Tab] 隐藏漫游, desc=
-DT = switch, true, false, tag=[底部 Tab] 隐藏笔记, desc=
+DT = switch, false, true, tag=[底部 Tab] 隐藏笔记, desc=
 GZ = switch, true, false, tag=[底部 Tab] 隐藏关注, desc=
 SOU = switch, true, false, tag=[底部 Tab] 隐藏搜索, desc=
 SY_NAME = input, "", tag=[底部 Tab] 首页自定义名称, desc=留空保持原名
@@ -28,20 +28,23 @@ AIXG = switch, false, true, tag=[顶部 Tab] 显示 AI 写歌, desc=
 HDTAB = switch, false, true, tag=[顶部 Tab] 显示活动 Tab, desc=
 
 # ===== 首页卡片 (开启=显示) =====
-PRGG = switch, true, false, tag=[首页] 问候语, desc=
+PRGG = switch, false, true, tag=[首页] 问候语, desc=
 PRDRD = switch, false, true, tag=[首页] 每日推荐, desc=
 PRSCVPT = switch, false, true, tag=[首页] 推荐歌单, desc=
 PRST = switch, false, true, tag=[首页] 最近常听, desc=
 HMPR = switch, false, true, tag=[首页] 音乐合伙人, desc=
 PRRR = switch, true, false, tag=[首页] 雷达歌单, desc=
 PRRK = switch, false, true, tag=[首页] 排行榜, desc=
-PRMST = switch, true, false, tag=[首页] 推荐专属歌单, desc=
+PRMST = switch, false, true, tag=[首页] 推荐专属歌单, desc=
 PRCN = switch, true, false, tag=[首页] 你的专属歌单, desc=
+PRPRS = switch, true, false, tag=[首页] 私房推荐歌曲, desc=
+PRRSS = switch, true, false, tag=[首页] 红心相似歌曲, desc=
 
 # ===== 伪 VIP =====
 VipEnabled = switch, true, false, tag=[伪 VIP] 开启, desc=关闭后所有 VIP 接口透传原响应
-VipLevel = select, "1", "2", "3", "4", "5", "6", "7", tag=[伪 VIP] 等级, desc=默认 7 级（满级）
+VipLevel = select, "7", "1", "2", "3", "4", "5", "6", tag=[伪 VIP] 等级, desc=默认 7 级（满级）
 GrowthValue = input, 99999, tag=[伪 VIP] 成长值, desc=默认 99999
+VipExpire = input, "2099-09-09", tag=[伪 VIP] 到期时间, desc=支持日期 (2099-09-09 / 2099/09/09 23:59:59) 或毫秒时间戳
 
 # ===== 调试 =====
 LogLevel = select, "info", "off", "error", "warn", "debug", "all", tag=[调试] 日志级别, desc=排错时切到 debug 可看到 Settings/handler 内部日志
@@ -50,6 +53,7 @@ LogLevel = select, "info", "off", "error", "warn", "debug", "all", tag=[调试] 
 DOMAIN, iadmat.nosdn.127.net, REJECT-NO-DROP
 DOMAIN, iadmatapk.nosdn.127.net, REJECT-NO-DROP
 DOMAIN, iadmusicmat.music.126.net, REJECT-NO-DROP
+DOMAIN, iadmusicmatvideo.music.126.net, REJECT-NO-DROP
 DOMAIN, httpdns.n.netease.com, REJECT-NO-DROP
 DOMAIN, httpdns.music.163.com, REJECT-NO-DROP
 
@@ -65,7 +69,9 @@ DOMAIN, httpdns.music.163.com, REJECT-NO-DROP
 [Script]
 http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(batch|v\d\/resource\/comment\/floor\/get) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=通用 (评论区/广告/红点), argument=[{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(music-vip-membership\/(client|front)\/vip\/info|vipnewcenter\/app\/resource\/newaccountpage|vip-center-bff\/(card\/entry\/list|float\/data)) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=伪 VIP, argument=[{VipEnabled},{VipLevel},{GrowthValue},{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(music-vip-membership\/(client|front)\/vip\/info|vipnewcenter\/app\/resource\/newaccountpage|vip-center-bff\/(card\/entry\/list|float\/data|quality\/auth\/info)|v1\/user\/info) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=伪 VIP, argument=[{VipEnabled},{VipLevel},{GrowthValue},{VipExpire},{LogLevel}]
+
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/sp\/flow\/(status\/v2|popup\/query) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=免流量包伪造+弹窗清空, argument=[{VipEnabled},{VipExpire},{LogLevel}]
 
 http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/home\/framework\/tab script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=底部 Tab, argument=[{FX},{MY},{DT},{GZ},{SOU},{SY_NAME},{WD_NAME},{MY_NAME},{DT_NAME},{FX_NAME},{LogLevel}]
 
@@ -73,7 +79,7 @@ http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/hom
 
 http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/vipactivity\/app\/cashier\/setting\/get script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=收银台广告, argument=[{LogLevel}]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(homepage\/block\/page|link\/page\/rcmd\/(resource\/show|block\/resource\/multi\/refresh)) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=首页推荐, argument=[{PRGG},{PRDRD},{PRSCVPT},{PRST},{HMPR},{PRRR},{PRRK},{PRMST},{PRCN},{LogLevel}]
+http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(homepage\/block\/page|link\/page\/rcmd\/(resource\/show|block\/resource\/multi\/refresh)) script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=首页推荐, argument=[{PRGG},{PRDRD},{PRSCVPT},{PRST},{HMPR},{PRRR},{PRRK},{PRMST},{PRCN},{PRPRS},{PRRSS},{LogLevel}]
 
 http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/link\/page\/discovery\/resource\/show script-path=https://raw.githubusercontent.com/bemarkt/scripts/master/provider/Loon/Scripts/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=发现页, argument=[{LogLevel}]
 
