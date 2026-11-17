@@ -5,10 +5,10 @@
 #!tag=去广告, 依赖
 #!system=
 #!system_version=
-#!loon_version=3.4.0(962)
+#!loon_version=3.5.1(998)
 #!homepage=https://hub.kelee.one
 #!icon=https://raw.githubusercontent.com/luestr/IconResource/main/Website_icon/120px/TencentAd.png
-#!date=2026-08-22 10:20:51
+#!date=2026-10-02 13:57:49
 
 [Rule]
 DOMAIN-KEYWORD, adstrategy, REJECT
@@ -225,10 +225,10 @@ DOMAIN, df.tanx.com, REJECT
 DOMAIN, opehs.tanx.com, REJECT
 DOMAIN, beacon-api.aliyuncs.com, REJECT
 DOMAIN, adash.man.aliyuncs.com, REJECT
+DOMAIN, adashx.m.taobao.com, REJECT
 DOMAIN, applog.uc.cn, REJECT
 DOMAIN, atoken.m.taobao.com, REJECT
 AND, ((DOMAIN-KEYWORD, adash), (DOMAIN-SUFFIX, ut.taobao.com)), REJECT
-URL-REGEX, "^http:\/\/.+\/amdc\/mobileDispatch", REJECT
 
 DOMAIN, baichuan-sdk.alicdn.com, REJECT
 DOMAIN, acs4baichuan.m.taobao.com, REJECT
@@ -421,6 +421,8 @@ DOMAIN-SUFFIX, sogaha.cn, REJECT
 
 DOMAIN, zxid-m.mobileservice.cn, REJECT
 
+DOMAIN, xadsmartget.adgain.cn, REJECT
+
 DOMAIN-SUFFIX, tradplusad.com, REJECT
 
 DOMAIN-SUFFIX, fancyapi.com, REJECT
@@ -475,10 +477,10 @@ DOMAIN-SUFFIX, tobidad.com, REJECT
 DOMAIN, ep7.facebook.com, REJECT
 
 [Rewrite]
-^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\/ reject
-^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_ reject
-^https:\/\/images\.pinduoduo\.com\/mrk\/ reject
-^https:\/\/images\.pinduoduo\.com\/marketing_api\/ reject
+request if ${url} ~= /^https:\/\/video-dsp\.pddpic\.com\/market-dsp-video\//i then reject(404)
+request if ${url} ~= /^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_/i then reject(404)
+request if ${url} ~= /^https:\/\/images\.pinduoduo\.com\/mrk\//i then reject(404)
+request if ${url} ~= /^https:\/\/images\.pinduoduo\.com\/marketing_api\//i then reject(404)
 
 [MitM]
 hostname=video-dsp.pddpic.com, t-dsp.pinduoduo.com, images.pinduoduo.com
